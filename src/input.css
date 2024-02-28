@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Pixel';
+    src: url(./fonts/PixelEmulator-xq08.woff) format('woff');
+}
+
+.skills-logo {
+    background-image: url(./images/Spring-Logo.png);
+    background-size:cover;
+}
