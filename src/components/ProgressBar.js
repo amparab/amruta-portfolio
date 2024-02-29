@@ -5,7 +5,7 @@ export default function ProgressBar ({progress}) {
     const progressAnimation = useSpring({
         width: `${progress}`,
         from: { width: '0%' },
-        config: { duration:2000 }
+        config: { duration:1000 }
     });
 
     return(

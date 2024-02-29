@@ -3,8 +3,11 @@ import { useSpring, animated } from '@react-spring/web';
 import React, { useRef, useEffect, useState } from 'react';
 import image from './images/myphoto-cropped.png'
 import skillsBg from './images/skills-bg-2.png'
+import expImg from './images/experience.jpg'
 import Skills from './components/Skills';
 import { ReactTyped } from 'react-typed';
+import * as Constants from './constants/Constants';
+import Experience from './components/Experience';
 
 function App() {
 
@@ -17,12 +20,14 @@ function App() {
     const [rotation, setRotation] = useState(0);
     const [currentRotation, setCurrentRotation] = useState(0);
     const [showExperience, setShowExperience] = useState(false);
+    const [showIntro, setShowIntro] = useState(true);
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
 
     useEffect(() => {
-      const handleScroll = () => {
-        setScrollY(window.scrollY);
-      };
-
       window.addEventListener('scroll', handleScroll);
 
       return () => {
@@ -47,17 +52,39 @@ function App() {
 
     useEffect(() => {
       const curRotation = scrollY * 360 / window.innerHeight;
-      setRotation(Math.min(curRotation, 180));
+      setRotation(Math.min(curRotation, Constants.minRotation));
       setCurrentRotation(curRotation);
+      console.log('rotation', rotation);
+      console.log('curRotation', curRotation)
       // Change image source when rotation reaches 90 degrees
-      if (rotation >= 120) {
-        setDisplaySkills(true);
-        setImageSource(skillsBg); // New image source
-      } else {
+      if (curRotation < 120) {
         setDisplaySkills(false);
-        setImageSource(image); // Reset to original image source
+        setImageSource(image);
+      } else if( curRotation >= 120 && curRotation < 360) {
+         setDisplaySkills(true);
+         setImageSource(skillsBg);
+      } else if (curRotation >= 360 && curRotation < 480){
+        setDisplaySkills(false);
+        setShowIntro(false);
+        setImageSource(skillsBg);
+      } else if (curRotation > 480) {
+        setImageSource(expImg);
+        setShowExperience(true);
       }
     }, [scrollY]);
+
+
+    const getRotation = () => {
+      return currentRotation <= 360 ? rotation : Math.min(Constants.minRotation+(currentRotation - 360), 360);
+    }
+
+    const scaleMaskX = () => {
+      return currentRotation <= 360 ? 1 + (scrollY*scaleFactor / window.innerWidth) : 0.7;
+    }
+
+    const scaleMaskY = () => {
+      return currentRotation <= 360 ? 1 + (scrollY*scaleFactor / window.innerHeight) : 2;
+    }
 
 
     const springProps = useSpring({
@@ -66,9 +93,9 @@ function App() {
       },
       to: {
         transform: `perspective(1000px) 
-                  rotateY(${rotation}deg) 
-                  scaleX(${1 + (scrollY*scaleFactor / window.innerWidth)})
-                  scaleY(${1 + (scrollY*scaleFactor / window.innerHeight)})
+                  rotateY(${getRotation()}deg) 
+                  scaleX(${scaleMaskX()})
+                  scaleY(${scaleMaskY()})
                   translateY(${window.innerWidth < 768 ? Math.max(-(scrollY), -window.innerHeight*0.3) : '0'}px)
                   `
       },
@@ -85,10 +112,15 @@ function App() {
       config: { easing: 'ease-in-out' }
     });
 
-    const handleScrollToBottom = () => {
-      console.log("called back");
-      setDisplaySkills(false);
-      setShowExperience(true);
+    const stopScrolling = (isAnimating) => {
+      console.log('in parent', isAnimating);
+      if(isAnimating){
+          var scrollPosition = window.scrollY;
+          window.onscroll = function() {
+            window.scrollTo(0, scrollPosition);
+          };
+      }
+      
     };
 
   return (
@@ -120,16 +152,18 @@ function App() {
             />}
           </svg>
           <div class="absolute inset-0 overflow-auto">
-          {displaySkills && <Skills currentRotation={currentRotation} onScrollToBottom={handleScrollToBottom} /> }
+          {displaySkills && <Skills currentRotation={currentRotation} stopScrolling={stopScrolling} /> }
+          {showExperience && <Experience />}
           </div>
           
         </div>
-        <div id="intro1" class="flex-shrink-0 h-1/2 md:h-full w-full md:w-1/2 flex justify-start items-center order-1 md:order-2 pl-5">
+        {showIntro && <div id="intro1" class="flex-shrink-0 h-1/2 md:h-full w-full md:w-1/2 flex justify-start items-center order-1 md:order-2 pl-5">
           <h1 class='fixed text-3xl md:text-5xl font-pixel'>Hello,<br/>I am <br/> 
             <ReactTyped strings={["AMRUTA PARAB"]} typeSpeed={50} />
           </h1>
-        </div>
+        </div>}
       </div>
+      <div id="container" class="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div id="container" class="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
     </>
   );

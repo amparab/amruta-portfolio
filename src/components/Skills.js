@@ -17,19 +17,24 @@ export default function Skills ({ onScrollToBottom, currentRotation }) {
 
     const [showSkills, setShowSkills] = useState(false);
     const skillRef = useRef(null);
+    // const [isAnimating, setIsAnimating] = useState(false);
 
+    
+    useEffect(() => {
+        if(currentRotation > 180) {
+            setShowSkills(true);
+        
+        }
+        else {
+            setShowSkills(false);
+        }
 
-    // useEffect(() => {
-    //     console.log('currentRotation',currentRotation);
-    //     if (currentRotation > 180) {
-    //       setShowSkills(true);
-    //       if (currentRotation > 360) {
-    //         onScrollToBottom();
-    //       }
-    //     } else {
-    //       setShowSkills(false);
-    //     }
-    //   }, [currentRotation, onScrollToBottom]);
+      }, [currentRotation]);
+
+    //   useEffect(() => {
+    //     console.log('isAnimating', isAnimating);
+
+    //   }, [isAnimating]);
 
 
     const logoAnimation = useSpring({
@@ -41,7 +46,7 @@ export default function Skills ({ onScrollToBottom, currentRotation }) {
             transform: `rotateY(0deg) `,
             opacity: 2
         },
-        config: { duration:2000 }
+        config: { duration:1000 }
     });  
 
     const skillsAnimation = useSpring({
@@ -51,7 +56,7 @@ export default function Skills ({ onScrollToBottom, currentRotation }) {
         to: {
             opacity: 0.75
         },
-        config: { duration:2000 }
+        config: { duration:1000 }
     }); 
 
     const images = [
@@ -69,11 +74,11 @@ export default function Skills ({ onScrollToBottom, currentRotation }) {
     return(
         <>
             <animated.div ref={skillRef} class="fixed inset-0 overflow-auto p-5 bg-black" style={{...skillsAnimation}}>
-                {currentRotation > 180 && currentRotation <= 500 && 
+                {showSkills && 
                 <div id="skillsContainer" 
                     class="flex flex-col justify-center items-center text-white" style={{ maxHeight: '200vh' }}>
                     <div id="skills-title" class="text-4xl md:text-6xl font-pixel mb-8">
-                        <ReactTyped strings={["MY SKILLS"]} typeSpeed={120} />
+                        <ReactTyped strings={["MY SKILLS"]} typeSpeed={100} />
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-4">
                     {images.map((image) => (
@@ -93,7 +98,7 @@ export default function Skills ({ onScrollToBottom, currentRotation }) {
                     </div>
                 </div>}
             </animated.div> 
-            {currentRotation > 360 && <div class="fixed inset-0 overflow-auto p-5 bg-violet-300"></div>}
+            {/* {currentRotation > 360 && <div class="fixed inset-0 overflow-auto p-5 bg-violet-300"></div>} */}
         </>
     );
 
