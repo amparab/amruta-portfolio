@@ -3,11 +3,15 @@ import { useSpring, animated } from '@react-spring/web';
 import React, { useRef, useEffect, useState } from 'react';
 import image from './images/myphoto-cropped.png'
 import skillsBg from './images/skills-bg-2.png'
-import expImg from './images/experience.jpg'
+import expImg from './images/Girl_Computer.png'
+import spaceBg from './images/space-bg-layer.jpg'
+import certBg from './images/Certification-Bg.jpg'
+import black from './images/black.png'
 import Skills from './components/Skills';
 import { ReactTyped } from 'react-typed';
 import * as Constants from './constants/Constants';
 import Experience from './components/Experience';
+import Certifications from './components/Certifcations';
 
 function App() {
 
@@ -21,6 +25,10 @@ function App() {
     const [currentRotation, setCurrentRotation] = useState(0);
     const [showExperience, setShowExperience] = useState(false);
     const [showIntro, setShowIntro] = useState(true);
+    const [showExpBg, setShowExpBg] = useState(false);
+    const [minRotation, setMinRotation] = useState(180);
+    const [rotationThresh, setRotationThresh] = useState(360);
+    const [showCertification, setShowCertification] = useState(false);
 
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -52,7 +60,7 @@ function App() {
 
     useEffect(() => {
       const curRotation = scrollY * 360 / window.innerHeight;
-      setRotation(Math.min(curRotation, Constants.minRotation));
+      setRotation(Math.min(curRotation, minRotation));
       setCurrentRotation(curRotation);
       console.log('rotation', rotation);
       console.log('curRotation', curRotation)
@@ -60,30 +68,64 @@ function App() {
       if (curRotation < 120) {
         setDisplaySkills(false);
         setImageSource(image);
+        setShowIntro(true);
       } else if( curRotation >= 120 && curRotation < 360) {
          setDisplaySkills(true);
          setImageSource(skillsBg);
+         setShowExpBg(false);
+         setShowExperience(false);
       } else if (curRotation >= 360 && curRotation < 480){
         setDisplaySkills(false);
         setShowIntro(false);
         setImageSource(skillsBg);
-      } else if (curRotation > 480) {
+        setShowExperience(false);
+        setShowExpBg(true);
+      } else if (curRotation > 480 && curRotation < 485) {
         setImageSource(expImg);
+        api.start({
+          from: {scale: 2},
+          to: {scale: 2.5}
+        });
+      }  else if (curRotation > 485 && curRotation < 660) {
+        setMinRotation(360); // 180 + 360
+        setRotationThresh(540); //360+180
         setShowExperience(true);
+        setShowExpBg(true);
+        setImageSource(expImg);
+        setShowCertification(false);
+      } else if (curRotation > 660){
+        setShowExpBg(false);
+        setShowExperience(false);
+        setImageSource(certBg);
+        setShowCertification(true);
       }
     }, [scrollY]);
 
 
     const getRotation = () => {
-      return currentRotation <= 360 ? rotation : Math.min(Constants.minRotation+(currentRotation - 360), 360);
+      const rotAnim = currentRotation <= rotationThresh ? rotation : Math.min(minRotation+(currentRotation - rotationThresh), rotationThresh);
+      // console.log('rotAnim', rotAnim);
+      return rotAnim;
     }
 
     const scaleMaskX = () => {
-      return currentRotation <= 360 ? 1 + (scrollY*scaleFactor / window.innerWidth) : 0.7;
+      if(currentRotation <= 360){
+        return 1 + (scrollY*scaleFactor / window.innerWidth);
+      } else {
+        return 0.7;
+      }
     }
 
     const scaleMaskY = () => {
-      return currentRotation <= 360 ? 1 + (scrollY*scaleFactor / window.innerHeight) : 2;
+
+      if(currentRotation <= 360){
+        return 1 + (scrollY*scaleFactor / window.innerHeight);
+      } else if (currentRotation < 660){
+        return 2;
+      } else if (currentRotation >660) {
+        return 0.8;
+      }
+
     }
 
 
@@ -111,6 +153,11 @@ function App() {
       },
       config: { easing: 'ease-in-out' }
     });
+
+    const [bgAnimation, api] = useSpring(() => ({
+      from: {scale: 2},
+      config: { duration: 3000 }
+    }));
 
     const stopScrolling = (isAnimating) => {
       console.log('in parent', isAnimating);
@@ -142,18 +189,38 @@ function App() {
                 }}
               />
             </mask>
-            {<animated.image
+            {/* <g mask="url(#myMask)"> */}
+            {showExpBg && <animated.image
               class="h-screen w-screen"
-              href={imageSource} mask="url(#myMask)"
+              href={spaceBg}
+              mask="url(#myMask)"
+              style={{
+                transformOrigin: '38% 50%',
+                ...bgAnimation
+              }}
+            />}
+            <animated.image
+              class="h-screen w-screen"
+              href={imageSource}
+              mask="url(#myMask)"
               style={{
                 transformOrigin: '38% 50%',
                 ...imageAnimation
               }}
-            />}
+            />
+            {/* <animated.image
+              class="h-screen w-screen opacity-50"
+              href={black}
+              mask="url(#myMask)"
+            /> */}
+          {/* </g> */}
+            
+
           </svg>
           <div class="absolute inset-0 overflow-auto">
           {displaySkills && <Skills currentRotation={currentRotation} stopScrolling={stopScrolling} /> }
           {showExperience && <Experience />}
+          {showCertification && <Certifications />}
           </div>
           
         </div>
@@ -163,6 +230,7 @@ function App() {
           </h1>
         </div>}
       </div>
+      <div id="container" class="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div id="container" class="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div id="container" class="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
     </>
