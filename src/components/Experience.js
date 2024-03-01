@@ -12,7 +12,7 @@ export default function Experience() {
             <div className="md:h-full w-full md:w-1/2 flex justify-start items-center order-1 md:order-2 fixed"></div>
             <div className="h-full w-full md:w-1/2 flex flex-col items-center order-1 md:order-2 fixed mt-4 mb-4">
                 <div id="skills-title" className="text-lg md:text-3xl relative left-1/2 font-pixel mb-8">
-                    <ReactTyped strings={["My Education and Experience"]} typeSpeed={50} />
+                <ReactTyped strings={["Education and Experience"]} typeSpeed={50} />
                 </div>
                 <div className="w-px bg-black relative left-1/3 flex items-center h-40">
                     <div className="section-1 ml-6 p-4 rounded-md flex items-center bg-gradient-to-br from-black via-pink-950 to-pink-700" style={{ minWidth: '300px', width: 'fit-content' }}>
@@ -58,7 +58,7 @@ export default function Experience() {
                             <p className="font-pixel text-xs text-black">(2016 - 2020)</p>
                         </div>
                     </div>
-                    <div className="circl-4 w-3 h-3 rounded-full bg-black absolute left-1/2 transform -translate-x-1/2"></div> {/* Circle for Position 2 */}
+                    <div className="circle-4 w-3 h-3 rounded-full bg-black absolute left-1/2 transform -translate-x-1/2"></div> {/* Circle for Position 2 */}
                 </div>
             </div>
         </div>

@@ -33,21 +33,21 @@
 }
 
 .w-px {
-    animation: drawLine 6s linear forwards;
+    animation: drawLine 4s linear forwards;
 }
 .section-1 {
-    animation: fadeIn 1.5s forwards;
+    animation: fadeIn 1s forwards;
 }
 .section-2 {
-    animation: fadeIn 1.5s forwards;
+    animation: fadeIn 1s forwards;
     animation-delay: 0.5s;
 }
 .section-3 {
-    animation: fadeIn 1.5s forwards;
+    animation: fadeIn 1s forwards;
     animation-delay: 1s;
 }
 .section-4 {
-    animation: fadeIn 1.5s forwards;
+    animation: fadeIn 1s forwards;
     animation-delay: 1.5s;
 }
 
