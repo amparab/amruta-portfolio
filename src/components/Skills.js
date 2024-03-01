@@ -13,29 +13,7 @@ import JiraLogo from '../images/Jira-Logo.png';
 import React, { useRef, useEffect, useState } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 
-export default function Skills ({ onScrollToBottom, currentRotation }) {
-
-    const [showSkills, setShowSkills] = useState(false);
-    const skillRef = useRef(null);
-    // const [isAnimating, setIsAnimating] = useState(false);
-
-    
-    useEffect(() => {
-        if(currentRotation > 180) {
-            setShowSkills(true);
-        
-        }
-        else {
-            setShowSkills(false);
-        }
-
-      }, [currentRotation]);
-
-    //   useEffect(() => {
-    //     console.log('isAnimating', isAnimating);
-
-    //   }, [isAnimating]);
-
+export default function Skills () {
 
     const logoAnimation = useSpring({
         from: { 
@@ -45,16 +23,6 @@ export default function Skills ({ onScrollToBottom, currentRotation }) {
         to: {
             transform: `rotateY(0deg) `,
             opacity: 2
-        },
-        config: { duration:1000 }
-    });  
-
-    const skillsAnimation = useSpring({
-        from: {
-            opacity: 0
-        },
-        to: {
-            opacity: 0.75
         },
         config: { duration:1000 }
     }); 
@@ -73,8 +41,7 @@ export default function Skills ({ onScrollToBottom, currentRotation }) {
 
     return(
         <>
-            <animated.div ref={skillRef} class="fixed inset-0 overflow-auto p-5 bg-black" style={{...skillsAnimation}}>
-                {showSkills && 
+            <animated.div class="fixed inset-0 overflow-auto p-5">              
                 <div id="skillsContainer" 
                     class="flex flex-col justify-center items-center text-white" style={{ maxHeight: '200vh' }}>
                     <div id="skills-title" class="text-4xl md:text-6xl font-pixel mb-8">
@@ -96,9 +63,8 @@ export default function Skills ({ onScrollToBottom, currentRotation }) {
                         </div>
                     ))}
                     </div>
-                </div>}
+                </div>
             </animated.div> 
-            {/* {currentRotation > 360 && <div class="fixed inset-0 overflow-auto p-5 bg-violet-300"></div>} */}
         </>
     );
 

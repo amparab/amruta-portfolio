@@ -30,68 +30,156 @@ function App() {
   const [minRotation, setMinRotation] = useState(180);
   const [rotationThresh, setRotationThresh] = useState(360);
   const [showCertification, setShowCertification] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState('down');
+  const [isReady, setIsReady] = useState(false);
+
+
+  const handleWheel = (event) => {
+    if (event.deltaY > 0) {
+      setScrollDirection('down');
+    } else if (event.deltaY < 0) {
+      setScrollDirection('up');
+    }
+  };
 
   const handleScroll = () => {
     setScrollY(window.scrollY);
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     window.addEventListener('scroll', handleScroll);
+
+    const timer = setTimeout(() => {
+      setIsReady(true);
+    }, 2000);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
     };
   }, []);
 
   useEffect(() => {
-    const parentDiv = document.getElementById('intro2');
-    const parentWidth = parentDiv.offsetWidth;
-    const newRectY = window.innerWidth > 768 ? window.innerHeight : window.innerHeight + (window.innerHeight / 3);
+    const parentWidth = window.innerHeight;
+    const newRectY = window.innerWidth > Constants.large_screen_breakpoint ? window.innerHeight : window.innerHeight + (window.innerHeight / 3);
     setRectY(newRectY);
-    setScaleFactorX(window.innerWidth > 768 ? 8 : 2);
-    setScaleFactorY(window.innerWidth > 768 ? 6 : 2);
     setRectX(parentWidth);
+    setScaleFactorX(window.innerWidth > Constants.large_screen_breakpoint ? 8 : 2);
+    setScaleFactorY(window.innerWidth > Constants.large_screen_breakpoint ? 6 : 2);
   }, []);
+
+  const scrollingUpSequence = (curRotation) => {
+    if (curRotation <= 675 && curRotation > 660) { 
+
+      // Hide the Certificate section
+      setShowCertification(false);
+      setShowOverlay(false);
+
+  } else if (curRotation <= 660 && curRotation > 650){
+
+      // Display and start skill background
+      setImageSource(expImg);
+      setShowExpBg(true);
+      api.start({
+        from: {scale: 2},
+        to: {scale: 2.5}
+      });
+
+  } else if(curRotation <= 650 && curRotation > 280) {
+      //Display timeline
+      setShowExperience(true);
+  } else if (curRotation <= 280 && curRotation >260){
+      // Show Skill Bg only and hide timeline
+      setImageSource(skillsBg);
+      setShowExpBg(false);
+      setShowExperience(false);
+  } else if(curRotation <= 260 && curRotation > 160){
+      // Show skills
+      setDisplaySkills(true);
+      setShowOverlay(true);
+  } else if (curRotation <= 160 && curRotation > 110){
+      setDisplaySkills(false);
+      setShowOverlay(false);
+  } else if (curRotation <= 110) {
+      setImageSource(image);
+      setShowIntro(true);
+  }
+};
+
+  const scrollingDownSequence = (curRotation) => {
+      if (curRotation < 120) { 
+
+        // Display the Intro section
+        setDisplaySkills(false);
+        setImageSource(image);
+        setShowIntro(true);
+        setShowOverlay(false);
+
+    } else if (curRotation >= 120 && curRotation < 180){
+
+        // Display Skill Bg Image first
+        setImageSource(skillsBg);
+
+    } else if (curRotation >= 180 && curRotation <350){
+
+        // Hide Skills
+        setShowOverlay(true);
+        setDisplaySkills(true);
+
+    } else if (curRotation >= 350 && curRotation < 480){
+
+        // Show experience Bg only
+        setShowOverlay(false);
+        setDisplaySkills(false);
+        setShowIntro(false);
+        setShowExpBg(true);
+        
+    } else if (curRotation >= 480 && curRotation < 490){
+
+        // Start experience animation
+        setImageSource(expImg);
+        api.start({
+          from: {scale: 2},
+          to: {scale: 2.5}
+        });
+
+    } else if (curRotation >= 490 && curRotation < 660) {
+
+      // Start experience and other animations
+      setShowExperience(true);
+      setMinRotation(360);
+      setRotationThresh(540);
+      setShowOverlay(false);
+
+    } else if (curRotation >= 660 && curRotation < 715) {
+
+      // Show Certificate Background only
+      setImageSource(certBg);
+      setShowExperience(false);
+
+    } else if (curRotation >= 715){
+
+      // Show Certificate Component
+      setShowOverlay(true);
+      setShowExpBg(false);
+      setShowCertification(true);
+    }
+  };
 
   useEffect(() => {
     const curRotation = scrollY * 360 / window.innerHeight;
     setRotation(Math.min(curRotation, minRotation));
     setCurrentRotation(curRotation);
+    console.log(curRotation);
 
-    if (curRotation < 120) {
-      setDisplaySkills(false);
-      setImageSource(image);
-      setShowIntro(true);
-    } else if (curRotation >= 120 && curRotation < 360) {
-      setDisplaySkills(true);
-      setImageSource(skillsBg);
-      setShowExpBg(false);
-      setShowExperience(false);
-    } else if (curRotation >= 360 && curRotation < 480) {
-      setDisplaySkills(false);
-      setShowIntro(false);
-      setImageSource(skillsBg);
-      setShowExperience(false);
-      setShowExpBg(true);
-    } else if (curRotation > 480 && curRotation < 485) {
-      setImageSource(expImg);
-      api.start({
-        from: {scale: 1.5},
-        to: {scale: 2.5}
-      });
-    } else if (curRotation > 485 && curRotation < 660) {
-      setMinRotation(360);
-      setRotationThresh(540);
-      setShowExperience(true);
-      setShowExpBg(true);
-      setImageSource(expImg);
-      setShowCertification(false);
-    } else if (curRotation > 660) {
-      setShowExpBg(false);
-      setShowExperience(false);
-      setImageSource(certBg);
-      setShowCertification(true);
+    if(scrollDirection === 'down'){
+        scrollingDownSequence(curRotation);
+    } else {
+      scrollingUpSequence(curRotation);
     }
+
   }, [scrollY]);
 
   const getRotation = useMemo(() => {
@@ -102,7 +190,8 @@ function App() {
   const scaleMaskX = useMemo(() => {
     if(currentRotation <= 360) {
       return 1 + (scrollY * scaleFactorX / window.innerWidth);
-    } else return 1 + (scrollY * 0.5 / window.innerWidth);
+    } 
+    else return 1 + (scrollY * 0.5 / window.innerWidth);
     
   }, [currentRotation, scrollY, scaleFactorX]);
 
@@ -125,7 +214,7 @@ function App() {
                 rotateY(${getRotation}deg) 
                 scaleX(${scaleMaskX})
                 scaleY(${scaleMaskY})
-                translateY(${window.innerWidth < 768 ? Math.max(-(scrollY), -window.innerHeight * 0.3) : '0'}px)
+                translateY(${window.innerWidth < Constants.large_screen_breakpoint ? Math.max(-(scrollY), -window.innerHeight * 0.3) : '0'}px)
                 `
     },
     config: { easing: 'ease-in-out' }
@@ -141,81 +230,88 @@ function App() {
     config: { easing: 'ease-in-out' }
   });
 
+  const overlay = useSpring({
+    from: { opacity: 0, scale: 1 },
+    to: { opacity: 0.5, scale: 4 },
+    config: { duration: 6000 }
+  });
+
   const [bgAnimation, api] = useSpring(() => ({
     from: { scale: 1.5 },
     config: { duration: 2000 }
   }));
 
-  const stopScrolling = (isAnimating) => {
-    if (isAnimating) {
-      var scrollPosition = window.scrollY;
-      window.onscroll = function () {
-        window.scrollTo(0, scrollPosition);
-      };
-    }
-  };
-
   return (
     <>
-      <div id="container" className="h-screen w-screen flex flex-col md:flex-row justify-center items-center">
-        <div id="intro2" className="z-10 flex-shrink-0 h-1/2 md:h-full w-full md:w-1/2 order-2 md:order-1">
-          <svg className="left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full fixed border border-solid border-red-500">
-            <mask id="myMask" className='myMask' >
-              <animated.rect
-                x={((rectX - 450) / 1.25)}
-                y={(rectY - 300) / 2}
-                className="rect"
-                width="450"
-                height="300"
-                fill="white"
-                style={{
-                  transformOrigin: '38% 50%',
-                  ...springProps
-                }}
+    {!isReady ? 
+    <div className="flex justify-center items-center h-screen w-screen">
+      <h1 className="text-center">Loading...</h1>
+    </div>
+    :
+      <div id="container" onWheel={handleWheel} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center">
+      <div id="imageContainer" className="z-10 flex-shrink-0 h-1/2 md:h-full w-full md:w-1/2 order-2 md:order-1">
+        <svg className="left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full fixed">
+          <mask id="myMask" className='myMask' >
+            <animated.rect
+              x={((rectX - 450) / 1.25)}
+              y={(rectY - 300) / 2}
+              className="rect"
+              width="450"
+              height="300"
+              fill="white"
+              style={{
+                transformOrigin: '38% 50%',
+                ...springProps
+              }}
+            />
+          </mask>
+          <g mask="url(#myMask)">
+            {showExpBg && <animated.image
+              className="h-screen w-screen"
+              href={spaceBg}
+              mask="url(#myMask)"
+              style={{
+                transformOrigin: '38% 50%',
+                ...bgAnimation
+              }}
+            />}
+            <animated.image
+              className="h-screen w-screen"
+              href={imageSource}
+              mask="url(#myMask)"
+              style={{
+                transformOrigin: '38% 50%',
+                ...imageAnimation
+              }}
               />
-            </mask>
-            <g mask="url(#myMask)">
-              {showExpBg && <animated.image
-                className="h-screen w-screen"
-                href={spaceBg}
-                mask="url(#myMask)"
-                style={{
-                  transformOrigin: '38% 50%',
-                  ...bgAnimation
-                }}
-              />}
-              <animated.image
-                className="h-screen w-screen"
-                href={imageSource}
-                mask="url(#myMask)"
-                style={{
-                  transformOrigin: '38% 50%',
-                  ...imageAnimation
-                }}
-                />
-                <animated.image
-                  class="h-screen w-screen opacity-0"
-                  href={black}
-                  mask="url(#myMask)"
-                />
-            </g>
-            
-          </svg>
-          <div className="absolute inset-0 overflow-auto">
-            {displaySkills && <Skills currentRotation={currentRotation} stopScrolling={stopScrolling} />}
-            {showExperience && <Experience />}
-            {showCertification && <Certifications />}
-          </div>
+            {showOverlay && <animated.image
+              class="h-screen w-screen"
+              href={black}
+              mask="url(#myMask)"
+              style={{
+                ...overlay,
+                transformOrigin: '50% 50%'
+              }}
+            />}
+          </g>
+          
+        </svg>
+        <div className="absolute inset-0 overflow-auto">
+          {displaySkills && <Skills />}
+          {showExperience && <Experience />}
+          {showCertification && <Certifications />}
         </div>
-        {showIntro && <div id="intro1" className="flex-shrink-0 h-1/2 md:h-full w-full md:w-1/2 flex justify-start items-center order-1 md:order-2 pl-5">
-          <h1 className='fixed text-3xl md:text-5xl font-pixel'>Hello,<br />I am <br />
-            <ReactTyped strings={["AMRUTA PARAB"]} typeSpeed={50} />
-          </h1>
-        </div>}
       </div>
-      <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
-      <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
-      <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
+      {showIntro && <div id="intro1" className="flex-shrink-0 h-1/2 md:h-full w-full md:w-1/2 flex justify-start items-center order-1 md:order-2 pl-5">
+        <h1 className='fixed text-3xl md:text-5xl font-pixel'>Hello,<br />I am <br />
+          <ReactTyped strings={["AMRUTA PARAB"]} typeSpeed={50} />
+        </h1>
+      </div>}
+    </div>
+    }
+    <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
+    <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
+    <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
     </>
   );
 }
