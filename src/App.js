@@ -34,6 +34,8 @@ function App() {
   const [showCertification, setShowCertification] = useState(false);
   const [scrollDirection, setScrollDirection] = useState('down');
   const [isReady, setIsReady] = useState(true);
+  const [cycle, setCycle] = useState(1);
+  const [cycleUpdated, setCycleUpdated] = useState(false);
 
 
   const handleWheel = (event) => {
@@ -264,7 +266,9 @@ const scrollingDownSequence = (curRotation) => {
     const curRotation = scrollY * 360 / window.innerHeight;
     setRotation(Math.min(curRotation, minRotation));
     setCurrentRotation(curRotation);
-    console.log(curRotation);
+    // const curRotationT = (scrollY * 360 / window.innerHeight) % 360;
+    // const limitedRotationT = curRotation > 180 ? curRotation - 180 : curRotation;
+    // console.log(limitedRotationT);
 
     if(scrollDirection === 'down'){
         scrollingDownSequence(curRotation);
@@ -274,13 +278,49 @@ const scrollingDownSequence = (curRotation) => {
 
   }, [scrollY]);
 
-  const getRotation = useMemo(() => {
-    const rotAnim = currentRotation <= rotationThresh ? rotation : Math.min(minRotation + (currentRotation - rotationThresh), rotationThresh);
-    return rotAnim;
-  }, [currentRotation, rotation, rotationThresh, minRotation]);
+  const calcRotation = y => {
+    // Calculate the rotation based on scroll position
+    let rotation = (y * 360 / window.innerHeight);
+
+    // if(rotation > 180 * (cycle + 1) && rotation < 180 * (cycle + 2)){
+    //   console.log('cycle',cycle+1);
+    //   setCycle(cycle+1);
+    // }
+
+    // Adjust rotation to stay at 180 for a period of time or scroll distance
+    const threshold = (window.innerHeight / 2)*cycle; // Change this value as needed
+    const distance = window.innerHeight / 2; // Change this value as needed
+
+    if (rotation >= 180 * cycle && rotation <= 180 * (cycle + 1)) {
+    // if ((rotation >= 180 && rotation <= 360) || (rotation >= 540 && rotation <= 720)) {
+      // Determine if rotation should be locked at 180
+      setCycleUpdated(false);
+      const lockRotation = scrollY > threshold && scrollY < threshold + distance;
+      console.log('lockRotation', lockRotation);
+      if (lockRotation) {
+        return 180
+      }
+    } else if (rotation > 180 * (cycle + 1) && !cycleUpdated) {
+      setCycle(c => c + 1); // Increment the cycle value
+      setCycleUpdated(true);
+      console.log('cycle', cycle);
+    }
+
+    rotation = rotation > 180 ? rotation - 180 : rotation;
+    
+    console.log(rotation);
+
+    return rotation;
+  };
+
+
+  // const getRotation = useMemo(() => {
+  //   const rotAnim = currentRotation <= rotationThresh ? rotation : Math.min(minRotation + (currentRotation - rotationThresh), rotationThresh);
+  //   return rotAnim;
+  // }, [currentRotation, rotation, rotationThresh, minRotation]);
 
   const scaleMaskX = useMemo(() => {
-    return 1 + (scrollY * scaleFactorX / window.innerWidth);
+    return 1 + (scrollY*3 / window.innerWidth);
     // if(currentRotation <= 360) {
     //   return 1 + (scrollY * scaleFactorX / window.innerWidth);
     // } else if (currentRotation > 1000) {
@@ -288,29 +328,41 @@ const scrollingDownSequence = (curRotation) => {
     // }
     // else return 1 + (scrollY * 0.5 / window.innerWidth);
     
-  }, [currentRotation, scrollY, scaleFactorX]);
+  }, [currentRotation, scrollY]);
 
   const scaleMaskY = useMemo(() => {
-    if (currentRotation <= 360) {
-      return 1 + (scrollY * scaleFactorY / window.innerHeight);
-    } else if (currentRotation < 660) {
-      return 1 + (scrollY*2 / window.innerHeight);;
-    } else if (currentRotation > 660) {
-      return 2;
-    }
+    return 1 + (scrollY*3 / window.innerHeight);
+    // if (currentRotation <= 360) {
+    //   return 1 + (scrollY * scaleFactorY / window.innerHeight);
+    // } else if (currentRotation < 660) {
+    //   return 1 + (scrollY*2 / window.innerHeight);;
+    // } else if (currentRotation > 660) {
+    //   return 2;
+    // }
   }, [currentRotation, scrollY, scaleFactorY]);
+
+  const getTranslateY = useMemo(() => {
+    if (currentRotation <= 180) {
+      return scrollY/3;
+      // return Math.min(scrollY/3, window.innerHeight*0.3);
+    } else {
+      return 0;
+    }
+  }, [currentRotation, scrollY]);
 
   const springProps = useSpring({
     from: {
       transform: `perspective(1000px)`
     },
     to: {
+      // rotateY(${currentRotation}deg) 
       transform: `perspective(1000px) 
-                rotateY(${getRotation}deg) 
-                scaleX(${scaleMaskX})
-                scaleY(${scaleMaskY})
-                translateY(${window.innerWidth < Constants.large_screen_breakpoint ? Math.max(-(scrollY), -window.innerHeight * 0.3) : '0'}px)
-                translateX(${currentRotation < 1000 ? '0' : window.innerHeight * 0.3}px)
+                  rotateY(${calcRotation(scrollY)}deg) 
+                  scaleX(${scaleMaskX})
+                  scaleY(${scaleMaskY})
+                  translateY(${getTranslateY}px)
+                  translateX(${currentRotation < 1000 ? '0' : window.innerHeight * 0.3}px)
+
                 `
     },
     config: { easing: 'slowEasing' }
@@ -333,69 +385,68 @@ const scrollingDownSequence = (curRotation) => {
 
   return (
     <>
-    {!isReady ? 
-    <div className="flex justify-center items-center h-screen w-screen">
-      <h1 className="text-center">Loading...</h1>
-    </div>
-    :
-      <div id="container" onWheel={handleWheel} className="h-screen w-screen flex flex-col justify-center items-center">
-      <div id="imageContainer" className=" h-1/2 w-full">
-        <svg className="w-full h-full fixed">
-          <mask id="myMask" className='myMask' >
-            <animated.rect
-              x={(rectX - 450) / 2}
-              y={(rectY - 300) / 3}
-              className="rect"
-              width="450"
-              height="300"
-              fill="white"
-              style={{
-                transformOrigin: '50% 50%',
-                ...springProps
-              }}
-            />
-          </mask>
-          <g mask="url(#myMask)">
-            {showExpBg && <animated.image
-              className="h-screen w-screen"
-              href={spaceBg}
-              mask="url(#myMask)"
-              style={{
-                transformOrigin: '38% 50%',
-                ...bgAnimation
-              }}
-            />}
-            <animated.image
-              className="h-screen w-screen"
-              href={imageSource}
-              mask="url(#myMask)"
-              style={{
-                transformOrigin: '38% 50%',
-                ...imageAnimation
-              }}
-              />
-          </g>
-          
-        </svg>
-        <div className="absolute inset-0 overflow-auto">
-          {displaySkills && <Skills />}
-          {showExperience && <Experience />}
-          {showCertification && <Certifications />}
+      {!isReady ? 
+        <div className="flex justify-center items-center h-screen w-screen">
+          <h1 className="text-center">Loading...</h1>
         </div>
-      </div>
-      {showIntro && <div id="intro1" className="flex-shrink-0 h-1/2 md:h-full w-full md:w-1/2 flex justify-start items-center order-1 md:order-2 pl-5">
-        <h1 className='fixed text-3xl md:text-5xl font-pixel'>Hello,<br />I am <br />
-          <ReactTyped strings={["AMRUTA PARAB"]} typeSpeed={50} />
-        </h1>
-      </div>}
-    </div>
-    }
-    <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
-    <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
-    <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
-    <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
+      :
+        <div id="container" onWheel={handleWheel} className="h-screen w-screen flex flex-col justify-center items-center">
+          <div id="imageContainer" className=" h-full w-full">
+            <svg className="w-full h-full fixed">
+              <mask id="myMask" className='myMask' >
+                <animated.rect
+                  x={(window.innerWidth - 450) / 2}
+                  y={(window.innerHeight - 300) / 4}
+                  className="rect"
+                  width="450"
+                  height="300"
+                  fill="white"
+                  style={{
+                    transformOrigin: '50% 50%',
+                    ...springProps
+                  }}
+                />
+              </mask>
+              <g mask="url(#myMask)">
+                {showExpBg && <animated.image
+                  className="h-screen w-screen"
+                  href={spaceBg}
+                  mask="url(#myMask)"
+                  style={{
+                    transformOrigin: '38% 50%',
+                    ...bgAnimation
+                  }}
+                />}
+                <animated.image
+                  className="h-screen w-screen"
+                  href={imageSource}
+                  mask="url(#myMask)"
+                  style={{
+                    transformOrigin: '38% 50%',
+                    ...imageAnimation
+                  }}
+                />
+              </g>
+            </svg>
+            <div className="absolute inset-0 overflow-auto">
+              {displaySkills && <Skills />}
+              {showExperience && <Experience />}
+              {showCertification && <Certifications />}
+            </div>
+          </div>
+          {showIntro && <div id="intro1" className="h-screen w-full flex flex-col items-center justify-center border border-solid border-red-600">
+          {/* <h1 className='fixed text-3xl md:text-5xl font-pixel'>Hello, I am</h1> */}
+          <h1 className='fixed text-3xl md:text-5xl font-pixel'><ReactTyped strings={["AMRUTA PARAB"]} typeSpeed={50} /></h1>
+          </div>}
+        </div>
+      }
+      <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
+      <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
+      <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
+      <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
     </>
   );
+  
 }
 
 export default App;
