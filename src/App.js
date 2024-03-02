@@ -46,7 +46,7 @@ function App() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const parentWidth = window.innerHeight;
+    const parentWidth = window.innerWidth;
     const newRectY = window.innerWidth > Constants.large_screen_breakpoint ? window.innerHeight : window.innerHeight + (window.innerHeight / 3);
     setRectY(newRectY);
     setRectX(parentWidth);
@@ -280,12 +280,13 @@ const scrollingDownSequence = (curRotation) => {
   }, [currentRotation, rotation, rotationThresh, minRotation]);
 
   const scaleMaskX = useMemo(() => {
-    if(currentRotation <= 360) {
-      return 1 + (scrollY * scaleFactorX / window.innerWidth);
-    } else if (currentRotation > 1000) {
-      return 1;
-    }
-    else return 1 + (scrollY * 0.5 / window.innerWidth);
+    return 1 + (scrollY * scaleFactorX / window.innerWidth);
+    // if(currentRotation <= 360) {
+    //   return 1 + (scrollY * scaleFactorX / window.innerWidth);
+    // } else if (currentRotation > 1000) {
+    //   return 1;
+    // }
+    // else return 1 + (scrollY * 0.5 / window.innerWidth);
     
   }, [currentRotation, scrollY, scaleFactorX]);
 
@@ -337,19 +338,19 @@ const scrollingDownSequence = (curRotation) => {
       <h1 className="text-center">Loading...</h1>
     </div>
     :
-      <div id="container" onWheel={handleWheel} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center">
-      <div id="imageContainer" className="z-10 flex-shrink-0 h-1/2 md:h-full w-full md:w-1/2 order-2 md:order-1">
-        <svg className="left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full fixed">
+      <div id="container" onWheel={handleWheel} className="h-screen w-screen flex flex-col justify-center items-center">
+      <div id="imageContainer" className=" h-1/2 w-full">
+        <svg className="w-full h-full fixed">
           <mask id="myMask" className='myMask' >
             <animated.rect
-              x={((rectX - 450) / 1.25)}
-              y={(rectY - 300) / 2}
+              x={(rectX - 450) / 2}
+              y={(rectY - 300) / 3}
               className="rect"
               width="450"
               height="300"
               fill="white"
               style={{
-                transformOrigin: '38% 50%',
+                transformOrigin: '50% 50%',
                 ...springProps
               }}
             />
