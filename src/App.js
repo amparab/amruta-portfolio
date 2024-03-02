@@ -35,7 +35,6 @@ function App() {
   const [scrollDirection, setScrollDirection] = useState('down');
   const [isReady, setIsReady] = useState(true);
   const [cycle, setCycle] = useState(1);
-  const [cycleUpdated, setCycleUpdated] = useState(false);
 
 
   const handleWheel = (event) => {
@@ -270,48 +269,109 @@ const scrollingDownSequence = (curRotation) => {
     // const limitedRotationT = curRotation > 180 ? curRotation - 180 : curRotation;
     // console.log(limitedRotationT);
 
-    if(scrollDirection === 'down'){
-        scrollingDownSequence(curRotation);
-    } else {
-      scrollingUpSequence(curRotation);
-    }
+    // if(scrollDirection === 'down'){
+    //     scrollingDownSequence(curRotation);
+    // } else {
+    //   scrollingUpSequence(curRotation);
+    // }
 
   }, [scrollY]);
 
-  const calcRotation = y => {
-    // Calculate the rotation based on scroll position
-    let rotation = (y * 360 / window.innerHeight);
+  
+  let prevScroll = 0;
+  let rotationT = 0;
+  let cycleT = 0;
 
-    // if(rotation > 180 * (cycle + 1) && rotation < 180 * (cycle + 2)){
-    //   console.log('cycle',cycle+1);
-    //   setCycle(cycle+1);
-    // }
-
-    // Adjust rotation to stay at 180 for a period of time or scroll distance
-    const threshold = (window.innerHeight / 2)*cycle; // Change this value as needed
-    const distance = window.innerHeight / 2; // Change this value as needed
-
-    if (rotation >= 180 * cycle && rotation <= 180 * (cycle + 1)) {
-    // if ((rotation >= 180 && rotation <= 360) || (rotation >= 540 && rotation <= 720)) {
-      // Determine if rotation should be locked at 180
-      setCycleUpdated(false);
-      const lockRotation = scrollY > threshold && scrollY < threshold + distance;
-      console.log('lockRotation', lockRotation);
-      if (lockRotation) {
-        return 180
-      }
-    } else if (rotation > 180 * (cycle + 1) && !cycleUpdated) {
-      setCycle(c => c + 1); // Increment the cycle value
-      setCycleUpdated(true);
-      console.log('cycle', cycle);
+const calcRotation = y => {
+    // Adjust y based on previous scroll position if rotation is locked
+    if (rotation === cycleT * 180 || rotation === (cycleT + 1) * 180) {
+        y = prevScroll;
     }
 
-    rotation = rotation > 180 ? rotation - 180 : rotation;
-    
-    console.log(rotation);
+    rotationT = (y * 360 / window.innerHeight);
+    cycleT = Math.floor(rotation / 180);
+    let threshold = (window.innerHeight / 2) * cycleT;
+    const distance = window.innerHeight / 2;
 
-    return rotation;
-  };
+    if (cycleT % 2 === 1) {
+        // If cycle is odd, lock at 180 or 360
+        if (rotationT >= (cycleT * 180) && rotationT <= (cycleT + 1) * 180) {
+            const lockRotation = y > threshold && y < threshold + distance;
+            if (lockRotation) {
+                console.log(cycleT * 180);
+                return cycleT * 180;
+            }
+        }
+    } else {
+        // If cycle is even, scroll-controlled
+        return rotationT;
+    }
+
+    console.log('rotation from out', rotationT);
+
+    return rotationT;
+};
+
+  
+
+
+
+//   const calcRotation = y => {
+//     let rotation = (y * 360 / window.innerHeight);
+//     let cycle = Math.floor(rotation / 180);
+//     let threshold = (window.innerHeight / 2) * cycle;
+//     const distance = window.innerHeight / 2;
+
+//     if (cycle % 2 === 1) {
+//         // If cycle is odd, lock at 180 or 360
+//         if (rotation >= (cycle * 180) && rotation <= (cycle + 1) * 180) {
+//             const lockRotation = y > threshold && y < threshold + distance;
+//             if (lockRotation) {
+//                 console.log(cycle*180);
+//                 return cycle * 180;
+//             }
+//         }
+//     } else {
+//         // If cycle is even, scroll-controlled
+//         return rotation;
+//     }
+
+//     console.log('rotation from out', rotation);
+
+//     return rotation;
+// };
+
+
+  // const calcRotation = y => {
+
+  //   let rotation = (y * 360 / window.innerHeight);
+
+  //   let cycle = Math.floor(rotation / 180);
+  //   console.log('rotation cycle', cycle);
+
+  //   let threshold = (window.innerHeight / 2)*cycle; 
+  //   const distance = window.innerHeight/2; 
+
+  //   console.log('rotation', rotation);
+
+  //   if ( cycle!=0 && rotation >= (cycle) * 180 && rotation <= (cycle +1) * 180) {
+  //   // if (rotation >= 180 * cycle && rotation <= 180 * (cycle + 1)) {
+  //   // if ((rotation >= 180 && rotation <= 360) || (rotation >= 540 && rotation <= 720)) {
+
+  //     const lockRotation = scrollY > threshold && scrollY < threshold + distance;
+
+  //     if (lockRotation) {
+  //       console.log('rotation in lock', cycle * 180);
+  //       return cycle * 180
+  //     }
+  
+  //   } 
+  //   // rotation = rotation > cycle * 180 ? rotation - (cycle * 180) : rotation;
+    
+    
+
+  //   return rotation;
+  // };
 
 
   // const getRotation = useMemo(() => {
@@ -356,12 +416,13 @@ const scrollingDownSequence = (curRotation) => {
     },
     to: {
       // rotateY(${currentRotation}deg) 
+      // scaleX(${scaleMaskX})
+      // scaleY(${scaleMaskY})
+      // translateY(${getTranslateY}px)
+      // translateX(${currentRotation < 1000 ? '0' : window.innerHeight * 0.3}px)
       transform: `perspective(1000px) 
                   rotateY(${calcRotation(scrollY)}deg) 
-                  scaleX(${scaleMaskX})
-                  scaleY(${scaleMaskY})
-                  translateY(${getTranslateY}px)
-                  translateX(${currentRotation < 1000 ? '0' : window.innerHeight * 0.3}px)
+                  
 
                 `
     },
