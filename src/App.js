@@ -1,6 +1,6 @@
 import './input.css';
-import { useSpring, animated } from '@react-spring/web';
-import React, { useEffect, useState, useMemo } from 'react';
+import { useSpring, animated, config  } from '@react-spring/web';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import image from './images/myphoto-cropped.png'
 import skillsBg from './images/skills-bg-2.png'
 import expImg from './images/Girl_Computer.png'
@@ -13,6 +13,10 @@ import * as Constants from './constants/Constants';
 import Experience from './components/Experience';
 import Certifications from './components/Certifcations';
 import useDebouncedScroll from './components/useDebouncedScroll';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap } from 'gsap';
+
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
 
@@ -34,7 +38,72 @@ function App() {
   const [showCertification, setShowCertification] = useState(false);
   const [scrollDirection, setScrollDirection] = useState('down');
   const [isReady, setIsReady] = useState(true);
-  const [cycle, setCycle] = useState(1);
+
+  // const maskRef = useRef(null);
+  const conRef = useRef(null);
+  const parRef = useRef(null);
+
+  const maskRef = useRef(null);
+  const reference = useRef(null);
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    const temptl = gsap.timeline({
+      scrollTrigger: {
+        trigger: conRef.current,
+        start: 'top bottom',
+        end: 'bottom bottom',
+        scrub: true, // Smooth animation
+        ease: "slow"
+      },
+      onUpdate: function () {
+        console.log("Rotation value:", gsap.getProperty(reference.current, "rotation"));
+        setRotation(gsap.getProperty(reference.current, "rotation"));
+      }
+    });
+  
+    // Define the animation
+    temptl.to(reference.current, {
+      transformOrigin: '100% 100%',
+      rotate: 180
+    })
+  
+    return () => {
+      temptl.kill();
+    };
+  }, []);
+
+useEffect(() => {
+  const mask = maskRef.current;
+  gsap.set(mask, { transformOrigin: "50% 50%" });
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: conRef.current,
+      start: 'top bottom',
+      end: 'bottom bottom',
+      scrub: true, // Smooth animation
+      ease: "slow",
+      onUpdate: function () {
+        console.log("Width value:", gsap.getProperty(reference.current, "rotation"));
+      }
+    }
+  });
+
+  // Define the animation
+  tl.to(mask,
+    {
+    // transformOrigin: '50% 50%',
+    scale: 3.5,
+    y: window.innerHeight/2
+    // width: window.innerWidth,
+    // height: window.innerHeight
+  });
+
+
+  return () => {
+    tl.kill();
+  };
+}, []);
 
 
   const handleWheel = (event) => {
@@ -137,7 +206,7 @@ function App() {
 
 const scrollingDownSequence = (curRotation) => {
   switch (true) {
-    case curRotation < 120:
+    case curRotation < 125:
       // Display the Intro section
 
       setImageSource(image);
@@ -148,7 +217,7 @@ const scrollingDownSequence = (curRotation) => {
       setShowExpBg(false);
       setShowCertification(false);  
       break;
-    case curRotation >= 120 && curRotation < 180:
+    case curRotation >= 125 && curRotation < 170:
       // Display Skill Bg Image first
       setImageSource(skillsBg);
 
@@ -159,26 +228,49 @@ const scrollingDownSequence = (curRotation) => {
       setShowCertification(false);  
 
       break;
-    case curRotation >= 180 && curRotation < 270:
-      // Show Skills
+    case curRotation >= 170 && curRotation < 310:
       setImageSource(skillsBg);
       setDisplaySkills(true);
 
       setShowIntro(false);
       setShowExperience(false);
       setShowExpBg(false);
+      setShowCertification(false);  
+      break;
+    case curRotation >= 310 && curRotation < 315:
+      setImageSource(skillsBg);
+      setDisplaySkills(false);
+      setShowExpBg(false);
+      setShowExperience(false);
+      setShowIntro(false);
+      setShowCertification(false);
+
+    case curRotation >= 315 && curRotation < 350:
+      // Show Skills
+      setImageSource(expImg);
+      setShowExpBg(true);
+      api.start({
+        from: {scale: 2},
+        to: {scale: 2.5}
+      });
+      setShowExperience(false);
+      setShowIntro(false);
+      setDisplaySkills(false);
       setShowCertification(false);
 
       break;
 
-    case curRotation >= 270 && curRotation < 300:
+    case curRotation >= 350 && curRotation < 540:
       // Show Skills
-      setImageSource(skillsBg);
-
-      setDisplaySkills(false);
+      setImageSource(expImg);
+      setShowExpBg(true);
+      api.start({
+        from: {scale: 2},
+        to: {scale: 2.5}
+      });
+      setShowExperience(true);
       setShowIntro(false);
-      setShowExperience(false);
-      setShowExpBg(false);
+      setDisplaySkills(false);
       setShowCertification(false);
 
       break;
@@ -197,7 +289,7 @@ const scrollingDownSequence = (curRotation) => {
       setDisplaySkills(false);
       setShowCertification(false);
       break;
-    case curRotation >= 360 && curRotation < 400:
+    case curRotation >= 360 && curRotation < 450:
       // Start experience animation
       setImageSource(expImg);
       setShowExpBg(true);
@@ -209,18 +301,18 @@ const scrollingDownSequence = (curRotation) => {
       setShowCertification(false);
       
       break;
-    case curRotation >= 370 && curRotation < 645:
+    case curRotation >= 450 && curRotation < 600:
       // Start experience and other animations
-      setShowExperience(true);
-      setImageSource(expImg);
-      setShowExpBg(true);
-      setMinRotation(360);
-      setRotationThresh(540);
+      
+      setImageSource(certBg);
 
+      setShowExpBg(false);
+      setShowExperience(false);
       setShowIntro(false);
       setDisplaySkills(false);
       setShowCertification(false);
       break;
+
     case curRotation >= 645 && curRotation < 715:
       // Show Certificate Background only
       setImageSource(certBg);
@@ -261,117 +353,42 @@ const scrollingDownSequence = (curRotation) => {
   }
 };
 
-  useEffect(() => {
-    const curRotation = scrollY * 360 / window.innerHeight;
-    setRotation(Math.min(curRotation, minRotation));
-    setCurrentRotation(curRotation);
-    // const curRotationT = (scrollY * 360 / window.innerHeight) % 360;
-    // const limitedRotationT = curRotation > 180 ? curRotation - 180 : curRotation;
-    // console.log(limitedRotationT);
+  // useEffect(() => {
+  //   const degrees = (scrollY * 360) / window.innerHeight;
 
-    // if(scrollDirection === 'down'){
-    //     scrollingDownSequence(curRotation);
-    // } else {
-    //   scrollingUpSequence(curRotation);
-    // }
+  //   setRotation(degrees);
 
-  }, [scrollY]);
+  //   if(scrollDirection === 'down'){
+  //       scrollingDownSequence(rotation);
+  //   } else {
+  //     scrollingUpSequence(rotation);
+  //   }
 
-  
-  let prevScroll = 0;
-  let rotationT = 0;
-  let cycleT = 0;
+  // }, [scrollY]);
 
-const calcRotation = y => {
-    // Adjust y based on previous scroll position if rotation is locked
-    if (rotation === cycleT * 180 || rotation === (cycleT + 1) * 180) {
-        y = prevScroll;
-    }
-
-    rotationT = (y * 360 / window.innerHeight);
-    cycleT = Math.floor(rotation / 180);
-    let threshold = (window.innerHeight / 2) * cycleT;
+  const calcRotation = y => {
+    let rotation = (y * 360 / window.innerHeight);
+    let cycle = Math.floor(rotation / 180);
+    let threshold = (window.innerHeight / 2) * cycle;
     const distance = window.innerHeight / 2;
 
-    if (cycleT % 2 === 1) {
+    if (cycle % 2 === 1) {
         // If cycle is odd, lock at 180 or 360
-        if (rotationT >= (cycleT * 180) && rotationT <= (cycleT + 1) * 180) {
+        if (rotation >= (cycle * 180) && rotation <= (cycle + 1) * 180) {
             const lockRotation = y > threshold && y < threshold + distance;
             if (lockRotation) {
-                console.log(cycleT * 180);
-                return cycleT * 180;
+                console.log(cycle * 180);
+                return cycle * 180;
             }
         }
     } else {
         // If cycle is even, scroll-controlled
-        return rotationT;
+        console.log(rotation);
+        return rotation;
     }
 
-    console.log('rotation from out', rotationT);
-
-    return rotationT;
+    return rotation;
 };
-
-  
-
-
-
-//   const calcRotation = y => {
-//     let rotation = (y * 360 / window.innerHeight);
-//     let cycle = Math.floor(rotation / 180);
-//     let threshold = (window.innerHeight / 2) * cycle;
-//     const distance = window.innerHeight / 2;
-
-//     if (cycle % 2 === 1) {
-//         // If cycle is odd, lock at 180 or 360
-//         if (rotation >= (cycle * 180) && rotation <= (cycle + 1) * 180) {
-//             const lockRotation = y > threshold && y < threshold + distance;
-//             if (lockRotation) {
-//                 console.log(cycle*180);
-//                 return cycle * 180;
-//             }
-//         }
-//     } else {
-//         // If cycle is even, scroll-controlled
-//         return rotation;
-//     }
-
-//     console.log('rotation from out', rotation);
-
-//     return rotation;
-// };
-
-
-  // const calcRotation = y => {
-
-  //   let rotation = (y * 360 / window.innerHeight);
-
-  //   let cycle = Math.floor(rotation / 180);
-  //   console.log('rotation cycle', cycle);
-
-  //   let threshold = (window.innerHeight / 2)*cycle; 
-  //   const distance = window.innerHeight/2; 
-
-  //   console.log('rotation', rotation);
-
-  //   if ( cycle!=0 && rotation >= (cycle) * 180 && rotation <= (cycle +1) * 180) {
-  //   // if (rotation >= 180 * cycle && rotation <= 180 * (cycle + 1)) {
-  //   // if ((rotation >= 180 && rotation <= 360) || (rotation >= 540 && rotation <= 720)) {
-
-  //     const lockRotation = scrollY > threshold && scrollY < threshold + distance;
-
-  //     if (lockRotation) {
-  //       console.log('rotation in lock', cycle * 180);
-  //       return cycle * 180
-  //     }
-  
-  //   } 
-  //   // rotation = rotation > cycle * 180 ? rotation - (cycle * 180) : rotation;
-    
-    
-
-  //   return rotation;
-  // };
 
 
   // const getRotation = useMemo(() => {
@@ -380,7 +397,12 @@ const calcRotation = y => {
   // }, [currentRotation, rotation, rotationThresh, minRotation]);
 
   const scaleMaskX = useMemo(() => {
-    return 1 + (scrollY*3 / window.innerWidth);
+    if(rotation >= 300){
+      return 1.5
+    } else if (rotation >= 650){
+      return 10;
+    }
+    return 1 + (scrollY*8/ window.innerWidth);
     // if(currentRotation <= 360) {
     //   return 1 + (scrollY * scaleFactorX / window.innerWidth);
     // } else if (currentRotation > 1000) {
@@ -391,7 +413,7 @@ const calcRotation = y => {
   }, [currentRotation, scrollY]);
 
   const scaleMaskY = useMemo(() => {
-    return 1 + (scrollY*3 / window.innerHeight);
+    return 1 + (scrollY*5 / window.innerHeight);
     // if (currentRotation <= 360) {
     //   return 1 + (scrollY * scaleFactorY / window.innerHeight);
     // } else if (currentRotation < 660) {
@@ -402,32 +424,86 @@ const calcRotation = y => {
   }, [currentRotation, scrollY, scaleFactorY]);
 
   const getTranslateY = useMemo(() => {
-    if (currentRotation <= 180) {
-      return scrollY/3;
+    if (rotation >= 300) {
+      return scrollY/3
       // return Math.min(scrollY/3, window.innerHeight*0.3);
     } else {
       return 0;
     }
-  }, [currentRotation, scrollY]);
+  }, [rotation, scrollY]);
 
+  const getTranslateX = useMemo(() => {
+    if(rotation < 300) 
+      return '0'
+    else if (rotation >= 495){
+      return window.innerWidth * 0.30
+    }
+    else {
+      return -window.innerWidth * 0.15;
+    }
+  } ,[rotation]);
+
+  // const springProps = useSpring({
+  //   from: {
+  //     transform: `perspective(500px)`
+  //   },
+  //   to: {
+  //     // rotateY(${currentRotation}deg) 
+  //     // scaleX(${scaleMaskX})
+  //     // scaleY(${scaleMaskY})
+  //     // translateY(${getTranslateY}px)
+  //     // translateX(${currentRotation < 1000 ? '0' : window.innerHeight * 0.3}px)
+  //     transform: `perspective(500px) 
+  //                 rotateY(${rotation}deg)   
+  //                 scaleX(${scaleMaskX})
+  //                 scaleY(${scaleMaskY})
+  //               `
+  //   },
+  //   config: { mass: 5, tension: 350, friction: 40 }
+  // },);
+
+//   const calcRotationTemp = (scrollY) => {
+//   const degrees = (scrollY * 360) / window.innerHeight;
+//   const pausedRotation = degrees % 2160; // Repeat every 1800 degrees (5 full rotations)
+//   let rotation = 0;
+
+//   if (pausedRotation <= 180) {
+//     rotation = pausedRotation;
+//   } else if (pausedRotation <= 360) {
+//     rotation = 180;
+//   } else if (pausedRotation <= 540) {
+//     rotation = 180 + (pausedRotation - 360);
+//   } else if (pausedRotation <= 720) {
+//     rotation = 360;
+//   } else if (pausedRotation <= 900) {
+//     rotation = 360 + (pausedRotation - 720);
+//   } else if (pausedRotation <= 1080) {
+//     rotation = 540;
+//   } else if (pausedRotation <= 1260) {
+//     rotation = 540 + (pausedRotation - 1080);
+//   } else if (pausedRotation <= 1440) {
+//     rotation = 720;
+//   } else if (pausedRotation <= 1620) {
+//     rotation = 720 + (pausedRotation - 1440);
+//   } else {
+//     rotation = 900;
+//   }
+//   console.log(pausedRotation);
+//   setRotation(rotation);
+// };
+
+  
+
+  // Set up the spring animation for the rotation
   const springProps = useSpring({
-    from: {
-      transform: `perspective(1000px)`
-    },
-    to: {
-      // rotateY(${currentRotation}deg) 
-      // scaleX(${scaleMaskX})
-      // scaleY(${scaleMaskY})
-      // translateY(${getTranslateY}px)
-      // translateX(${currentRotation < 1000 ? '0' : window.innerHeight * 0.3}px)
-      transform: `perspective(1000px) 
-                  rotateY(${calcRotation(scrollY)}deg) 
-                  
-
-                `
-    },
-    config: { easing: 'slowEasing' }
+    from: { rotateY: 0 },
+    transformOrigin: '50% 50%',
+    transform: `perspective(1000px) 
+                rotateY(${rotation}deg)
+                 `,
+    config: { ...config.slow},
   });
+
 
   const imageAnimation = useSpring({
     to: {
@@ -440,7 +516,7 @@ const calcRotation = y => {
   });
 
   const [bgAnimation, api] = useSpring(() => ({
-    from: { scale: 1.5 },
+    from: { scale: 2 },
     config: { duration: 2000 }
   }));
 
@@ -451,9 +527,11 @@ const calcRotation = y => {
           <h1 className="text-center">Loading...</h1>
         </div>
       :
+        
         <div id="container" onWheel={handleWheel} className="h-screen w-screen flex flex-col justify-center items-center">
-          <div id="imageContainer" className=" h-full w-full">
-            <svg className="w-full h-full fixed">
+          <div ref={reference} width="450" height="300" className='z-0'></div>
+          <div id="imageContainer" ref={parRef} className=" h-full w-full">
+          <svg className="w-full h-full fixed" ref={maskRef}>
               <mask id="myMask" className='myMask' >
                 <animated.rect
                   x={(window.innerWidth - 450) / 2}
@@ -463,7 +541,7 @@ const calcRotation = y => {
                   height="300"
                   fill="white"
                   style={{
-                    transformOrigin: '50% 50%',
+                    
                     ...springProps
                   }}
                 />
@@ -475,17 +553,16 @@ const calcRotation = y => {
                   mask="url(#myMask)"
                   style={{
                     transformOrigin: '38% 50%',
-                    ...bgAnimation
+                    // ...bgAnimation
                   }}
                 />}
-                <animated.image
-                  className="h-screen w-screen"
-                  href={imageSource}
+                <image ref={imgRef} className=' left-1/2'
+                  href={skillsBg}
                   mask="url(#myMask)"
-                  style={{
-                    transformOrigin: '38% 50%',
-                    ...imageAnimation
-                  }}
+                  // style={{
+                  //   transformOrigin: '50% 50%',
+                  //   ...imageAnimation
+                  // }}
                 />
               </g>
             </svg>
@@ -501,7 +578,7 @@ const calcRotation = y => {
           </div>}
         </div>
       }
-      <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
+      <div ref={conRef} style={{height: '200vh'}} className="w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
