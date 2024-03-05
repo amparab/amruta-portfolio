@@ -1,8 +1,8 @@
 import './input.css';
 import { useSpring, animated, config  } from '@react-spring/web';
 import React, { useEffect, useState, useMemo, useRef } from 'react';
-import image from './images/myphoto-cropped.png'
-import skillsBg from './images/skills-bg-2.png'
+import image from './images/main.png'
+import skillsBg from './images/skills-bg.png'
 import expImg from './images/Girl_Computer.png'
 import spaceBg from './images/space-bg-layer.jpg'
 import certBg from './images/Certification-Bg.jpg'
@@ -41,24 +41,56 @@ function App() {
 
   // const maskRef = useRef(null);
   const conRef = useRef(null);
-  const parRef = useRef(null);
+  const conRef2 = useRef(null);
+  const conRef1 = useRef(null);
 
   const maskRef = useRef(null);
   const reference = useRef(null);
-  const imgRef = useRef(null);
+  const tempRef = useRef(null);
 
   useEffect(() => {
     const temptl = gsap.timeline({
       scrollTrigger: {
         trigger: conRef.current,
+        id: 'first',
+        start: 'top bottom',
+        end: 'bottom bottom',
+        scrub: true, // Smooth animation
+        // ease: "slow",
+        markers: true,
+        toggleActions: "play reverse play reverse",
+      },
+      onUpdate: function () {
+        let currentRotation = gsap.getProperty(reference.current, "rotation");
+        console.log('currentRotation', currentRotation);
+        let progress = ScrollTrigger.getById("first").progress;
+        console.log('progress', progress);
+        if(progress >= 0.5){
+          setImageSource(skillsBg);
+        } else{
+          setImageSource(image);
+        }
+        setRotation(currentRotation);
+      },
+      onComplete: function() {
+        setDisplaySkills(true);
+      }
+     });
+
+    const temptl2 = gsap.timeline({
+      onStart: () => {
+        setDisplaySkills(false)
+      },
+      scrollTrigger: {
+        trigger: conRef2.current,
         start: 'top bottom',
         end: 'bottom bottom',
         scrub: true, // Smooth animation
         ease: "slow"
       },
       onUpdate: function () {
-        console.log("Rotation value:", gsap.getProperty(reference.current, "rotation"));
-        setRotation(gsap.getProperty(reference.current, "rotation"));
+        let currentRotation = gsap.getProperty(reference.current, "rotation");
+        setRotation(currentRotation);
       }
     });
   
@@ -67,9 +99,19 @@ function App() {
       transformOrigin: '100% 100%',
       rotate: 180
     })
+
+    temptl2.to(reference.current, {
+      transformOrigin: '100% 100%',
+      rotate: 360,
+    })
+
+    temptl2.to(maskRef.current, {
+      x: -1000,
+    }, 0)
   
     return () => {
       temptl.kill();
+      temptl2.kill();
     };
   }, []);
 
@@ -82,10 +124,7 @@ useEffect(() => {
       start: 'top bottom',
       end: 'bottom bottom',
       scrub: true, // Smooth animation
-      ease: "slow",
-      onUpdate: function () {
-        console.log("Width value:", gsap.getProperty(reference.current, "rotation"));
-      }
+      ease: "slow"
     }
   });
 
@@ -93,8 +132,29 @@ useEffect(() => {
   tl.to(mask,
     {
     // transformOrigin: '50% 50%',
-    scale: 3.5,
+    scale: () => Math.max(window.innerWidth / 450, window.innerHeight / 300),
     y: window.innerHeight/2
+    // width: window.innerWidth,
+    // height: window.innerHeight
+  });
+
+  gsap.set(tempRef.current, { transformOrigin: "50% 50%" });
+  const tltemp = gsap.timeline({
+    scrollTrigger: {
+      trigger: conRef.current,
+      start: 'top bottom',
+      end: 'bottom bottom',
+      scrub: true, // Smooth animation
+      ease: "slow"
+    }
+  });
+
+  // Define the animation
+  tltemp.to(tempRef.current,
+    {
+    // transformOrigin: '50% 50%',
+    scale: () => Math.max(window.innerWidth / 450, window.innerHeight / 300),
+    y: window.innerHeight/2,
     // width: window.innerWidth,
     // height: window.innerHeight
   });
@@ -353,95 +413,7 @@ const scrollingDownSequence = (curRotation) => {
   }
 };
 
-  // useEffect(() => {
-  //   const degrees = (scrollY * 360) / window.innerHeight;
 
-  //   setRotation(degrees);
-
-  //   if(scrollDirection === 'down'){
-  //       scrollingDownSequence(rotation);
-  //   } else {
-  //     scrollingUpSequence(rotation);
-  //   }
-
-  // }, [scrollY]);
-
-  const calcRotation = y => {
-    let rotation = (y * 360 / window.innerHeight);
-    let cycle = Math.floor(rotation / 180);
-    let threshold = (window.innerHeight / 2) * cycle;
-    const distance = window.innerHeight / 2;
-
-    if (cycle % 2 === 1) {
-        // If cycle is odd, lock at 180 or 360
-        if (rotation >= (cycle * 180) && rotation <= (cycle + 1) * 180) {
-            const lockRotation = y > threshold && y < threshold + distance;
-            if (lockRotation) {
-                console.log(cycle * 180);
-                return cycle * 180;
-            }
-        }
-    } else {
-        // If cycle is even, scroll-controlled
-        console.log(rotation);
-        return rotation;
-    }
-
-    return rotation;
-};
-
-
-  // const getRotation = useMemo(() => {
-  //   const rotAnim = currentRotation <= rotationThresh ? rotation : Math.min(minRotation + (currentRotation - rotationThresh), rotationThresh);
-  //   return rotAnim;
-  // }, [currentRotation, rotation, rotationThresh, minRotation]);
-
-  const scaleMaskX = useMemo(() => {
-    if(rotation >= 300){
-      return 1.5
-    } else if (rotation >= 650){
-      return 10;
-    }
-    return 1 + (scrollY*8/ window.innerWidth);
-    // if(currentRotation <= 360) {
-    //   return 1 + (scrollY * scaleFactorX / window.innerWidth);
-    // } else if (currentRotation > 1000) {
-    //   return 1;
-    // }
-    // else return 1 + (scrollY * 0.5 / window.innerWidth);
-    
-  }, [currentRotation, scrollY]);
-
-  const scaleMaskY = useMemo(() => {
-    return 1 + (scrollY*5 / window.innerHeight);
-    // if (currentRotation <= 360) {
-    //   return 1 + (scrollY * scaleFactorY / window.innerHeight);
-    // } else if (currentRotation < 660) {
-    //   return 1 + (scrollY*2 / window.innerHeight);;
-    // } else if (currentRotation > 660) {
-    //   return 2;
-    // }
-  }, [currentRotation, scrollY, scaleFactorY]);
-
-  const getTranslateY = useMemo(() => {
-    if (rotation >= 300) {
-      return scrollY/3
-      // return Math.min(scrollY/3, window.innerHeight*0.3);
-    } else {
-      return 0;
-    }
-  }, [rotation, scrollY]);
-
-  const getTranslateX = useMemo(() => {
-    if(rotation < 300) 
-      return '0'
-    else if (rotation >= 495){
-      return window.innerWidth * 0.30
-    }
-    else {
-      return -window.innerWidth * 0.15;
-    }
-  } ,[rotation]);
 
   // const springProps = useSpring({
   //   from: {
@@ -462,57 +434,20 @@ const scrollingDownSequence = (curRotation) => {
   //   config: { mass: 5, tension: 350, friction: 40 }
   // },);
 
-//   const calcRotationTemp = (scrollY) => {
-//   const degrees = (scrollY * 360) / window.innerHeight;
-//   const pausedRotation = degrees % 2160; // Repeat every 1800 degrees (5 full rotations)
-//   let rotation = 0;
 
-//   if (pausedRotation <= 180) {
-//     rotation = pausedRotation;
-//   } else if (pausedRotation <= 360) {
-//     rotation = 180;
-//   } else if (pausedRotation <= 540) {
-//     rotation = 180 + (pausedRotation - 360);
-//   } else if (pausedRotation <= 720) {
-//     rotation = 360;
-//   } else if (pausedRotation <= 900) {
-//     rotation = 360 + (pausedRotation - 720);
-//   } else if (pausedRotation <= 1080) {
-//     rotation = 540;
-//   } else if (pausedRotation <= 1260) {
-//     rotation = 540 + (pausedRotation - 1080);
-//   } else if (pausedRotation <= 1440) {
-//     rotation = 720;
-//   } else if (pausedRotation <= 1620) {
-//     rotation = 720 + (pausedRotation - 1440);
-//   } else {
-//     rotation = 900;
-//   }
-//   console.log(pausedRotation);
-//   setRotation(rotation);
-// };
-
-  
 
   // Set up the spring animation for the rotation
   const springProps = useSpring({
     from: { rotateY: 0 },
     transformOrigin: '50% 50%',
-    transform: `perspective(1000px) 
-                rotateY(${rotation}deg)
-                 `,
+  //     transform: `perspective(500px) 
+  //                 rotateY(${rotation}deg)   
+  //                 scaleX(${scaleMaskX})
+  //                 scaleY(${scaleMaskY})
+    transform: `perspective(1200px) 
+                rotateY(${rotation}deg)`,
+  //   config: { mass: 5, tension: 350, friction: 40 }
     config: { ...config.slow},
-  });
-
-
-  const imageAnimation = useSpring({
-    to: {
-      transform: `
-                scaleX(${1 + (scrollY / window.innerWidth)})
-                scaleY(${1 + (scrollY / window.innerWidth)})
-                `
-    },
-    config: { easing: 'slowEasing' }
   });
 
   const [bgAnimation, api] = useSpring(() => ({
@@ -530,8 +465,8 @@ const scrollingDownSequence = (curRotation) => {
         
         <div id="container" onWheel={handleWheel} className="h-screen w-screen flex flex-col justify-center items-center">
           <div ref={reference} width="450" height="300" className='z-0'></div>
-          <div id="imageContainer" ref={parRef} className=" h-full w-full">
-          <svg className="w-full h-full fixed" ref={maskRef}>
+          <div id="imageContainer" className=" h-full w-full">
+          <svg className="w-full h-full fixed">
               <mask id="myMask" className='myMask' >
                 <animated.rect
                   x={(window.innerWidth - 450) / 2}
@@ -546,41 +481,50 @@ const scrollingDownSequence = (curRotation) => {
                   }}
                 />
               </mask>
-              <g mask="url(#myMask)">
-                {showExpBg && <animated.image
-                  className="h-screen w-screen"
-                  href={spaceBg}
+              {/* <g mask="url(#myMask)"> */}
+                {/* {<image ref={tempRef}
+                  width={800} // Specify the width of the image
+                  x={(window.innerWidth - 800) / 2} // Horizontally center the image
+                  href={imageSource}
                   mask="url(#myMask)"
-                  style={{
-                    transformOrigin: '38% 50%',
-                    // ...bgAnimation
-                  }}
-                />}
-                <image ref={imgRef} className=' left-1/2'
-                  href={skillsBg}
-                  mask="url(#myMask)"
-                  // style={{
-                  //   transformOrigin: '50% 50%',
-                  //   ...imageAnimation
-                  // }}
-                />
-              </g>
+                />} */}
+                
+                
+              {/* </g> */}
             </svg>
-            <div className="absolute inset-0 overflow-auto">
-              {displaySkills && <Skills />}
-              {showExperience && <Experience />}
-              {showCertification && <Certifications />}
-            </div>
+            <svg className="w-full h-full fixed z-10" mask="url(#myMask)" ref={maskRef} >
+              <g>
+              <image
+                href={imageSource}
+                mask="url(#myMask)"
+                width={800} // Specify the width of the image
+                x={(window.innerWidth - 800) / 2} // Horizontally center the image
+              />
+              {showExpBg && <image
+                href={expImg}
+                ref={tempRef}
+                width={800} // Specify the width of the image
+                x={(window.innerWidth - 800) / 2} // Horizontally center the image
+              />}
+              </g>
+            
+            </svg>
           </div>
-          {showIntro && <div id="intro1" className="h-screen w-full flex flex-col items-center justify-center border border-solid border-red-600">
+          {showIntro && <div id="intro1" className="z-0 h-screen w-full flex flex-col items-center justify-center border border-solid border-red-600">
           {/* <h1 className='fixed text-3xl md:text-5xl font-pixel'>Hello, I am</h1> */}
-          <h1 className='fixed text-3xl md:text-5xl font-pixel'><ReactTyped strings={["AMRUTA PARAB"]} typeSpeed={50} /></h1>
+          <h1 className='fixed text-3xl md:text-5xl font-pixel'>
+            <ReactTyped strings={["AMRUTA PARAB"]} typeSpeed={50} /></h1>
           </div>}
         </div>
       }
-      <div ref={conRef} style={{height: '200vh'}} className="w-screen flex flex-col md:flex-row justify-center items-center"></div>
-      <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
-      <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
+      <div ref={conRef} className=" h-screen w-screen flex flex-col md:flex-row justify-center items-center bg-slate-500"></div>
+      <div ref={conRef1} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center bg-yellow-600"></div>
+      <div ref={conRef2} className=" h-screen w-screen flex flex-col md:flex-row justify-center items-center bg-purple-500"></div>
+      <div className="absolute inset-0 overflow-auto z-50">
+              {<Skills show={displaySkills} ref={conRef1} />}
+              {showExperience && <Experience />}
+              {showCertification && <Certifications />}
+            </div>
       <div className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
     </>
   );
