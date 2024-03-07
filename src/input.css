@@ -7,6 +7,12 @@
     src: url(./fonts/PixelEmulator-xq08.woff) format('woff');
 }
 
+@font-face {
+    font-family: 'Knuckles';
+    src: url(./fonts/AznKnucklesTrial-z85pa.woff) format('woff');
+}
+
+
 .skills-logo {
     background-image: url(./images/Spring-Logo.png);
     background-size:cover;

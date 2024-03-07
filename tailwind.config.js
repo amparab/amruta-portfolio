@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         pixel: ["Pixel", "sans-serif"],
-        // Add more custom font families as needed
+        knuckles: ["Knuckles", "sans-serif"],
       },
     },
   },
