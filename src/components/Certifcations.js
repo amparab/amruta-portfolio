@@ -19,7 +19,7 @@ export default function Certifications () {
     return(
         <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-white">
         <div id="skills-title" class="text-2xl md:text-4xl font-pixel mb-8">
-            <ReactTyped strings={["My Certifications"]} typeSpeed={70} />
+            <ReactTyped strings={["Certifications"]} typeSpeed={70} />
         </div>
         <div class="items-center justify-center">
             <div className="p-4 flex items-center">
