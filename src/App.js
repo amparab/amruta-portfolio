@@ -27,7 +27,7 @@ function App() {
 
   const [imageSource, setImageSource] = useState(image);
   const [displaySkills, setDisplaySkills] = useState(false);
-  const [rotation, setRotation] = useState(0);
+  const [rotation, setRotation] = useState(60);
   const [showExperience, setShowExperience] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const [showExpBg, setShowExpBg] = useState(false);
@@ -48,22 +48,15 @@ function App() {
   const reference = useRef(null);
   const spaceRef = useRef(null);
 
-  // useEffect(() => {
-  //   const rotationAnimation = gsap.timeline();
-  //   rotationAnimation.to(reference.current, {
-  //     transformOrigin: '100% 100%',
-  //     rotate: 60,
-  //     duration: 1,
-  //     onUpdate: function () {
-  //       let currentRotation = gsap.getProperty(reference.current, "rotation");
-  //       setRotation(currentRotation);
-  //     },
-  //   });
-  //   return () => {
-  //     rotationAnimation.kill();
-  //   };
-  // }, []);
+  useEffect(() => {
 
+    gsap.fromTo(maskRef.current, {
+      opacity: 0,
+    }, {
+      duration: 1,
+      opacity: 1,
+    });
+  }, []);
 
   useEffect(() => {
 
@@ -80,7 +73,7 @@ function App() {
       onUpdate: function () {
         let currentRotation = gsap.getProperty(reference.current, "rotation");
         let progress = ScrollTrigger.getById("intro-photo").progress;
-        if(progress >= 0.5){
+        if(progress >= 0.33){
           setImageSource(skillsBg);
         } else{
           setImageSource(image);
@@ -243,7 +236,7 @@ function App() {
       },
      });
   
-    rotationAnimation1.to(reference.current, {
+    rotationAnimation1.fromTo(reference.current,{rotate: 60}, {
       transformOrigin: '100% 100%',
       rotate: 180
     })
@@ -381,16 +374,17 @@ useEffect(() => {
     });
 
     parallax.fromTo(spaceRef.current, {scale: 1}, {scale: 1.5});
-    return () => {
-      parallax.kill();
-    };
-});
+      return () => {
+        parallax.kill();
+      };
+    });
 
   const springProps = useSpring({
+    from: {rotateY: 0},
     transformOrigin: '50% 50%',
     transform: `perspective(1000px) 
                 rotateY(${rotation}deg)`,
-  });
+  }, );
 
   return (
     <>
