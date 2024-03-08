@@ -1,19 +1,19 @@
 import './input.css';
 import { useSpring, animated, config  } from '@react-spring/web';
-import React, { useEffect, useState, useMemo, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import image from './images/main.png'
-import skillsBg from './images/skills-bg-2.png'
+import skillsBg from './images/sky.jpg'
+import skyline from './images/skyline-layer2.png'
+import girl from './images/skills_char-layer2.png'
 import expImg from './images/Girl_Computer.png'
 import spaceBg from './images/space-bg-layer.jpg'
 import certBg from './images/Certification-Bg.jpg'
 import contactBg from './images/contact.jpg'
-import black from './images/black.png'
 import Skills from './components/Skills';
 import { ReactTyped } from 'react-typed';
 import * as Constants from './constants/Constants';
 import Experience from './components/Experience';
 import Certifications from './components/Certifcations';
-import useDebouncedScroll from './components/useDebouncedScroll';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { gsap } from 'gsap';
 import ContactLinks from './components/ContactLinks';
@@ -31,6 +31,7 @@ function App() {
   const [showExperience, setShowExperience] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const [showExpBg, setShowExpBg] = useState(false);
+  const [showParallax, setShowParallax] = useState(false);
   const [showCertification, setShowCertification] = useState(false);
   const [isReady, setIsReady] = useState(true);
   const [showContactLinks, setShowContactLinks] = useState(false);
@@ -47,9 +48,12 @@ function App() {
   const maskRef = useRef(null);
   const reference = useRef(null);
   const spaceRef = useRef(null);
+  const skylineRef = useRef(null);
+  const girlRef = useRef(null);
 
   useEffect(() => {
 
+    window.scrollTo(0, 0);
     gsap.fromTo(maskRef.current, {
       opacity: 0,
     }, {
@@ -69,14 +73,15 @@ function App() {
         scrub: 0.5,
         toggleActions: "play reverse play reverse",
       },
-
       onUpdate: function () {
         let currentRotation = gsap.getProperty(reference.current, "rotation");
         let progress = ScrollTrigger.getById("intro-photo").progress;
         if(progress >= 0.33){
           setImageSource(skillsBg);
+          setShowParallax(true);
         } else{
           setImageSource(image);
+          setShowParallax(false);
         }
         setRotation(currentRotation);
       },
@@ -123,8 +128,10 @@ function App() {
         if(progress >= 0.5){
           setImageSource(expImg);
           setShowExpBg(true);
+          setShowParallax(false);
         } else{
           setImageSource(skillsBg);
+          setShowParallax(true);
         }
       },
       onReverseComplete: function() {
@@ -279,6 +286,46 @@ function App() {
     };
   }, []);
 
+
+  useEffect(() => {
+    const parallaxSkyLine = gsap.timeline({
+      scrollTrigger: {
+        trigger: conRef1.current,
+        start: 'top bottom',
+        end: 'bottom bottom',
+        scrub: 0.5,
+        ease: "slow",
+        toggleActions: "play reverse play reverse"
+      }
+    });
+    parallaxSkyLine.fromTo(skylineRef.current,{y: 100}, {y: 0}); //large
+    // parallaxSkyLine.fromTo(skylineRef.current,{y: 200}, {y: 100}); small
+
+    return () => {
+      parallaxSkyLine.kill();
+    };
+
+  });
+
+  useEffect(() => {
+    const parallaxGirl = gsap.timeline({
+      scrollTrigger: {
+        trigger: conRef1.current,
+        start: 'top bottom',
+        end: 'bottom bottom',
+        scrub: 0.5,
+        ease: "slow",
+        toggleActions: "play reverse play reverse"
+      }
+    });
+    parallaxGirl.fromTo(girlRef.current,{y: 50}, {y: 0}); //large
+    // parallaxGirl.fromTo(girlRef.current,{y: 100}, {y: 50}); //small
+
+    return () => {
+      parallaxGirl.kill();
+    };
+  });
+
 useEffect(() => {
   const mask = maskRef.current;
   gsap.set(mask, { transformOrigin: "50% 50%" });
@@ -323,6 +370,7 @@ useEffect(() => {
 
   trans_exp_cert.to(mask,{x: 0});
 
+  // Keep cert still
   gsap.timeline({
     scrollTrigger: {
       trigger: conRef5.current,
@@ -356,14 +404,14 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  const parallax = gsap.timeline({
+  const parallaxExp = gsap.timeline({
       onStart: () => {
         setShowExperience(true);
       },
       scrollTrigger: {
         trigger: conRef3.current,
         start: 'top bottom',
-        end: 'bottom bottom',
+        end: 'bottom top',
         scrub: 0.5,
         ease: "slow",
         toggleActions: "play reverse play reverse",
@@ -373,9 +421,9 @@ useEffect(() => {
       },
     });
 
-    parallax.fromTo(spaceRef.current, {scale: 1}, {scale: 1.5});
+    parallaxExp.fromTo(spaceRef.current, {scale: 1}, {scale: 1.5});
       return () => {
-        parallax.kill();
+        parallaxExp.kill();
       };
     });
 
@@ -421,13 +469,14 @@ useEffect(() => {
               <svg className="absolute inset-0 w-full h-full z-10" mask="url(#myMask)" ref={maskRef}>
                 <g>
                   {showExpBg && (
-                    <animated.image
+                    <image
                       href={spaceBg}
                       ref={spaceRef}
                       width={800}
                       x={(window.innerWidth - 800) / 2}
                     />
                   )}
+                   
                   <image
                     href={imageSource}
                     mask="url(#myMask)"
@@ -436,6 +485,22 @@ useEffect(() => {
                     x={(window.innerWidth - 800) / 2}
                     y={(window.innerHeight - 1170) / 2}
                   />
+                  {showParallax && (
+                        <image
+                        href={skyline}
+                        ref={skylineRef}
+                        width={800}
+                        x={(window.innerWidth - 800) / 2}
+                      />
+                  )}
+                  {showParallax && (
+                      <image
+                        href={girl}
+                        ref={girlRef}
+                        width={800}
+                        x={(window.innerWidth - 800) / 2}
+                      />
+                  )}
                 </g>
               </svg>
             </div>

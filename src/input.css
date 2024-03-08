@@ -12,6 +12,11 @@
     src: url(./fonts/AznKnucklesTrial-z85pa.woff) format('woff');
 }
 
+@font-face {
+    font-family: 'KnucklesLite';
+    src: url(./fonts/AznKnucklesTrialLight-jEyJl.woff) format('woff');
+}
+
 
 .skills-logo {
     background-image: url(./images/Spring-Logo.png);

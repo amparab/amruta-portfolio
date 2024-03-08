@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         pixel: ["Pixel", "sans-serif"],
         knuckles: ["Knuckles", "sans-serif"],
+        knuckleslite: ["KnucklesLite", "sans-serif"],
       },
     },
   },

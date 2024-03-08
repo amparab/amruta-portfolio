@@ -29,8 +29,7 @@ const Skills = ({ref, show}) => {
         { id: 5, src: ReactLogo, progress: 60, name: 'React', ref: logo },
         { id: 6, src: KafkaLogo, progress: 50, name: 'Kafka', ref: logo },
         { id: 7, src: GitLogo, progress: 75, name: 'Git' , ref: logo},
-        { id: 8, src: TailwindLogo, progress: 50, name: 'TailwindCss', ref: logo },
-        { id: 9, src: JiraLogo, progress: 40, name: 'Jira', ref: logo }
+        { id: 8, src: TailwindLogo, progress: 50, name: 'TailwindCss', ref: logo }
       ];
 
       useEffect(() => {
@@ -83,34 +82,30 @@ const Skills = ({ref, show}) => {
         // temptl.play();
     }
 
-    
-
-    return(
+    return (
         <>
-            {skills && <animated.div class="fixed inset-0 overflow-auto p-5">              
-                <div id="skillsContainer" 
-                    class="flex flex-col justify-center items-center text-white" style={{ maxHeight: '200vh' }}>
-                    <div id="skills-title" class="text-4xl md:text-6xl font-pixel mb-8">
-                        <ReactTyped strings={["MY SKILLS"]} typeSpeed={100} onComplete={onCompleteTyping} />
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-4">
-                    {images.map((image) => (
-                        <div className="p-4 flex items-center">
-                            <div ref={image.ref}
-                                className="w-24 h-24 mr-4 shadow-xl rounded-full flex-shrink-0"
-                                style={{transformOrigin: 'center'}}
-                            >
-                                <img className="w-full h-full rounded-full" src={image.src} alt={`Image ${image.id}`} key={image.id} />
-                            </div>
-                            <div>
-                                <div className="text-lg font-pixel">{image.name}</div>
-                                <ProgressBar progress={image.progress} />
-                            </div>
+            {skills && (
+                <animated.div className="fixed inset-0 overflow-auto p-5 flex flex-col justify-center items-center">
+                    <div id="skillsContainer" className=" text-white text-center" style={{ maxHeight: '200vh' }}>
+                        <div id="skills-title" className="text-4xl md:text-6xl font-knuckles my-8">
+                            <ReactTyped strings={["MY SKILLS"]} typeSpeed={50} onComplete={onCompleteTyping} />
                         </div>
-                    ))}
+                        <div className="grid grid-cols-1 md:grid-cols-2  gap-x-44 pt-4">
+                            {images.map((image) => (
+                                <div key={image.id} className="p-4 flex items-center">
+                                    <div ref={image.ref} className="w-12 h-12 mr-4 shadow-xl rounded-full flex-shrink-0" style={{ transformOrigin: 'center' }}>
+                                        <img className="w-full h-full rounded-full" src={image.src} alt={`Image ${image.id}`} />
+                                    </div>
+                                    <div>
+                                        <div className="text-lg font-knuckleslite">{image.name}</div>
+                                        <ProgressBar progress={image.progress} />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                </div>
-            </animated.div> }
+                </animated.div>
+            )}
         </>
     );
 
