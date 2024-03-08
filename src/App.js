@@ -83,10 +83,12 @@ function App() {
           setImageSource(image);
           setShowParallax(false);
         }
-        setRotation(currentRotation);
+        // setRotation(currentRotation);
+        setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)`});
       },
       onReverseComplete: function() {
         setShowIntro(true);
+        setSpringProps({ immediate: true,  transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(60deg)` });
       }
      });
 
@@ -123,7 +125,7 @@ function App() {
       },
       onUpdate: function () {
         let currentRotation = gsap.getProperty(reference.current, "rotation");
-        setRotation(currentRotation);
+        setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)`});
         let progress = ScrollTrigger.getById("rot_skills_exp").progress;
         if(progress >= 0.5){
           setImageSource(expImg);
@@ -169,7 +171,7 @@ function App() {
       },
       onUpdate: function () {
         let currentRotation = gsap.getProperty(reference.current, "rotation");
-        setRotation(currentRotation);
+        
         let progress = ScrollTrigger.getById("rot_exp_cert").progress;
         if(progress >= 0.5){
           setImageSource(certBg);
@@ -177,6 +179,7 @@ function App() {
           setImageSource(expImg);
           setShowExpBg(true);
         }
+        setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)`});
       },
       onComplete: function() {
         setShowCertification(true);
@@ -214,7 +217,7 @@ function App() {
       },
       onUpdate: function () {
         let currentRotation = gsap.getProperty(reference.current, "rotation");
-        setRotation(currentRotation);
+        setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)`});
         let progress = ScrollTrigger.getById("rot_cert_contact").progress;
         if(progress >= 0.5){
           setImageSource(contactBg);
@@ -224,6 +227,7 @@ function App() {
       },
       onComplete: function () {
         setShowContactLinks(true);
+        setShowCertification(false);
       },
       onReverseComplete: function () {
         setShowCertification(true);
@@ -427,12 +431,11 @@ useEffect(() => {
       };
     });
 
-  const springProps = useSpring({
-    from: {rotateY: 0},
-    transformOrigin: '50% 50%',
-    transform: `perspective(1000px) 
-                rotateY(${rotation}deg)`,
-  }, );
+    const [springProps, setSpringProps] = useSpring(() => ({
+      rotateY: 0,
+      transformOrigin: '50% 50%', 
+      transform: `perspective(1000px) rotateY(60deg)`
+  }));
 
   return (
     <>
