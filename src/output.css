@@ -699,6 +699,19 @@ video {
   src: url(./fonts/PixelEmulator-xq08.woff) format('woff');
 }
 
+@font-face {
+  font-family: 'knuckles';
+
+  src: url(./fonts/AznKnucklesTrial-z85pa.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'knuckleslite';
+
+  src: url(./fonts/AznKnucklesTrialLight-jEyJl.woff) format('woff');
+}
+
+
 @media (min-width: 768px) {
   .md\:order-1 {
     order: 1;

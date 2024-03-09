@@ -7,7 +7,85 @@
     src: url(./fonts/PixelEmulator-xq08.woff) format('woff');
 }
 
+@font-face {
+    font-family: 'Knuckles';
+    src: url(./fonts/AznKnucklesTrial-z85pa.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'KnucklesLite';
+    src: url(./fonts/AznKnucklesTrialLight-jEyJl.woff) format('woff');
+}
+
+
 .skills-logo {
     background-image: url(./images/Spring-Logo.png);
     background-size:cover;
 }
+
+.section-1,
+.section-2,
+.section-3,
+.section-4,
+.circle-1,
+.circle-2,
+.circle-3,
+.circle-4 {
+    opacity: 0;
+}
+
+@keyframes drawLine {
+    0% {
+        max-height: 10vh;
+    }
+    100% {
+        max-height: 60vh; /* Adjust the value based on your design */
+    }
+}
+
+.w-px {
+    animation: drawLine 4s linear forwards;
+}
+.section-1 {
+    animation: fadeIn 1s forwards;
+}
+.section-2 {
+    animation: fadeIn 1s forwards;
+    animation-delay: 0.5s;
+}
+.section-3 {
+    animation: fadeIn 1s forwards;
+    animation-delay: 1s;
+}
+.section-4 {
+    animation: fadeIn 1s forwards;
+    animation-delay: 1.5s;
+}
+
+.circle-1 {
+    animation: fadeIn 0.5s forwards;
+    animation-delay: 0.5s;
+}
+.circle-2 {
+    animation: fadeIn 0.5s forwards;
+    animation-delay: 1s;
+}
+.circle-3 {
+    animation: fadeIn 0.5s forwards;
+    animation-delay: 1.5s;
+}
+.circle-4 {
+    animation: fadeIn 0.5s forwards;
+    animation-delay: 2s;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
