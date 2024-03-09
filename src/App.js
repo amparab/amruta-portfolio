@@ -26,7 +26,9 @@ function App() {
   const svgMaskHeight = 350;
 
   const initialAngle = 0;
-  const initialOffset = 0.5;
+  let initialOffset = 0.5;
+
+  let scrubValue = 0.5;
 
   const [imageSource, setImageSource] = useState(image);
   const [displaySkills, setDisplaySkills] = useState(false);
@@ -38,6 +40,7 @@ function App() {
   const [isReady, setIsReady] = useState(true);
   const [showContactLinks, setShowContactLinks] = useState(false);
   const [showProfession, setShowProfession] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const conRef = useRef(null);
   const conRef2 = useRef(null);
@@ -63,6 +66,18 @@ function App() {
     }
 
     window.scrollTo(0, 0);
+
+    if(window.innerWidth >= 768){
+      setIsSmallScreen(false);
+      scrubValue=0.5;
+      initialOffset = 0.5;
+    } else {
+      setIsSmallScreen(true);
+      scrubValue=true;
+      initialOffset=0.3;
+    }
+
+
     gsap.fromTo(maskRef.current, {
       opacity: 0,
     }, {
@@ -79,7 +94,7 @@ function App() {
         id: 'intro-photo',
         start: 'top bottom',
         end: 'bottom bottom',
-        scrub: 0.5,
+        scrub: scrubValue,
         toggleActions: "play reverse play reverse",
       },
       onUpdate: function () {
@@ -106,7 +121,7 @@ function App() {
         trigger: conRef1.current,
         start: 'top bottom',
         end: 'bottom bottom',
-        scrub: 0.5,
+        scrub: scrubValue,
         toggleActions: "play reverse play reverse",
       },
       onStart: function() {
@@ -128,7 +143,7 @@ function App() {
         id: "rot_skills_exp",
         start: 'top bottom',
         end: 'bottom bottom',
-        scrub: 0.5,
+        scrub: scrubValue,
         ease: "slow",
         toggleActions: "play reverse play reverse"
       },
@@ -158,7 +173,7 @@ function App() {
         trigger: conRef3.current,
         start: 'top bottom',
         end: 'bottom bottom',
-        scrub: 0.5,
+        scrub: scrubValue,
         toggleActions: "play reverse play reverse",
       },
       onStart: function() {
@@ -183,7 +198,7 @@ function App() {
         id: "rot_exp_cert",
         start: 'top bottom',
         end: 'bottom bottom+=500',
-        scrub: 0.5,
+        scrub: scrubValue,
         ease: "slow",
         toggleActions: "play reverse play reverse"
       },
@@ -213,7 +228,7 @@ function App() {
         trigger: conRef5.current,
         start: 'top bottom',
         end: 'bottom bottom',
-        scrub: 0.5,
+        scrub: scrubValue,
         toggleActions: "play reverse play reverse",
       },
       onReverseComplete: function() {
@@ -231,7 +246,7 @@ function App() {
         id: "rot_cert_contact",
         start: 'top bottom',
         end: 'bottom bottom+=500',
-        scrub: 0.5,
+        scrub: scrubValue,
         ease: "slow",
         toggleActions: "play reverse play reverse"
       },
@@ -253,6 +268,7 @@ function App() {
         setShowExperience(true);
         setImageSource(expImg);
         setShowExpBg(true);
+        setShowContactLinks(false);
       }
     });
 
@@ -260,8 +276,8 @@ function App() {
       scrollTrigger: {
         trigger: conRef5.current,
         start: 'bottom top',
-        end: 'bottom bottom-=500',
-        scrub: 0.5,
+        end: 'bottom bottom+=900',
+        scrub: scrubValue,
         toggleActions: "play reverse play reverse",
       },
       onReverseComplete: function() {
@@ -319,7 +335,7 @@ function App() {
         trigger: conRef1.current,
         start: 'top bottom',
         end: 'bottom bottom',
-        scrub: 0.5,
+        scrub: scrubValue,
         ease: "slow",
         toggleActions: "play reverse play reverse"
       }
@@ -339,7 +355,7 @@ function App() {
         trigger: conRef1.current,
         start: 'top bottom',
         end: 'bottom bottom',
-        scrub: 0.5,
+        scrub: scrubValue,
         ease: "slow",
         toggleActions: "play reverse play reverse"
       }
@@ -360,7 +376,7 @@ useEffect(() => {
       trigger: conRef.current,
       start: 'top bottom',
       end: 'bottom bottom',
-      scrub: 0.5,
+      scrub: scrubValue,
       ease: "slow",
       toggleActions: "play reverse play reverse"
     }
@@ -374,21 +390,21 @@ useEffect(() => {
       trigger: conRef2.current,
       start: 'top bottom',
       end: 'bottom bottom',
-      scrub: 0.5,
+      scrub: scrubValue,
       ease: "slow",
       toggleActions: "play reverse play reverse"
     }
   });
 
   trans_skills_exp.to(mask,{scale: 1.25});
-  trans_skills_exp.to(mask,{y: -100}, 0);
+  trans_skills_exp.to(mask,{y: isSmallScreen ? 0 : -100}, 0);
 
   const trans_exp_cert = gsap.timeline({
     scrollTrigger: {
       trigger: conRef4.current,
       start: 'top bottom',
       end: 'bottom bottom+=500',
-      scrub: 0.5,
+      scrub: scrubValue,
       ease: "slow",
       toggleActions: "restart none"
     }
@@ -402,7 +418,7 @@ useEffect(() => {
       trigger: conRef5.current,
       start: 'top bottom',
       end: 'bottom bottom',
-      scrub: 0.5,
+      scrub: scrubValue,
       ease: "slow",
       toggleActions: "play reverse play reverse"
     }
@@ -413,13 +429,13 @@ useEffect(() => {
       trigger: conRef6.current,
       start: 'top bottom',
       end: 'bottom bottom',
-      scrub: 0.5,
+      scrub: scrubValue,
       ease: "slow",
       toggleActions: "play reverse play reverse"
     },
   });
 
-  trans_cert_contact.to(mask,{opacity: 1, scale: 1.5});
+  trans_cert_contact.to(mask,{opacity: 1, scale: 3});
 
   return () => {
     trans_intro_skills.kill();
@@ -439,7 +455,7 @@ useEffect(() => {
         trigger: conRef3.current,
         start: 'top bottom',
         end: 'bottom top',
-        scrub: 0.5,
+        scrub: scrubValue,
         ease: "slow",
         toggleActions: "play reverse play reverse",
       },
@@ -465,16 +481,16 @@ useEffect(() => {
     <>
       {!isReady ? 
         <div className="justify-center flex items-center h-screen w-screen">
-          <h1 className="text-center">Sorry! this website is not supported on iOS <br/>
+          <h1 className="text-center font-knuckleslite">Sorry! this website is not supported on iOS <br/>
           Please try on devices with Windows / Android</h1>
         </div>
       :
         
-        <div id="container" className="h-screen w-screen flex flex-col justify-center items-center">
+        <div id="container" className="h-screen w-screen flex flex-col justify-center items-center mt-5">
           <div ref={reference} width={svgMaskWidth} height={svgMaskHeight} className='z-0'></div>
           <div className="h-screen w-full flex flex-col items-center fixed">
             {showIntro && (
-              <div className="text-2xl md:text-4xl my-12 md:my-24 font-knuckles">
+              <div className="text-2xl md:text-4xl mt-24 md:mt-24 font-knuckles">
                 <ReactTyped strings={["Hi! I am Amruta Parab"]} typeSpeed={25} onComplete={() => setShowProfession(true)} />
               </div>
             )}
@@ -533,7 +549,7 @@ useEffect(() => {
               </svg>
             </div>
             {showIntro && showProfession && (
-              <h1 className="text-2xl md:text-4xl font-knuckles my-12 md:my-24">
+              <h1 className="text-2xl md:text-4xl font-knuckles mb-24 md:mb-24">
                 <ReactTyped strings={["I'm a Software Developer"]} typeSpeed={25} />
               </h1>
             )}
@@ -542,7 +558,8 @@ useEffect(() => {
         </div>
       }
 
-    {isReady ? <div>
+    {isReady ? 
+    <div className='mt-5'>
     <div className="absolute inset-0 overflow-auto">
               {<Skills show={displaySkills} />}
               {<Experience show={showExperience} />}
