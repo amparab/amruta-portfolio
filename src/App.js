@@ -108,7 +108,6 @@ function App() {
           setImageSource(image);
           setShowParallax(false);
         }
-        // setRotation(currentRotation);
         setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)`});
       },
       onReverseComplete: function() {
@@ -178,11 +177,9 @@ function App() {
         toggleActions: "play reverse play reverse",
       },
       onStart: function() {
-        // setShowExperience(false);
         setShowCertification(false);
       },
       onReverseComplete: function() {
-        // setShowExperience(false);
         setShowCertification(false);
       }
      });
@@ -205,21 +202,12 @@ function App() {
       },
       onUpdate: function () {
         let currentRotation = gsap.getProperty(reference.current, "rotation");
-        
-        // let progress = ScrollTrigger.getById("rot_exp_cert").progress;
-        // if(progress >= 0.5){
-        //   setImageSource(certBg);
-        // } else{
-        //   setImageSource(expImg);
-        //   setShowExpBg(true);
-        // }
         setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)`});
       },
       onComplete: function() {
         setShowExperience(true);
       },
       onReverseComplete: function() {
-        // setShowExperience(false);
         setShowCertification(true);
       }
     });
@@ -254,12 +242,6 @@ function App() {
       onUpdate: function () {
         let currentRotation = gsap.getProperty(reference.current, "rotation");
         setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)`});
-        // let progress = ScrollTrigger.getById("rot_cert_contact").progress;
-        // if(progress >= 0.5){
-        //   setImageSource(contactBg);
-        // } else{
-        //   setImageSource(certBg);
-        // }
       },
       onComplete: function () {
         setShowContactLinks(true);
@@ -304,7 +286,6 @@ function App() {
     rotationAnimation3.to(reference.current, {
       transformOrigin: '100% 100%',
       rotate: 540
-      // y: window.innerHeight
     });
 
     rotationAnimation_rev3.to(reference.current, {x:0}) ;
@@ -341,8 +322,7 @@ function App() {
         toggleActions: "play reverse play reverse"
       }
     });
-    parallaxSkyLine.fromTo(skylineRef.current,{y: 100}, {y: 0}); //large
-    // parallaxSkyLine.fromTo(skylineRef.current,{y: 200}, {y: 100}); small
+    parallaxSkyLine.fromTo(skylineRef.current,{y: 100}, {y: 0});
 
     return () => {
       parallaxSkyLine.kill();
@@ -361,8 +341,7 @@ function App() {
         toggleActions: "play reverse play reverse"
       }
     });
-    parallaxGirl.fromTo(girlRef.current,{y: 50}, {y: 0}); //large
-    // parallaxGirl.fromTo(girlRef.current,{y: 100}, {y: 50}); //small
+    parallaxGirl.fromTo(girlRef.current,{y: 50}, {y: 0});
 
     return () => {
       parallaxGirl.kill();
@@ -413,7 +392,6 @@ useEffect(() => {
 
   trans_exp_cert.to(mask,{opacity: 0});
 
-  // Keep cert still
   gsap.timeline({
     scrollTrigger: {
       trigger: conRef5.current,
@@ -448,10 +426,6 @@ useEffect(() => {
 
 useEffect(() => {
   const parallaxExp = gsap.timeline({
-      onStart: () => {
-        // setShowExperience(true);
-        // setShowCertification(true);
-      },
       scrollTrigger: {
         trigger: conRef3.current,
         start: 'top bottom',
@@ -459,11 +433,7 @@ useEffect(() => {
         scrub: scrubValue,
         ease: "slow",
         toggleActions: "play reverse play reverse",
-      },
-      onComplete: () => {
-        // setShowExperience(false);
-        // setShowCertification(false);
-      },
+      }
     });
 
     parallaxExp.fromTo(spaceRef.current, {scale: 1}, {scale: 1.5});
@@ -561,7 +531,7 @@ useEffect(() => {
     <div className='mt-5'>
     <div className="absolute inset-0 overflow-auto">
               {<Skills show={displaySkills} />}
-              {<Experience show={showExperience} />}
+              {<Experience show={showExperience} scrollTriggerRef={conRef5} />}
               {<Certifications show={showCertification} />}
               {showContactLinks && <ContactLinks />}
       </div>
