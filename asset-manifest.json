@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/amruta-portfolio/static/css/main.3cd8c48c.css",
-    "main.js": "/amruta-portfolio/static/js/main.611a2c36.js",
+    "main.js": "/amruta-portfolio/static/js/main.be4d8877.js",
     "static/js/453.07a2d4c0.chunk.js": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js",
     "static/media/pink.png": "/amruta-portfolio/static/media/pink.6de4eb1a2fcd424f01c6.png",
     "static/media/Certification-Bg.jpg": "/amruta-portfolio/static/media/Certification-Bg.67171a9b09637bc45bb2.jpg",
@@ -29,11 +29,11 @@
     "static/media/PixelEmulator-xq08.woff": "/amruta-portfolio/static/media/PixelEmulator-xq08.93c4c5e1f7f7fa1a7000.woff",
     "index.html": "/amruta-portfolio/index.html",
     "main.3cd8c48c.css.map": "/amruta-portfolio/static/css/main.3cd8c48c.css.map",
-    "main.611a2c36.js.map": "/amruta-portfolio/static/js/main.611a2c36.js.map",
+    "main.be4d8877.js.map": "/amruta-portfolio/static/js/main.be4d8877.js.map",
     "453.07a2d4c0.chunk.js.map": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3cd8c48c.css",
-    "static/js/main.611a2c36.js"
+    "static/js/main.be4d8877.js"
   ]
 }
