@@ -30,7 +30,6 @@ function App() {
 
   const [imageSource, setImageSource] = useState(image);
   const [displaySkills, setDisplaySkills] = useState(false);
-  const [rotation, setRotation] = useState(initialAngle);
   const [showExperience, setShowExperience] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const [showExpBg, setShowExpBg] = useState(false);
@@ -55,6 +54,13 @@ function App() {
   const girlRef = useRef(null);
 
   useEffect(() => {
+
+    var isIOS = /iPad|iPhone|iPod/.test(navigator.platform);
+
+    if (isIOS) {
+        setIsReady(false);
+        return;
+    }
 
     window.scrollTo(0, 0);
     gsap.fromTo(maskRef.current, {
@@ -458,8 +464,9 @@ useEffect(() => {
   return (
     <>
       {!isReady ? 
-        <div className="flex justify-center items-center h-screen w-screen">
-          <h1 className="text-center">Loading...</h1>
+        <div className="justify-center items-center h-screen w-screen">
+          <h1 className="text-center">Sorry! this website is not supported on iOS</h1>
+          <h1 className="text-center">Please try on devices with Windows / Android</h1>
         </div>
       :
         
@@ -467,7 +474,7 @@ useEffect(() => {
           <div ref={reference} width={svgMaskWidth} height={svgMaskHeight} className='z-0'></div>
           <div className="h-screen w-full flex flex-col items-center fixed">
             {showIntro && (
-              <div className="text-2xl md:text-4xl my-24 font-knuckles">
+              <div className="text-2xl md:text-4xl my-12 md:my-24 font-knuckles">
                 <ReactTyped strings={["Hi! I am Amruta Parab"]} typeSpeed={25} onComplete={() => setShowProfession(true)} />
               </div>
             )}
@@ -526,7 +533,7 @@ useEffect(() => {
               </svg>
             </div>
             {showIntro && showProfession && (
-              <h1 className="text-2xl md:text-4xl font-knuckles my-24">
+              <h1 className="text-2xl md:text-4xl font-knuckles my-12 md:my-24">
                 <ReactTyped strings={["I'm a Software Developer"]} typeSpeed={25} />
               </h1>
             )}

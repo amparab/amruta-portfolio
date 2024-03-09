@@ -33,7 +33,7 @@ export default function Certifications ({show}) {
     });  
 
     return(
-        <div className="fixed bottom-16 md:bottom-32 left-0 right-0 flex justify-center -z-10" ref={certRef}>
+        <div className="fixed bottom-6 md:bottom-32 left-0 right-0 flex justify-center -z-10" ref={certRef}>
             {showCert && <div className="p-4 flex items-center">
                     <div className="w-24 h-24 mr-4 rounded-full flex-shrink-0">
                         <animated.img 
@@ -43,7 +43,7 @@ export default function Certifications ({show}) {
                         />
                     </div>
                     <div>
-                        <div className="text-lg font-knuckles">
+                        <div className="text-sm md:text-lg font-knuckles">
                             I am a <br/>
                             Certified Kubernetes <br/> Application Developer</div>
                         </div>

@@ -25,7 +25,7 @@ export default function Experience({show}) {
 
        <div className="fixed inset-0 overflow-auto p-5 flex flex-col justify-center items-center" ref={expRef}>
             {showExp && <div>
-                <div id="skills-title" className="text-2xl md:text-4xl font-knuckles text-center">
+                <div id="skills-title" className="text-xl md:text-4xl font-knuckles text-center">
                 <ReactTyped strings={["My Education and Experience"]} typeSpeed={50} />
             </div>
 
@@ -35,10 +35,10 @@ export default function Experience({show}) {
                     <div
                                     class="relative my-6 text-gray-800 bg-white rounded-xl col-start-1 col-end-5 mr-auto md:mr-0 md:ml-auto shadow-xl">
                                     <div className="p-2 rounded-md flex items-center bg-cyan-600">
-                                        <div className="w-16 h-16 mr-4 shadow-xl rounded-full overflow-hidden flex-shrink-0">
+                                        <div className="w-8 h-8 md:w-16 md:h-16 mr-4 shadow-xl rounded-full overflow-hidden flex-shrink-0">
                                             <img className="w-full h-full object-cover rounded-full" src={VesitLogo} alt="Vesit Logo" />
                                         </div>
-                                        <div className="flex flex-col flex-grow">
+                                        <div className="flex flex-col flex-grow text-sm md:text-lg">
                                             <div className="font-knuckleslite text-white">VESIT</div>
                                             <p className="font-knuckleslite text-white">Bachelor's Degree <br/> in Computer Science</p>
                                             <p className="font-knuckleslite text-white">(2016 - 2020)</p>
@@ -63,10 +63,10 @@ export default function Experience({show}) {
                         </div>
                         <div class="relative my-6 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto shadow-xl">
                                     <div className="p-2 rounded-md flex items-center bg-cyan-600" >
-                                        <div className="w-16 h-16 mr-4 shadow-xl rounded-full overflow-hidden flex-shrink-0">
+                                        <div className="w-8 h-8 md:w-16 md:h-16 mr-4 shadow-xl rounded-full overflow-hidden flex-shrink-0">
                                             <img className="w-full h-full object-cover rounded-full" src={JPLogo} alt="Vesit Logo" />
                                         </div>
-                                        <div className="flex flex-col flex-grow">
+                                        <div className="flex flex-col flex-grow text-sm md:text-lg">
                                             <div className="font-knuckleslite text-white">JP Morgan Chase & Co.</div>
                                             <p className="font-knuckleslite text-white">(2020 - Present)</p>
                                         </div>
@@ -83,7 +83,7 @@ export default function Experience({show}) {
                         </div>
                         <div class="relative p-2 my-6 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto">
                                     <div className="rounded-md flex items-center">
-                                        <div className="flex flex-col flex-grow">
+                                        <div className="flex flex-col flex-grow text-sm md:text-lg">
                                             <div className="font-knuckleslite text-black">Software Engineer 1</div>
                                             <p className="font-knuckleslite text-black">(2020 - 2023)</p>
                                         </div>
@@ -100,7 +100,7 @@ export default function Experience({show}) {
                         </div>
                         <div class="relative p-2 my-6 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto">
                                     <div className="rounded-md flex items-center">
-                                        <div className="flex flex-col flex-grow">
+                                        <div className="flex flex-col flex-grow text-sm md:text-lg">
                                             <div className="font-knuckleslite text-black">Software Engineer 2</div>
                                             <p className="font-knuckleslite text-black">(2023 - Present)</p>
                                         </div>
