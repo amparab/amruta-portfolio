@@ -25,8 +25,8 @@ function App() {
   const svgMaskWidth = 350;
   const svgMaskHeight = 350;
 
-  const initialAngle = 45;
-  const initialOffset = 0.3;
+  const initialAngle = 0;
+  const initialOffset = 0.5;
 
   const [imageSource, setImageSource] = useState(image);
   const [displaySkills, setDisplaySkills] = useState(false);
@@ -387,7 +387,7 @@ useEffect(() => {
     scrollTrigger: {
       trigger: conRef4.current,
       start: 'top bottom',
-      end: 'bottom bottom',
+      end: 'bottom bottom+=500',
       scrub: 0.5,
       ease: "slow",
       toggleActions: "restart none"
@@ -464,9 +464,9 @@ useEffect(() => {
   return (
     <>
       {!isReady ? 
-        <div className="justify-center items-center h-screen w-screen">
-          <h1 className="text-center">Sorry! this website is not supported on iOS</h1>
-          <h1 className="text-center">Please try on devices with Windows / Android</h1>
+        <div className="justify-center flex items-center h-screen w-screen">
+          <h1 className="text-center">Sorry! this website is not supported on iOS <br/>
+          Please try on devices with Windows / Android</h1>
         </div>
       :
         
@@ -541,8 +541,9 @@ useEffect(() => {
 
         </div>
       }
-      
-      <div className="absolute inset-0 overflow-auto">
+
+    {isReady ? <div>
+    <div className="absolute inset-0 overflow-auto">
               {<Skills show={displaySkills} />}
               {<Experience show={showExperience} />}
               {<Certifications show={showCertification} />}
@@ -556,6 +557,8 @@ useEffect(() => {
       <div ref={conRef4} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div ref={conRef5} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div ref={conRef6} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
+    </div> : '' }   
+
     </>
   );
   
