@@ -467,7 +467,7 @@ useEffect(() => {
           <div ref={reference} width={svgMaskWidth} height={svgMaskHeight} className='z-0'></div>
           <div className="h-screen w-full flex flex-col items-center fixed">
             {showIntro && (
-              <div className="text-2xl md:text-4xl mt-20 font-knuckles">
+              <div className="text-2xl md:text-4xl mt-20 font-knuckles bg-gradient-to-r from-slate-800 via-blue-950 to-pink-700 text-transparent bg-clip-text">
                 <ReactTyped strings={["Hi! I am Amruta Parab"]} typeSpeed={25} onComplete={() => setShowProfession(true)} />
               </div>
             )}
@@ -526,7 +526,7 @@ useEffect(() => {
               </svg>
             </div>
             {showIntro && showProfession && (
-              <h1 className="text-2xl md:text-4xl font-knuckles mb-20">
+              <h1 className="text-2xl md:text-4xl font-knuckles mb-20 bg-gradient-to-r from-pink-700 via-blue-950 to-slate-800 text-transparent bg-clip-text">
                 <ReactTyped strings={["I'm a Software Developer"]} typeSpeed={25} />
               </h1>
             )}
