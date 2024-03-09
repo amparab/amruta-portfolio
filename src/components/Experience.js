@@ -34,8 +34,7 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
                 start: 'top bottom',
                 end: 'top 75%',
                 scrub: 0.5,
-                toggleActions: "play reverse play reverse",
-                markers: true
+                toggleActions: "play reverse play reverse"
             },
         });
     
@@ -49,8 +48,7 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
                 start: 'top 75%',
                 end: 'top 50%',
                 scrub: 0.5,
-                toggleActions: "play reverse play reverse",
-                markers: true
+                toggleActions: "play reverse play reverse"
             },
         });
     
@@ -64,8 +62,7 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
                 start: 'top 50%',
                 end: 'top 25%',
                 scrub: 0.5,
-                toggleActions: "play reverse play reverse",
-                markers: true
+                toggleActions: "play reverse play reverse"
             },
         });
     
@@ -79,8 +76,7 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
                 start: 'top 25%',
                 end: 'top top',
                 scrub: 0.5,
-                toggleActions: "play reverse play reverse",
-                markers: true
+                toggleActions: "play reverse play reverse"
             },
         });
     

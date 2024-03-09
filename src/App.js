@@ -259,7 +259,7 @@ function App() {
       scrollTrigger: {
         trigger: conRef5.current,
         start: 'bottom top',
-        end: 'bottom bottom+=900',
+        end: 'bottom bottom',
         scrub: scrubValue,
         toggleActions: "play reverse play reverse",
       },
@@ -533,7 +533,7 @@ useEffect(() => {
               {<Skills show={displaySkills} />}
               {<Experience show={showExperience} scrollTriggerRef={conRef5} />}
               {<Certifications show={showCertification} />}
-              {showContactLinks && <ContactLinks />}
+              {<ContactLinks show={showContactLinks} />}
       </div>
 
       <div ref={conRef} className=" h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>

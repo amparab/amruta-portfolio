@@ -20,18 +20,6 @@ export default function Certifications ({show}) {
         }  
       }, [show]);
 
-    const logoAnimation = useSpring({
-        from: { 
-            transform: `rotateZ(0deg)`,
-            opacity: 0
-        },
-        to: {
-            transform: `rotateZ(360deg)`,
-            opacity: 2
-        },
-        config: { duration:1000 }
-    });  
-
     return(
         <div className="fixed bottom-6 md:bottom-24 left-0 right-0 flex justify-center -z-10" ref={certRef}>
             {showCert && <div className="p-4 flex items-center">
@@ -39,7 +27,6 @@ export default function Certifications ({show}) {
                         <animated.img 
                             className="w-full h-full rounded-full" 
                             src={CKADLogo}
-                            style={{...logoAnimation, transformOrigin: 'center'}}
                         />
                     </div>
                     <div>
