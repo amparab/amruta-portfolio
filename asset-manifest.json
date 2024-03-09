@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/amruta-portfolio/static/css/main.ec281b2d.css",
-    "main.js": "/amruta-portfolio/static/js/main.e43cb377.js",
+    "main.css": "/amruta-portfolio/static/css/main.1ccaf347.css",
+    "main.js": "/amruta-portfolio/static/js/main.918c1510.js",
     "static/js/453.07a2d4c0.chunk.js": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js",
     "static/media/pink.png": "/amruta-portfolio/static/media/pink.6de4eb1a2fcd424f01c6.png",
     "static/media/Certification-Bg.jpg": "/amruta-portfolio/static/media/Certification-Bg.67171a9b09637bc45bb2.jpg",
@@ -28,12 +28,12 @@
     "static/media/linkedin.png": "/amruta-portfolio/static/media/linkedin.f249b38224ca41a0b909.png",
     "static/media/PixelEmulator-xq08.woff": "/amruta-portfolio/static/media/PixelEmulator-xq08.93c4c5e1f7f7fa1a7000.woff",
     "index.html": "/amruta-portfolio/index.html",
-    "main.ec281b2d.css.map": "/amruta-portfolio/static/css/main.ec281b2d.css.map",
-    "main.e43cb377.js.map": "/amruta-portfolio/static/js/main.e43cb377.js.map",
+    "main.1ccaf347.css.map": "/amruta-portfolio/static/css/main.1ccaf347.css.map",
+    "main.918c1510.js.map": "/amruta-portfolio/static/js/main.918c1510.js.map",
     "453.07a2d4c0.chunk.js.map": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ec281b2d.css",
-    "static/js/main.e43cb377.js"
+    "static/css/main.1ccaf347.css",
+    "static/js/main.918c1510.js"
   ]
 }
