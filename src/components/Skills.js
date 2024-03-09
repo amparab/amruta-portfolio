@@ -17,83 +17,47 @@ import { gsap } from 'gsap';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Skills = ({ref, show}) => {
-    const logo = useRef(null);
+const Skills = ({show}) => {
+    const skillsRef = useRef(null);
     const [skills, setSkills] = useState(false);
 
     const images = [
-        { id: 1, src: JavaLogo, progress: 85, name: 'Java', ref: logo },
-        { id: 2, src: SpringLogo, progress: 80, name: 'Spring', ref: logo},
-        { id: 3, src: KubernetesLogo, progress: 90, name: 'Kubernetes', ref: logo },
-        { id: 4, src: SqlLogo, progress: 80, name: 'SQL' , ref: logo},
-        { id: 5, src: ReactLogo, progress: 60, name: 'React', ref: logo },
-        { id: 6, src: KafkaLogo, progress: 50, name: 'Kafka', ref: logo },
-        { id: 7, src: GitLogo, progress: 75, name: 'Git' , ref: logo},
-        { id: 8, src: TailwindLogo, progress: 50, name: 'TailwindCss', ref: logo }
+        { id: 1, src: JavaLogo, progress: 85, name: 'Java'},
+        { id: 2, src: SpringLogo, progress: 80, name: 'Spring'},
+        { id: 3, src: KubernetesLogo, progress: 90, name: 'Kubernetes'},
+        { id: 4, src: SqlLogo, progress: 80, name: 'SQL'},
+        { id: 5, src: ReactLogo, progress: 60, name: 'React'},
+        { id: 6, src: KafkaLogo, progress: 50, name: 'Kafka'},
+        { id: 7, src: GitLogo, progress: 75, name: 'Git'},
+        { id: 8, src: TailwindLogo, progress: 50, name: 'TailwindCss'}
       ];
+
 
       useEffect(() => {
         if(show){
             setSkills(true);
+            gsap.fromTo(skillsRef.current, { opacity: 0 }, { opacity: 1, duration: 2 });
         } else {
-            setSkills(false);
-        }
-    
-        
+            // setSkills(false);
+            gsap.fromTo(skillsRef.current, { opacity: 1 }, { opacity: 0, onComplete: () => {
+                setSkills(false);
+            } });
+        }  
       }, [show]);
-
-    // const logoAnimation = useSpring({
-    //     from: { 
-    //         transform: `rotateY(90deg)`,
-    //         opacity: 0
-    //     },
-    //     to: {
-    //         transform: `rotateY(0deg) `,
-    //         opacity: 2
-    //     },
-    //     config: { duration:1000 }
-    // }); 
-
-    // const temptl = gsap.timeline({
-    //     scrollTrigger: {
-    //       trigger: ref.current,
-    //       start: 'top center',
-    //       end: 'bottom center',
-    //       scrub: true, // Smooth animation
-    //       ease: "slow",
-    //       markers: true,
-    //       toggleActions: "play reverse play reverse",
-    //       onComplete: function() {
-    //         console.log('complete');
-    //         setSkills(false);
-    //       }
-    //     }
-    //    });
-    
-    
-    //   temptl.fromTo(logo.current, {transformOrigin: '50% 50%', rotateY: 90 ,perspective: 1000}, {
-    //     perspective: 1000,
-    //     transformOrigin: '50% 50%',
-    //     rotateY: 180
-    //   });
-
-    const onCompleteTyping = () => {
-        // setSkills(true);
-        // temptl.play();
-    }
 
     return (
         <>
-            {skills && (
-                <animated.div className="fixed inset-0 overflow-auto p-5 flex flex-col justify-center items-center">
-                    <div id="skillsContainer" className=" text-white text-center" style={{ maxHeight: '200vh' }}>
-                        <div id="skills-title" className="text-4xl md:text-6xl font-knuckles my-8">
-                            <ReactTyped strings={["MY SKILLS"]} typeSpeed={50} onComplete={onCompleteTyping} />
+            {
+                <div className="fixed inset-0 overflow-auto p-5 flex flex-col justify-center items-center" ref={skillsRef}
+                >
+                    {skills && <div id="skillsContainer" className=" text-white text-center" style={{ maxHeight: '200vh' }}>
+                         <div id="skills-title" className="text-4xl md:text-6xl font-knuckles my-4 md:my-8">
+                            <ReactTyped strings={["MY SKILLS"]} typeSpeed={50} />
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2  gap-x-44 pt-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2  gap-x-44"> 
                             {images.map((image) => (
                                 <div key={image.id} className="p-4 flex items-center">
-                                    <div ref={image.ref} className="w-12 h-12 mr-4 shadow-xl rounded-full flex-shrink-0" style={{ transformOrigin: 'center' }}>
+                                    <div className="w-10 h-10 md:w-12 md:h-12 mr-4 shadow-xl rounded-full flex-shrink-0" style={{ transformOrigin: 'center' }}>
                                         <img className="w-full h-full rounded-full" src={image.src} alt={`Image ${image.id}`} />
                                     </div>
                                     <div>
@@ -103,9 +67,9 @@ const Skills = ({ref, show}) => {
                                 </div>
                             ))}
                         </div>
-                    </div>
-                </animated.div>
-            )}
+                    </div>}
+                </div>
+            }
         </>
     );
 

@@ -1,69 +1,114 @@
 import VesitLogo from '../images/Vesit-Logo.png';
 import JPLogo from '../images/JP-Logo.png';
 import { ReactTyped } from 'react-typed';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import '../input.css';
+import { gsap } from 'gsap';
 
-export default function Experience() {
+export default function Experience({show}) {
+
+    const expRef = useRef(null);
+    const [showExp, setShowExp] = useState(false);
+
+    useEffect(() => {
+        if(show){
+            setShowExp(true);
+            gsap.fromTo(expRef.current, { opacity: 0 }, { opacity: 1 });
+        } else {
+            gsap.fromTo(expRef.current, { opacity: 1 }, { opacity: 0, onComplete: () => {
+                setShowExp(false);
+            } });
+        }  
+      }, [show]);
 
     return (
 
-        <div className='fixed h-screen w-screen flex flex-col md:flex-row justify-center'>
-            <div className="md:h-full w-full md:w-1/2 flex justify-start items-center order-1 md:order-2 fixed"></div>
-            <div className="h-full w-full md:w-1/2 flex flex-col items-center order-1 md:order-2 fixed mt-4 mb-4">
-                <div id="skills-title" className="text-lg md:text-3xl relative left-1/2 font-pixel mb-8">
-                <ReactTyped strings={["Education and Experience"]} typeSpeed={50} />
-                </div>
-                <div className="w-px bg-black relative left-1/3 flex items-center h-40">
-                    <div className="section-1 ml-6 p-4 rounded-md flex items-center bg-gradient-to-br from-black via-pink-950 to-pink-700" style={{ minWidth: '300px', width: 'fit-content' }}>
-                        <div className="w-24 h-24 mr-4 shadow-xl rounded-full overflow-hidden flex-shrink-0">
-                            <img className="w-full h-full object-cover rounded-full" src={VesitLogo} alt="Vesit Logo" />
-                        </div>
-                        <div className="flex flex-col flex-grow">
-                            <div className="font-pixel text-white">VESIT</div>
-                            <p className="font-pixel text-xs text-white">Bachelor's Degree <br/> in Computer Science</p>
-                            <p className="font-pixel text-xs text-white">(2016 - 2020)</p>
-                        </div>
+        <div className="fixed inset-0 overflow-auto p-5 flex flex-col justify-center items-center" ref={expRef}>
+                <div id="skills-title" className="text-2xl md:text-4xl font-knuckles text-center">
+                <ReactTyped strings={["My Education and Experience"]} typeSpeed={50} />
+            </div>
+
+
+                <div class="flex flex-col grid-cols-9 p-2 mx-auto md:grid">
+                    <div class="flex md:contents flex-row-reverse">
+                    <div
+                                    class="relative my-6 text-gray-800 bg-white rounded-xl col-start-1 col-end-5 mr-auto md:mr-0 md:ml-auto shadow-xl">
+                                    <div className="p-2 rounded-md flex items-center bg-cyan-600">
+                                        <div className="w-16 h-16 mr-4 shadow-xl rounded-full overflow-hidden flex-shrink-0">
+                                            <img className="w-full h-full object-cover rounded-full" src={VesitLogo} alt="Vesit Logo" />
+                                        </div>
+                                        <div className="flex flex-col flex-grow">
+                                            <div className="font-knuckleslite text-white">VESIT</div>
+                                            <p className="font-knuckleslite text-white">Bachelor's Degree <br/> in Computer Science</p>
+                                            <p className="font-knuckleslite text-white">(2016 - 2020)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="relative col-start-5 col-end-6 mr-7 md:mx-auto">
+                                    <div class="flex items-center justify-center w-6 h-full">
+                                        <div class="w-1 h-full bg-gray-400 rounded-t-full bg-gradient-to-b">
+                                        </div>
+                                    </div>
+                                    <div class="absolute w-6 h-6 -mt-3 bg-white border-4 border-gray-600 rounded-full top-1/2"></div>
+                                </div>
                     </div>
-                    <div className="circle-1 w-3 h-3 rounded-full bg-black absolute left-1/2 transform -translate-x-1/2"></div> {/* Circle for Vesit */}
-                </div>
-                <div className="w-px bg-black relative left-1/3 flex items-center h-40">
-                    <div className="section-2 ml-6 p-4 rounded-md flex items-center bg-gradient-to-br from-black via-pink-950 to-pink-700" style={{ minWidth: '300px', width: 'fit-content' }}>
-                        <div className="w-24 h-24 mr-4 shadow-xl rounded-full overflow-hidden flex-shrink-0">
-                            <img className="w-full h-full object-cover rounded-full" src={JPLogo} alt="JP Logo" />
+
+                    <div class="flex md:contents">
+                        <div class="relative col-start-5 col-end-6 mr-7 md:mx-auto">
+                            <div class="flex items-center justify-center w-6 h-full">
+                                <div class="w-1 h-full bg-gray-400"></div>
+                            </div>
+                            <div class="absolute w-6 h-6 -mt-3 bg-white border-4 border-gray-600 rounded-full top-1/2"></div>
                         </div>
-                        <div className="flex flex-col flex-grow">
-                            <div className="font-pixel text-white">JP</div>
-                            <p className="font-pixel text-xs text-white">Some Degree <br/> in Something</p>
-                            <p className="font-pixel text-xs text-white">(2016 - 2020)</p>
-                        </div>
+                        <div class="relative my-6 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto shadow-xl">
+                                    <div className="p-2 rounded-md flex items-center bg-cyan-600" >
+                                        <div className="w-16 h-16 mr-4 shadow-xl rounded-full overflow-hidden flex-shrink-0">
+                                            <img className="w-full h-full object-cover rounded-full" src={JPLogo} alt="Vesit Logo" />
+                                        </div>
+                                        <div className="flex flex-col flex-grow">
+                                            <div className="font-knuckleslite text-white">JP Morgan Chase & Co.</div>
+                                            <p className="font-knuckleslite text-white">(2020 - Present)</p>
+                                        </div>
+                                    </div>
+                                </div>
                     </div>
-                    <div className="circle-2 w-3 h-3 rounded-full bg-black absolute left-1/2 transform -translate-x-1/2"></div> {/* Circle for JP */}
-                </div>
-                <div className="w-px bg-black relative left-1/3 flex items-center h-32" >
-                    <div className="section-3 ml-6 flex items-center" style={{ minWidth: '300px', width: 'fit-content' }}>
-                        <div className="flex flex-col flex-grow">
-                            <div className="font-pixel text-black">Position 1</div>
-                            <p className="font-pixel text-xs text-black">Job Description 1</p>
-                            <p className="font-pixel text-xs text-black">(2016 - 2020)</p>
+
+                    <div class="flex md:contents">
+                        <div class="relative col-start-5 col-end-6 mr-7 md:mx-auto">
+                            <div class="flex items-center justify-center w-6 h-full">
+                                <div class="w-1 h-full bg-gray-400"></div>
+                            </div>
+                            <div class="absolute w-6 h-6 -mt-3 bg-white border-4 border-gray-600 rounded-full top-1/2"></div>
                         </div>
+                        <div class="relative p-2 my-6 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto">
+                                    <div className="rounded-md flex items-center">
+                                        <div className="flex flex-col flex-grow">
+                                            <div className="font-knuckleslite text-black">Software Engineer 1</div>
+                                            <p className="font-knuckleslite text-black">(2020 - 2023)</p>
+                                        </div>
+                                    </div>
+                                </div>
                     </div>
-                    <div className="circle-3 w-3 h-3 rounded-full bg-black absolute left-1/2 transform -translate-x-1/2"></div> {/* Circle for Position 1 */}
-                </div>
-                <div className="w-px bg-black relative left-1/3 flex items-center h-32">
-                    <div className="section-4 ml-6 flex items-center" style={{ minWidth: '300px', width: 'fit-content' }}>
-                        <div className="flex flex-col flex-grow">
-                            <div className="font-pixel text-black">Position 2</div>
-                            <p className="font-pixel text-xs text-black">Job Description 2</p>
-                            <p className="font-pixel text-xs text-black">(2016 - 2020)</p>
+
+                    <div class="flex md:contents">
+                        <div class="relative col-start-5 col-end-6 mr-7 md:mx-auto">
+                            <div class="flex items-center justify-center w-6 h-full">
+                                <div class="w-1 h-full bg-gray-400"></div>
+                            </div>
+                            <div class="absolute w-6 h-6 -mt-3 bg-white border-4 border-gray-600 rounded-full top-1/2"></div>
                         </div>
+                        <div class="relative p-2 my-6 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto">
+                                    <div className="rounded-md flex items-center">
+                                        <div className="flex flex-col flex-grow">
+                                            <div className="font-knuckleslite text-black">Software Engineer 2</div>
+                                            <p className="font-knuckleslite text-black">(2023 - Present)</p>
+                                        </div>
+                                    </div>
+                                </div>
                     </div>
-                    <div className="circle-4 w-3 h-3 rounded-full bg-black absolute left-1/2 transform -translate-x-1/2"></div> {/* Circle for Position 2 */}
-                </div>
+
             </div>
         </div>
-
-
 
 
     );

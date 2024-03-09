@@ -136,6 +136,9 @@ function App() {
           setShowParallax(true);
         }
       },
+      onComplete: function() {
+        setShowCertification(true);
+      },
       onReverseComplete: function() {
         setDisplaySkills(true);
       }
@@ -149,8 +152,13 @@ function App() {
         scrub: 0.5,
         toggleActions: "play reverse play reverse",
       },
+      onStart: function() {
+        // setShowExperience(false);
+        setShowCertification(false);
+      },
       onReverseComplete: function() {
-        setShowExperience(false);
+        // setShowExperience(false);
+        setShowCertification(false);
       }
      });
 
@@ -158,13 +166,14 @@ function App() {
 
     const rotationAnimation3 = gsap.timeline({
       onStart: () => {
-        setDisplaySkills(false)
+        setDisplaySkills(false);
+        setShowCertification(false);
       },
       scrollTrigger: {
         trigger: conRef4.current,
         id: "rot_exp_cert",
         start: 'top bottom',
-        end: 'bottom bottom',
+        end: 'bottom bottom+=500',
         scrub: 0.5,
         ease: "slow",
         toggleActions: "play reverse play reverse"
@@ -172,20 +181,21 @@ function App() {
       onUpdate: function () {
         let currentRotation = gsap.getProperty(reference.current, "rotation");
         
-        let progress = ScrollTrigger.getById("rot_exp_cert").progress;
-        if(progress >= 0.5){
-          setImageSource(certBg);
-        } else{
-          setImageSource(expImg);
-          setShowExpBg(true);
-        }
+        // let progress = ScrollTrigger.getById("rot_exp_cert").progress;
+        // if(progress >= 0.5){
+        //   setImageSource(certBg);
+        // } else{
+        //   setImageSource(expImg);
+        //   setShowExpBg(true);
+        // }
         setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)`});
       },
       onComplete: function() {
-        setShowCertification(true);
+        setShowExperience(true);
       },
       onReverseComplete: function() {
-        setShowExperience(false);
+        // setShowExperience(false);
+        setShowCertification(true);
       }
     });
 
@@ -198,19 +208,20 @@ function App() {
         toggleActions: "play reverse play reverse",
       },
       onReverseComplete: function() {
-        setShowCertification(false);
+        setShowExperience(false);
       },
      });
 
     const rotationAnimation4 = gsap.timeline({
       onStart: function () {
-        setShowCertification(false);
+        setImageSource(certBg);
+        setShowExperience(false);
       },
       scrollTrigger: {
         trigger: conRef6.current,
         id: "rot_cert_contact",
         start: 'top bottom',
-        end: 'bottom bottom',
+        end: 'bottom bottom+=500',
         scrub: 0.5,
         ease: "slow",
         toggleActions: "play reverse play reverse"
@@ -218,19 +229,21 @@ function App() {
       onUpdate: function () {
         let currentRotation = gsap.getProperty(reference.current, "rotation");
         setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)`});
-        let progress = ScrollTrigger.getById("rot_cert_contact").progress;
-        if(progress >= 0.5){
-          setImageSource(contactBg);
-        } else{
-          setImageSource(certBg);
-        }
+        // let progress = ScrollTrigger.getById("rot_cert_contact").progress;
+        // if(progress >= 0.5){
+        //   setImageSource(contactBg);
+        // } else{
+        //   setImageSource(certBg);
+        // }
       },
       onComplete: function () {
         setShowContactLinks(true);
-        setShowCertification(false);
+        // setShowCertification(false);
       },
       onReverseComplete: function () {
-        setShowCertification(true);
+        setShowExperience(true);
+        setImageSource(expImg);
+        setShowExpBg(true);
       }
     });
 
@@ -238,7 +251,7 @@ function App() {
       scrollTrigger: {
         trigger: conRef5.current,
         start: 'bottom top',
-        end: 'bottom bottom',
+        end: 'bottom bottom-=500',
         scrub: 0.5,
         toggleActions: "play reverse play reverse",
       },
@@ -264,8 +277,8 @@ function App() {
 
     rotationAnimation3.to(reference.current, {
       transformOrigin: '100% 100%',
-      rotate: 540,
-      y: window.innerHeight
+      rotate: 540
+      // y: window.innerHeight
     });
 
     rotationAnimation_rev3.to(reference.current, {x:0}) ;
@@ -358,8 +371,8 @@ useEffect(() => {
     }
   });
 
-  trans_skills_exp.to(mask,{scale: 2});
-  trans_skills_exp.to(mask,{x: -window.innerWidth/4}, 0);
+  trans_skills_exp.to(mask,{scale: 1.25});
+  trans_skills_exp.to(mask,{y: -100}, 0);
 
   const trans_exp_cert = gsap.timeline({
     scrollTrigger: {
@@ -372,7 +385,7 @@ useEffect(() => {
     }
   });
 
-  trans_exp_cert.to(mask,{x: 0});
+  trans_exp_cert.to(mask,{opacity: 0});
 
   // Keep cert still
   gsap.timeline({
@@ -397,7 +410,7 @@ useEffect(() => {
     },
   });
 
-  trans_cert_contact.to(mask,{x: window.innerWidth/4});
+  trans_cert_contact.to(mask,{opacity: 1, scale: 1.5});
 
   return () => {
     trans_intro_skills.kill();
@@ -410,7 +423,8 @@ useEffect(() => {
 useEffect(() => {
   const parallaxExp = gsap.timeline({
       onStart: () => {
-        setShowExperience(true);
+        // setShowExperience(true);
+        // setShowCertification(true);
       },
       scrollTrigger: {
         trigger: conRef3.current,
@@ -421,7 +435,8 @@ useEffect(() => {
         toggleActions: "play reverse play reverse",
       },
       onComplete: () => {
-        setShowExperience(false);
+        // setShowExperience(false);
+        // setShowCertification(false);
       },
     });
 
@@ -449,7 +464,7 @@ useEffect(() => {
           <div ref={reference} width={svgMaskWidth} height={svgMaskHeight} className='z-0'></div>
           <div className="h-screen w-full flex flex-col items-center fixed border border-solid border-red-500">
             {showIntro && (
-              <div className="text-3xl md:text-5xl my-24 font-knuckles">
+              <div className="text-2xl md:text-4xl my-24 font-knuckles">
                 <ReactTyped strings={["Hi! I am Amruta Parab"]} typeSpeed={25} onComplete={() => setShowProfession(true)} />
               </div>
             )}
@@ -508,7 +523,7 @@ useEffect(() => {
               </svg>
             </div>
             {showIntro && showProfession && (
-              <h1 className="text-3xl md:text-5xl font-knuckles my-24">
+              <h1 className="text-2xl md:text-4xl font-knuckles my-24">
                 <ReactTyped strings={["I'm a Software Developer"]} typeSpeed={25} />
               </h1>
             )}
@@ -517,17 +532,17 @@ useEffect(() => {
         </div>
       }
       
-      <div className="absolute inset-0 overflow-auto z-50">
-              {<Skills show={displaySkills} ref={conRef1} />}
-              {showExperience && <Experience />}
-              {showCertification && <Certifications />}
+      <div className="absolute inset-0 overflow-auto">
+              {<Skills show={displaySkills} />}
+              {<Experience show={showExperience} />}
+              {<Certifications show={showCertification} />}
               {showContactLinks && <ContactLinks />}
       </div>
 
       <div ref={conRef} className=" h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div ref={conRef1} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div ref={conRef2} className=" h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
-      <div ref={conRef3} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
+      <div ref={conRef3} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center-z-20"></div>
       <div ref={conRef4} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div ref={conRef5} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div ref={conRef6} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>

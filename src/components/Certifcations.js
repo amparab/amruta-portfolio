@@ -1,8 +1,24 @@
-import { ReactTyped } from 'react-typed';
+
 import CKADLogo from '../images/CKAD-Logo.png';
 import { useSpring, animated } from '@react-spring/web';
+import { gsap } from 'gsap';
+import React, { useRef, useEffect, useState } from 'react';
 
-export default function Certifications () {
+export default function Certifications ({show}) {
+
+    const certRef = useRef(null);
+    const [showCert, setShowCert] = useState(false);
+
+    useEffect(() => {
+        if(show){
+            setShowCert(true);
+            gsap.fromTo(certRef.current, { opacity: 0 }, { opacity: 1 });
+        } else {
+            gsap.fromTo(certRef.current, { opacity: 1 }, { opacity: 0, onComplete: () => {
+                setShowCert(false);
+            } });
+        }  
+      }, [show]);
 
     const logoAnimation = useSpring({
         from: { 
@@ -17,25 +33,22 @@ export default function Certifications () {
     });  
 
     return(
-        <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center text-white">
-        <div id="skills-title" class="text-2xl md:text-4xl font-pixel mb-8">
-            <ReactTyped strings={["Certifications"]} typeSpeed={70} />
-        </div>
-        <div class="items-center justify-center">
-            <div className="p-4 flex items-center">
-            <div className=" w-36 h-36 mr-4 shadow-xl rounded-full flex-shrink-0">
-                <animated.img 
-                    className="w-full h-full rounded-full" 
-                    src={CKADLogo}
-                    style={{...logoAnimation, transformOrigin: 'center'}}
-                 />
-            </div>
-            <div>
-                <div className="text-lg font-pixel">Certified Kubernetes <br/> Application Developer</div>
-            </div>
-            </div>
-        </div>
-        </div>
+        <div className="fixed bottom-16 md:bottom-32 left-0 right-0 flex justify-center -z-10" ref={certRef}>
+            {showCert && <div className="p-4 flex items-center">
+                    <div className="w-24 h-24 mr-4 rounded-full flex-shrink-0">
+                        <animated.img 
+                            className="w-full h-full rounded-full" 
+                            src={CKADLogo}
+                            style={{...logoAnimation, transformOrigin: 'center'}}
+                        />
+                    </div>
+                    <div>
+                        <div className="text-lg font-knuckles">
+                            I am a <br/>
+                            Certified Kubernetes <br/> Application Developer</div>
+                        </div>
+                </div>}
+         </div>
     );
 
 }
