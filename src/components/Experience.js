@@ -23,7 +23,8 @@ export default function Experience({show}) {
 
     return (
 
-        <div className="fixed inset-0 overflow-auto p-5 flex flex-col justify-center items-center" ref={expRef}>
+       <div className="fixed inset-0 overflow-auto p-5 flex flex-col justify-center items-center" ref={expRef}>
+            {showExp && <div>
                 <div id="skills-title" className="text-2xl md:text-4xl font-knuckles text-center">
                 <ReactTyped strings={["My Education and Experience"]} typeSpeed={50} />
             </div>
@@ -107,7 +108,7 @@ export default function Experience({show}) {
                                 </div>
                     </div>
 
-            </div>
+            </div></div>}
         </div>
 
 

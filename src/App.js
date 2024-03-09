@@ -1,7 +1,7 @@
 import './input.css';
 import { useSpring, animated, config  } from '@react-spring/web';
 import React, { useEffect, useState, useRef } from 'react';
-import image from './images/main.png'
+import image from './images/pink.png'
 import skillsBg from './images/sky.jpg'
 import skyline from './images/skyline-layer2.png'
 import girl from './images/skills_char-layer2.png'
@@ -25,9 +25,12 @@ function App() {
   const svgMaskWidth = 350;
   const svgMaskHeight = 350;
 
+  const initialAngle = 45;
+  const initialOffset = 0.3;
+
   const [imageSource, setImageSource] = useState(image);
   const [displaySkills, setDisplaySkills] = useState(false);
-  const [rotation, setRotation] = useState(60);
+  const [rotation, setRotation] = useState(initialAngle);
   const [showExperience, setShowExperience] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const [showExpBg, setShowExpBg] = useState(false);
@@ -76,7 +79,7 @@ function App() {
       onUpdate: function () {
         let currentRotation = gsap.getProperty(reference.current, "rotation");
         let progress = ScrollTrigger.getById("intro-photo").progress;
-        if(progress >= 0.33){
+        if(progress >= initialOffset){
           setImageSource(skillsBg);
           setShowParallax(true);
         } else{
@@ -88,7 +91,7 @@ function App() {
       },
       onReverseComplete: function() {
         setShowIntro(true);
-        setSpringProps({ immediate: true,  transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(60deg)` });
+        setSpringProps({ immediate: true,  transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${initialAngle}deg)` });
       }
      });
 
@@ -260,7 +263,7 @@ function App() {
       },
      });
   
-    rotationAnimation1.fromTo(reference.current,{rotate: 60}, {
+    rotationAnimation1.fromTo(reference.current,{rotate: initialAngle}, {
       transformOrigin: '100% 100%',
       rotate: 180
     })
@@ -449,7 +452,7 @@ useEffect(() => {
     const [springProps, setSpringProps] = useSpring(() => ({
       rotateY: 0,
       transformOrigin: '50% 50%', 
-      transform: `perspective(1000px) rotateY(60deg)`
+      transform: `perspective(1000px) rotateY(${initialAngle}deg)`
   }));
 
   return (
@@ -462,7 +465,7 @@ useEffect(() => {
         
         <div id="container" className="h-screen w-screen flex flex-col justify-center items-center">
           <div ref={reference} width={svgMaskWidth} height={svgMaskHeight} className='z-0'></div>
-          <div className="h-screen w-full flex flex-col items-center fixed border border-solid border-red-500">
+          <div className="h-screen w-full flex flex-col items-center fixed">
             {showIntro && (
               <div className="text-2xl md:text-4xl my-24 font-knuckles">
                 <ReactTyped strings={["Hi! I am Amruta Parab"]} typeSpeed={25} onComplete={() => setShowProfession(true)} />
