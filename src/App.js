@@ -463,7 +463,7 @@ useEffect(() => {
 
   return (
     <> 
-        <div id="container" className="h-screen w-screen flex flex-col justify-center items-center mt-5">
+        <div id="container" className="h-screen w-screen flex flex-col justify-center items-center">
           <div ref={reference} width={svgMaskWidth} height={svgMaskHeight} className='z-0'></div>
           <div className="h-screen w-full flex flex-col items-center fixed">
             {showIntro && (
