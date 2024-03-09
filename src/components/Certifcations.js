@@ -21,7 +21,7 @@ export default function Certifications ({show}) {
       }, [show]);
 
     return(
-        <div className="fixed bottom-6 md:bottom-24 left-0 right-0 flex justify-center -z-10" ref={certRef}>
+        <div className="fixed bottom-6 md:bottom-10 left-0 right-0 flex justify-center -z-10" ref={certRef}>
             {showCert && <div className="p-4 flex items-center">
                     <div className="w-24 h-24 mr-4 rounded-full flex-shrink-0">
                         <animated.img 

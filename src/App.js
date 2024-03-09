@@ -37,7 +37,7 @@ function App() {
   const [showExpBg, setShowExpBg] = useState(false);
   const [showParallax, setShowParallax] = useState(false);
   const [showCertification, setShowCertification] = useState(false);
-  const [isReady, setIsReady] = useState(true);
+  const [errorMsg, setErrorMsg] = useState(false);
   const [error, setError] = useState(false);
   const [showContactLinks, setShowContactLinks] = useState(false);
   const [showProfession, setShowProfession] = useState(false);
@@ -63,6 +63,13 @@ function App() {
 
     if (isIOS) {
         setError(true);
+        setErrorMsg("Sorry! this website is not supported on iOS. Please try on devices with Windows / Android");
+        return;
+    } else if ((window.innerHeight < 570 && window.innerWidth < 340) 
+              || (window.innerHeight < 590 && window.innerWidth > 770)
+              || (window.innerWidth < 315)){
+        setError(true);
+        setErrorMsg("Your browser resolution is currently not supported. Try resizing the window to experience this site.");
         return;
     }
 
@@ -450,8 +457,7 @@ useEffect(() => {
 
   if(error){
      return <div className="justify-center flex items-center h-screen w-screen">
-        <h1 className="text-center font-knuckleslite">Sorry! this website is not supported on iOS <br/>
-        Please try on devices with Windows / Android</h1>
+        <h1 className="text-center font-knuckleslite">{errorMsg}</h1>
       </div>
   }
 
@@ -461,7 +467,7 @@ useEffect(() => {
           <div ref={reference} width={svgMaskWidth} height={svgMaskHeight} className='z-0'></div>
           <div className="h-screen w-full flex flex-col items-center fixed">
             {showIntro && (
-              <div className="text-2xl md:text-4xl mt-24 md:mt-24 font-knuckles">
+              <div className="text-2xl md:text-4xl mt-20 font-knuckles">
                 <ReactTyped strings={["Hi! I am Amruta Parab"]} typeSpeed={25} onComplete={() => setShowProfession(true)} />
               </div>
             )}
@@ -520,7 +526,7 @@ useEffect(() => {
               </svg>
             </div>
             {showIntro && showProfession && (
-              <h1 className="text-2xl md:text-4xl font-knuckles mb-24 md:mb-24">
+              <h1 className="text-2xl md:text-4xl font-knuckles mb-20">
                 <ReactTyped strings={["I'm a Software Developer"]} typeSpeed={25} />
               </h1>
             )}

@@ -76,7 +76,7 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
                 start: 'top 25%',
                 end: 'top top',
                 scrub: 0.5,
-                toggleActions: "play reverse play reverse"
+                toggleActions: "play reverse play reverse",
             },
         });
     
@@ -101,7 +101,7 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
                 <div class="flex flex-col grid-cols-9 p-2 mx-auto md:grid">
                     <div class="flex md:contents flex-row-reverse">
                     <div
-                                    class="relative my-6 text-gray-800 bg-white rounded-xl col-start-1 col-end-5 mr-auto md:mr-0 md:ml-auto">
+                                    class="relative my-2 text-gray-800 bg-white rounded-xl col-start-1 col-end-5 mr-auto md:mr-0 md:ml-auto">
                                     <div className="p-2 rounded-md flex items-center bg-cyan-600" ref={first}>
                                         <div className="w-8 h-8 md:w-16 md:h-16 mr-4 rounded-full overflow-hidden flex-shrink-0">
                                             <img className="w-full h-full object-cover rounded-full" src={VesitLogo} alt="Vesit Logo" />
@@ -129,7 +129,7 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
                             </div>
                             <div class="absolute w-6 h-6 -mt-3 bg-white border-4 border-gray-600 rounded-full top-1/2"></div>
                         </div>
-                        <div class="relative my-6 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto">
+                        <div class="relative my-2 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto">
                                     <div className="p-2 rounded-md flex items-center bg-cyan-600" ref={second}>
                                         <div className="w-8 h-8 md:w-16 md:h-16 mr-4 rounded-full overflow-hidden flex-shrink-0">
                                             <img className="w-full h-full object-cover rounded-full" src={JPLogo} alt="Vesit Logo" />
@@ -149,7 +149,7 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
                             </div>
                             <div class="absolute w-6 h-6 -mt-3 bg-white border-4 border-gray-600 rounded-full top-1/2"></div>
                         </div>
-                        <div class="relative p-2 my-6 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto" ref={third}>
+                        <div class="relative p-2 my-2 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto" ref={third}>
                                     <div className="rounded-md flex items-center">
                                         <div className="flex flex-col flex-grow text-sm md:text-lg">
                                             <div className="font-knuckleslite text-black">Software Engineer 1</div>
@@ -166,7 +166,7 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
                             </div>
                             <div class="absolute w-6 h-6 -mt-3 bg-white border-4 border-gray-600 rounded-full top-1/2"></div>
                         </div>
-                        <div class="relative p-2 my-6 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto" ref={fourth}>
+                        <div class="relative p-2 my-2 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto" ref={fourth}>
                                     <div className="rounded-md flex items-center">
                                         <div className="flex flex-col flex-grow text-sm md:text-lg">
                                             <div className="font-knuckleslite text-black">Software Engineer 2</div>
