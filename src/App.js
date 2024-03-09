@@ -38,6 +38,7 @@ function App() {
   const [showParallax, setShowParallax] = useState(false);
   const [showCertification, setShowCertification] = useState(false);
   const [isReady, setIsReady] = useState(true);
+  const [error, setError] = useState(false);
   const [showContactLinks, setShowContactLinks] = useState(false);
   const [showProfession, setShowProfession] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -61,7 +62,7 @@ function App() {
     var isIOS = /iPad|iPhone|iPod/.test(navigator.platform);
 
     if (isIOS) {
-        setIsReady(false);
+        setError(true);
         return;
     }
 
@@ -73,7 +74,7 @@ function App() {
       initialOffset = 0.5;
     } else {
       setIsSmallScreen(true);
-      scrubValue=true;
+      scrubValue=0.5;
       initialOffset=0.3;
     }
 
@@ -262,7 +263,7 @@ function App() {
       },
       onComplete: function () {
         setShowContactLinks(true);
-        // setShowCertification(false);
+        setShowExperience(false)
       },
       onReverseComplete: function () {
         setShowExperience(true);
@@ -477,15 +478,15 @@ useEffect(() => {
       transform: `perspective(1000px) rotateY(${initialAngle}deg)`
   }));
 
+  if(error){
+     return <div className="justify-center flex items-center h-screen w-screen">
+        <h1 className="text-center font-knuckleslite">Sorry! this website is not supported on iOS <br/>
+        Please try on devices with Windows / Android</h1>
+      </div>
+  }
+
   return (
-    <>
-      {!isReady ? 
-        <div className="justify-center flex items-center h-screen w-screen">
-          <h1 className="text-center font-knuckleslite">Sorry! this website is not supported on iOS <br/>
-          Please try on devices with Windows / Android</h1>
-        </div>
-      :
-        
+    <> 
         <div id="container" className="h-screen w-screen flex flex-col justify-center items-center mt-5">
           <div ref={reference} width={svgMaskWidth} height={svgMaskHeight} className='z-0'></div>
           <div className="h-screen w-full flex flex-col items-center fixed">
@@ -556,9 +557,7 @@ useEffect(() => {
           </div>
 
         </div>
-      }
 
-    {isReady ? 
     <div className='mt-5'>
     <div className="absolute inset-0 overflow-auto">
               {<Skills show={displaySkills} />}
@@ -569,12 +568,12 @@ useEffect(() => {
 
       <div ref={conRef} className=" h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div ref={conRef1} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
-      <div ref={conRef2} className=" h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
+      <div ref={conRef2} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div ref={conRef3} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center-z-20"></div>
       <div ref={conRef4} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div ref={conRef5} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div ref={conRef6} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
-    </div> : '' }   
+    </div>
 
     </>
   );
