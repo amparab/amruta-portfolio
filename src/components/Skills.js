@@ -53,7 +53,7 @@ const Skills = ({show}) => {
                 <div className="fixed inset-0 overflow-auto p-5 flex flex-col justify-center items-center" ref={skillsRef}
                 >
                     {skills && <div id="skillsContainer" className=" text-white text-center" style={{ maxHeight: '200vh' }}>
-                         <div id="skills-title" className="text-4xl md:text-6xl font-knuckles my-4 md:my-8">
+                         <div id="skills-title" className="text-2xl md:text-6xl font-knuckles my-4 md:my-8">
                             <ReactTyped strings={["MY SKILLS"]} typeSpeed={50} />
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2  gap-x-44"> 
