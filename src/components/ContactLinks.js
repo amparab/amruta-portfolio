@@ -50,14 +50,6 @@ const ContactLinks = ({show, scrollToTop}) => {
                         Github
                     </a>
                 </div>
-                <div className="flex justify-center items-center">                   
-                    <div className="w-8 h-8">
-                        <img className="object-cover" src={Instagram} alt="Instagram" />
-                    </div>
-                    <a href="https://www.instagram.com/amruta_parab/?hl=en" target="_blank" rel="noopener noreferrer" className="text-white mr-2 ml-2 text-xl font-knuckleslite hover:underline">
-                        Instagram
-                    </a>
-                </div>
                 
             </div>
             <div className="flex justify-center items-center mt-8">          
