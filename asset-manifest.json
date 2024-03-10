@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/amruta-portfolio/static/css/main.084da76e.css",
-    "main.js": "/amruta-portfolio/static/js/main.cd6007d3.js",
+    "main.css": "/amruta-portfolio/static/css/main.bbdd2fb5.css",
+    "main.js": "/amruta-portfolio/static/js/main.93e2cf33.js",
     "static/js/453.07a2d4c0.chunk.js": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js",
     "static/media/pink.png": "/amruta-portfolio/static/media/pink.6de4eb1a2fcd424f01c6.png",
     "static/media/Certification-Bg.jpg": "/amruta-portfolio/static/media/Certification-Bg.67171a9b09637bc45bb2.jpg",
@@ -12,6 +12,7 @@
     "static/media/instagram.png": "/amruta-portfolio/static/media/instagram.8e408da00539cdef4629.png",
     "static/media/SQL-Logo.png": "/amruta-portfolio/static/media/SQL-Logo.d94e97f6d5cce1ed7b42.png",
     "static/media/Kubernetes-Logo.png": "/amruta-portfolio/static/media/Kubernetes-Logo.47d27cf2083b3b3b7ac0.png",
+    "static/media/down-arrow.gif": "/amruta-portfolio/static/media/down-arrow.1b3884ea3fcddaf039a3.gif",
     "static/media/Jira-Logo.png": "/amruta-portfolio/static/media/Jira-Logo.c7f301a49458f5216215.png",
     "static/media/Java-Logo.png": "/amruta-portfolio/static/media/Java-Logo.be925db19dbfa198beb5.png",
     "static/media/CKAD-Logo.png": "/amruta-portfolio/static/media/CKAD-Logo.15859c575e5c51e433e1.png",
@@ -19,7 +20,6 @@
     "static/media/skills_char-layer3.png": "/amruta-portfolio/static/media/skills_char-layer3.a8920d0689a9a4f0d5e1.png",
     "static/media/Kafka-Logo.png": "/amruta-portfolio/static/media/Kafka-Logo.dcc84afdcf3c9d78b614.png",
     "static/media/Vesit-Logo.png": "/amruta-portfolio/static/media/Vesit-Logo.6e46a85bb111ef618d77.png",
-    "static/media/contact.jpg": "/amruta-portfolio/static/media/contact.3845adadd85bcff99c92.jpg",
     "static/media/AznKnucklesTrialLight-jEyJl.woff": "/amruta-portfolio/static/media/AznKnucklesTrialLight-jEyJl.bec9628ef55084cee440.woff",
     "static/media/AznKnucklesTrial-z85pa.woff": "/amruta-portfolio/static/media/AznKnucklesTrial-z85pa.1371c40862e43f143d08.woff",
     "static/media/Git-Logo.png": "/amruta-portfolio/static/media/Git-Logo.fe86c28c14ca4a71d931.png",
@@ -28,12 +28,12 @@
     "static/media/linkedin.png": "/amruta-portfolio/static/media/linkedin.f249b38224ca41a0b909.png",
     "static/media/PixelEmulator-xq08.woff": "/amruta-portfolio/static/media/PixelEmulator-xq08.93c4c5e1f7f7fa1a7000.woff",
     "index.html": "/amruta-portfolio/index.html",
-    "main.084da76e.css.map": "/amruta-portfolio/static/css/main.084da76e.css.map",
-    "main.cd6007d3.js.map": "/amruta-portfolio/static/js/main.cd6007d3.js.map",
+    "main.bbdd2fb5.css.map": "/amruta-portfolio/static/css/main.bbdd2fb5.css.map",
+    "main.93e2cf33.js.map": "/amruta-portfolio/static/js/main.93e2cf33.js.map",
     "453.07a2d4c0.chunk.js.map": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.084da76e.css",
-    "static/js/main.cd6007d3.js"
+    "static/css/main.bbdd2fb5.css",
+    "static/js/main.93e2cf33.js"
   ]
 }
