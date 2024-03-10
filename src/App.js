@@ -65,9 +65,10 @@ function App() {
         setError(true);
         setErrorMsg("Sorry! this website is not supported on iOS. Please try on devices with Windows / Android");
         return;
-    } else if ((window.innerHeight < 570 && window.innerWidth < 340) 
-              || (window.innerHeight < 590 && window.innerWidth > 770)
-              || (window.innerWidth < 315)){
+    } 
+    else if ((window.innerWidth > 768 && window.innerHeight < 500) 
+              || (window.innerHeight < 530 && window.innerWidth < 310))
+              {
         setError(true);
         setErrorMsg("Your browser resolution is currently not supported. Try resizing the window to experience this site.");
         return;
@@ -467,7 +468,8 @@ useEffect(() => {
           <div ref={reference} width={svgMaskWidth} height={svgMaskHeight} className='z-0'></div>
           <div className="h-screen w-full flex flex-col items-center fixed">
             {showIntro && (
-              <div className="text-2xl md:text-4xl mt-20 font-knuckles bg-gradient-to-r from-slate-800 via-blue-950 to-pink-700 text-transparent bg-clip-text">
+              <div className="text-2xl md:text-4xl font-knuckles bg-gradient-to-r from-slate-800 
+              via-blue-950 to-pink-700 text-transparent bg-clip-text" style={{marginTop: (window.innerHeight - svgMaskHeight) / 4}}>
                 <ReactTyped strings={["Hi! I am Amruta Parab"]} typeSpeed={25} onComplete={() => setShowProfession(true)} />
               </div>
             )}
@@ -526,7 +528,8 @@ useEffect(() => {
               </svg>
             </div>
             {showIntro && showProfession && (
-              <h1 className="text-2xl md:text-4xl font-knuckles mb-20 bg-gradient-to-r from-pink-700 via-blue-950 to-slate-800 text-transparent bg-clip-text">
+              <h1 className="text-2xl md:text-4xl font-knuckles bg-gradient-to-r from-pink-700 via-blue-950 
+              to-slate-800 text-transparent bg-clip-text" style={{marginBottom: (window.innerHeight - svgMaskHeight) / 4}}>
                 <ReactTyped strings={["I'm a Software Developer"]} typeSpeed={25} />
               </h1>
             )}
