@@ -62,7 +62,7 @@ function App() {
     var isIOS = /iPad|iPhone|iPod/.test(navigator.platform);
 
     if (isIOS) {
-        setError(true);
+        // setError(true);
         setErrorMsg("Sorry! this website is not supported on iOS. Please try on devices with Windows / Android");
         return;
     } 
@@ -83,7 +83,7 @@ function App() {
     } else {
       setIsSmallScreen(true);
       scrubValue=0.5;
-      initialOffset=0.3;
+      initialOffset=0.5;
     }
 
 
@@ -474,7 +474,7 @@ useEffect(() => {
               </div>
             )}
             <div id="imageContainer" className="h-full w-full">
-              <svg className="w-full h-full">
+            <svg className="left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full fixed">
                 <mask id="myMask" className="myMask">
                   <animated.rect
                     x={(window.innerWidth - svgMaskWidth) / 2}
@@ -488,9 +488,7 @@ useEffect(() => {
                     }}
                   />
                 </mask>
-              </svg>
-              <svg className="absolute inset-0 w-full h-full z-10" mask="url(#myMask)" ref={maskRef}>
-                <g>
+                <g mask="url(#myMask)" ref={maskRef} className="absolute inset-0 w-full h-full z-10">
                   {showExpBg && (
                     <image
                       href={spaceBg}
