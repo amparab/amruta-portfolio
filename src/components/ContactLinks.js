@@ -7,10 +7,11 @@ import { useEffect, useState, useRef } from 'react';
 import '../input.css';
 import { gsap } from 'gsap';
 
-const ContactLinks = ({show}) => {
+const ContactLinks = ({show, scrollToTop}) => {
 
     const contact = useRef(null);
     const [showContact, setShowContact] = useState(false);
+
 
     useEffect(() => {
         if(show){
@@ -57,7 +58,11 @@ const ContactLinks = ({show}) => {
                         Instagram
                     </a>
                 </div>
+                
             </div>
+            <div className="flex justify-center items-center mt-8">          
+                <button type="reset" onClick={scrollToTop} className="py-2 px-4 bg-white text-black border border-black rounded-md mr-4 font-knuckleslite">Scroll To Top</button>
+                </div>
         </div>
     </div>}
 </div>
