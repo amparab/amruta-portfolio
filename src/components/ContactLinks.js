@@ -24,6 +24,7 @@ const ContactLinks = ({show, scrollToTop}) => {
             } });
         }  
       }, [show]);
+    
 
     return (
 

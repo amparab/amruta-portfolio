@@ -15,16 +15,7 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
     const [showExp, setShowExp] = useState(false);
 
     useEffect(() => {
-        console.log('show',show);
-        if(show){
-            setShowExp(true);
-            // gsap.fromTo(expRef.current, { opacity: 0 }, { opacity: 1 });
-        } else {
-            setShowExp(false);
-            // gsap.fromTo(expRef.current, { opacity: 1 }, { opacity: 0, onComplete: () => {
-            //     setShowExp(false);
-            // } });
-        }  
+        setShowExp(show);
     }, [show]);
 
     useEffect(() => {
@@ -98,10 +89,10 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
             </div>
 
 
-                <div class="flex flex-col grid-cols-9 p-2 mx-auto md:grid">
-                    <div class="flex md:contents flex-row-reverse">
+                <div className="flex flex-col grid-cols-9 p-2 mx-auto md:grid">
+                    <div className="flex md:contents flex-row-reverse">
                     <div
-                                    class="relative my-2 text-gray-800 bg-white rounded-xl col-start-1 col-end-5 mr-auto md:mr-0 md:ml-auto">
+                                    className="relative my-2 text-gray-800 bg-white rounded-xl col-start-1 col-end-5 mr-auto md:mr-0 md:ml-auto">
                                     <div className="p-2 rounded-md flex items-center bg-cyan-600" ref={first}>
                                         <div className="w-8 h-8 md:w-16 md:h-16 mr-4 rounded-full overflow-hidden flex-shrink-0">
                                             <img className="w-full h-full object-cover rounded-full" src={VesitLogo} alt="Vesit Logo" />
@@ -113,23 +104,23 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="relative col-start-5 col-end-6 mr-7 md:mx-auto">
-                                    <div class="flex items-center justify-center w-6 h-full">
-                                        <div class="w-1 h-full bg-gray-400 rounded-t-full bg-gradient-to-b">
+                                <div className="relative col-start-5 col-end-6 mr-7 md:mx-auto">
+                                    <div className="flex items-center justify-center w-6 h-full">
+                                        <div className="w-1 h-full bg-gray-400 rounded-t-full bg-gradient-to-b">
                                         </div>
                                     </div>
-                                    <div class="absolute w-6 h-6 -mt-3 bg-white border-4 border-gray-600 rounded-full top-1/2"></div>
+                                    <div className="absolute w-6 h-6 -mt-3 bg-white border-4 border-gray-600 rounded-full top-1/2"></div>
                                 </div>
                     </div>
 
-                    <div class="flex md:contents">
-                        <div class="relative col-start-5 col-end-6 mr-7 md:mx-auto">
-                            <div class="flex items-center justify-center w-6 h-full">
-                                <div class="w-1 h-full bg-gray-400"></div>
+                    <div className="flex md:contents">
+                        <div className="relative col-start-5 col-end-6 mr-7 md:mx-auto">
+                            <div className="flex items-center justify-center w-6 h-full">
+                                <div className="w-1 h-full bg-gray-400"></div>
                             </div>
-                            <div class="absolute w-6 h-6 -mt-3 bg-white border-4 border-gray-600 rounded-full top-1/2"></div>
+                            <div className="absolute w-6 h-6 -mt-3 bg-white border-4 border-gray-600 rounded-full top-1/2"></div>
                         </div>
-                        <div class="relative my-2 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto">
+                        <div className="relative my-2 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto">
                                     <div className="p-2 rounded-md flex items-center bg-cyan-600" ref={second}>
                                         <div className="w-8 h-8 md:w-16 md:h-16 mr-4 rounded-full overflow-hidden flex-shrink-0">
                                             <img className="w-full h-full object-cover rounded-full" src={JPLogo} alt="Vesit Logo" />
@@ -142,14 +133,14 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
                                 </div>
                     </div>
 
-                    <div class="flex md:contents">
-                        <div class="relative col-start-5 col-end-6 mr-7 md:mx-auto">
-                            <div class="flex items-center justify-center w-6 h-full">
-                                <div class="w-1 h-full bg-gray-400"></div>
+                    <div className="flex md:contents">
+                        <div className="relative col-start-5 col-end-6 mr-7 md:mx-auto">
+                            <div className="flex items-center justify-center w-6 h-full">
+                                <div className="w-1 h-full bg-gray-400"></div>
                             </div>
-                            <div class="absolute w-6 h-6 -mt-3 bg-white border-4 border-gray-600 rounded-full top-1/2"></div>
+                            <div className="absolute w-6 h-6 -mt-3 bg-white border-4 border-gray-600 rounded-full top-1/2"></div>
                         </div>
-                        <div class="relative p-2 my-2 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto" ref={third}>
+                        <div className="relative p-2 my-2 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto" ref={third}>
                                     <div className="rounded-md flex items-center">
                                         <div className="flex flex-col flex-grow text-sm md:text-lg">
                                             <div className="font-knuckleslite text-black">Software Engineer 1</div>
@@ -159,14 +150,14 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
                                 </div>
                     </div>
 
-                    <div class="flex md:contents">
-                        <div class="relative col-start-5 col-end-6 mr-7 md:mx-auto">
-                            <div class="flex items-center justify-center w-6 h-full">
-                                <div class="w-1 h-full bg-gray-400"></div>
+                    <div className="flex md:contents">
+                        <div className="relative col-start-5 col-end-6 mr-7 md:mx-auto">
+                            <div className="flex items-center justify-center w-6 h-full">
+                                <div className="w-1 h-full bg-gray-400"></div>
                             </div>
-                            <div class="absolute w-6 h-6 -mt-3 bg-white border-4 border-gray-600 rounded-full top-1/2"></div>
+                            <div className="absolute w-6 h-6 -mt-3 bg-white border-4 border-gray-600 rounded-full top-1/2"></div>
                         </div>
-                        <div class="relative p-2 my-2 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto" ref={fourth}>
+                        <div className="relative p-2 my-2 text-gray-800 bg-white rounded-xl col-start-6 col-end-10 mr-auto" ref={fourth}>
                                     <div className="rounded-md flex items-center">
                                         <div className="flex flex-col flex-grow text-sm md:text-lg">
                                             <div className="font-knuckleslite text-black">Software Engineer 2</div>

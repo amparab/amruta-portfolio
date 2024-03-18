@@ -101,6 +101,7 @@ function Portfolio() {
           setShowParallax(false);
         }
         setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)`});
+        
       },
       onReverseComplete: function() {
         setShowIntro(true);
@@ -306,6 +307,10 @@ function Portfolio() {
 
 
   useEffect(() => {
+    if (!conRef1.current || !skylineRef.current) {
+        return;
+    }
+
     const parallaxSkyLine = gsap.timeline({
       scrollTrigger: {
         trigger: conRef1.current,
@@ -322,9 +327,13 @@ function Portfolio() {
       parallaxSkyLine.kill();
     };
 
-  });
+  }, [conRef1, skylineRef]);
 
   useEffect(() => {
+    if (!conRef1.current || !girlRef.current) {
+        return;
+    }
+
     const parallaxGirl = gsap.timeline({
       scrollTrigger: {
         trigger: conRef1.current,
@@ -340,7 +349,9 @@ function Portfolio() {
     return () => {
       parallaxGirl.kill();
     };
-  });
+
+}, [conRef1, girlRef]);
+
 
 useEffect(() => {
   const mask = maskRef.current;
@@ -419,22 +430,29 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  const parallaxExp = gsap.timeline({
-      scrollTrigger: {
-        trigger: conRef3.current,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: scrubValue,
-        ease: "slow",
-        toggleActions: "play reverse play reverse",
-      }
-    });
+  if (!conRef3.current || !spaceRef.current) {
+      return;
+  }
 
-    parallaxExp.fromTo(spaceRef.current, {scale: 1}, {scale: 1.5});
-      return () => {
-        parallaxExp.kill();
-      };
-    });
+  const parallaxExp = gsap.timeline({
+    scrollTrigger: {
+      trigger: conRef3.current,
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: scrubValue,
+      ease: "slow",
+      toggleActions: "play reverse play reverse",
+    }
+  });
+
+  parallaxExp.fromTo(spaceRef.current, {scale: 1}, {scale: 1.5});
+
+  return () => {
+    parallaxExp.kill();
+  };
+
+}, [conRef3, spaceRef]);
+
 
     const [springProps, setSpringProps] = useSpring(() => ({
       rotateY: 0,
