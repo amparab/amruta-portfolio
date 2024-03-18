@@ -20,14 +20,10 @@ import ContactLinks from './components/ContactLinks';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function App() {
+function Portfolio() {
 
-  const svgMaskWidth = 350;
-  const svgMaskHeight = 350;
-
-  const initialAngle = 0;
+  
   let initialOffset = 0.5;
-
   let scrubValue = 0.5;
 
   const [imageSource, setImageSource] = useState(image);
@@ -116,7 +112,7 @@ function App() {
       },
       onReverseComplete: function() {
         setShowIntro(true);
-        setSpringProps({ immediate: true,  transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${initialAngle}deg)` });
+        setSpringProps({ immediate: true,  transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${Constants.initialAngle}deg)` });
       }
      });
 
@@ -274,7 +270,7 @@ function App() {
       },
      });
   
-    rotationAnimation1.fromTo(reference.current,{rotate: initialAngle}, {
+    rotationAnimation1.fromTo(reference.current,{rotate: Constants.initialAngle}, {
       transformOrigin: '100% 100%',
       rotate: 180
     })
@@ -369,7 +365,7 @@ useEffect(() => {
   });
 
   trans_intro_skills.to(mask,
-    {scale: () => Math.max(window.innerWidth / svgMaskWidth, window.innerHeight / svgMaskHeight)});
+    {scale: () => Math.max(window.innerWidth / Constants.svgMaskWidth, window.innerHeight / Constants.svgMaskHeight)});
 
   const trans_skills_exp = gsap.timeline({
     scrollTrigger: {
@@ -451,7 +447,7 @@ useEffect(() => {
     const [springProps, setSpringProps] = useSpring(() => ({
       rotateY: 0,
       transformOrigin: '50% 50%', 
-      transform: `perspective(1000px) rotateY(${initialAngle}deg)`
+      transform: `perspective(1000px) rotateY(${Constants.initialAngle}deg)`
   }));
 
   const scrollToTop = () => {
@@ -480,11 +476,11 @@ useEffect(() => {
             <div className="text-[0.6rem] md:text-xs font-knuckleslite">Scroll</div>
           </div>
         </div>}
-          <div ref={reference} width={svgMaskWidth} height={svgMaskHeight} className='z-0'></div>
+          <div ref={reference} width={Constants.svgMaskWidth} height={Constants.svgMaskHeight} className='z-0'></div>
           <div className="h-screen w-full flex flex-col items-center fixed">
             {showIntro && (
               <div className="text-2xl md:text-4xl font-knuckles bg-gradient-to-r from-slate-800 
-              via-blue-950 to-pink-700 text-transparent bg-clip-text" style={{marginTop: (window.innerHeight - svgMaskHeight) / 4}}>
+              via-blue-950 to-pink-700 text-transparent bg-clip-text" style={{marginTop: (window.innerHeight - Constants.svgMaskHeight) / 4}}>
                 <ReactTyped strings={["Hi! I am Amruta Parab"]} typeSpeed={25} onComplete={() => setShowProfession(true)} />
               </div>
             )}
@@ -492,11 +488,11 @@ useEffect(() => {
             <svg className="left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full fixed" >
                 <mask id="myMask" className="myMask">
                   <animated.rect
-                    x={(window.innerWidth - svgMaskWidth) / 2}
-                    y={(window.innerHeight - svgMaskHeight) / 2}
+                    x={(window.innerWidth - Constants.svgMaskWidth) / 2}
+                    y={(window.innerHeight - Constants.svgMaskHeight) / 2}
                     className="rect"
-                    width={svgMaskWidth}
-                    height={svgMaskHeight}
+                    width={Constants.svgMaskWidth}
+                    height={Constants.svgMaskHeight}
                     fill="white"
                     style={{
                       ...springProps
@@ -542,7 +538,7 @@ useEffect(() => {
             </div>
             {showIntro && showProfession && (
               <h1 className="text-2xl md:text-4xl font-knuckles bg-gradient-to-r from-pink-700 via-blue-950 
-              to-slate-800 text-transparent bg-clip-text" style={{marginBottom: (window.innerHeight - svgMaskHeight) / 4}}>
+              to-slate-800 text-transparent bg-clip-text" style={{marginBottom: (window.innerHeight - Constants.svgMaskHeight) / 4}}>
                 <ReactTyped strings={["I'm a Software Developer"]} typeSpeed={25} />
               </h1>
             )}
@@ -572,4 +568,4 @@ useEffect(() => {
   
 }
 
-export default App;
+export default Portfolio;

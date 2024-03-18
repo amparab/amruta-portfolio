@@ -7,12 +7,10 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading time
     const timeout = setTimeout(() => {
       setLoading(false);
-    }, 3000); // Adjust the timeout as needed
+    }, 3000); 
 
-    // Cleanup the timeout to avoid memory leaks
     return () => clearTimeout(timeout);
   }, []);
 
