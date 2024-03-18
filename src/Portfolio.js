@@ -1,13 +1,13 @@
 import './input.css';
 import { useSpring, animated, config  } from '@react-spring/web';
 import React, { useEffect, useState, useRef } from 'react';
-import image from './images/pink.png'
+import image from './images/webp/pink.webp'
 import skillsBg from './images/sky.jpg'
 import skyline from './images/skyline-layer2.png'
 import girl from './images/skills_char-layer3.png'
 import expImg from './images/Girl_Computer.png'
 import spaceBg from './images/space-bg-layer.jpg'
-import certBg from './images/Certification-Bg.jpg'
+import certBg from './images/webp/contact-bg.webp'
 import scrollGif from './images/down-arrow.gif'
 import Skills from './components/Skills';
 import { ReactTyped } from 'react-typed';
@@ -55,36 +55,28 @@ function Portfolio() {
   const girlRef = useRef(null);
 
   useEffect(() => {
-
     window.scrollTo(0, 0);
-
-    if ((window.innerWidth > 768 && window.innerHeight < 500) 
-              || (window.innerHeight < 530 && window.innerWidth < 310))
-              {
+  
+    const handleUnsupportedResolution = () => {
+      const isUnsupportedResolution = 
+        (window.innerWidth > 768 && window.innerHeight < 500) ||
+        (window.innerHeight < 530 && window.innerWidth < 310);
+        
+      if (isUnsupportedResolution) {
         setError(true);
         setErrorMsg("Your browser resolution is currently not supported. Try resizing the window to experience this site.");
-        return;
-    }
-
-    if(window.innerWidth >= 768){
-      setIsSmallScreen(false);
-      scrubValue=0.5;
+      }
+    };
+  
+    const handleScreenSize = () => {
+      const isSmallScreen = window.innerWidth < 768;
+      setIsSmallScreen(isSmallScreen);
+      scrubValue = 0.5;
       initialOffset = 0.5;
-    } else {
-      setIsSmallScreen(true);
-      scrubValue=0.5;
-      initialOffset=0.5;
-    }
-
-
-    // gsap.fromTo(maskRef.current, {
-    //   opacity: 0,
-    // }, {
-    //   duration: 2,
-    //   opacity: 1,
-    // });
-
-
+    };
+  
+    handleUnsupportedResolution();
+    handleScreenSize();
   }, []);
 
   useEffect(() => {
