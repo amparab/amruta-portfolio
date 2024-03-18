@@ -91,17 +91,23 @@ function Portfolio() {
         toggleActions: "play reverse play reverse",
       },
       onUpdate: function () {
-        let currentRotation = gsap.getProperty(reference.current, "rotation");
         let progress = ScrollTrigger.getById("intro-photo").progress;
-        if(progress >= initialOffset){
+        let currentRotation = gsap.getProperty(reference.current, "rotation");
+      
+        if (progress >= initialOffset) {
           setImageSource(skillsBg);
           setShowParallax(true);
-        } else{
+        } else {
           setImageSource(image);
           setShowParallax(false);
         }
-        setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)`});
-        
+      
+        // Batch state updates
+        setSpringProps((prevProps) => ({
+          ...prevProps,
+          transformOrigin: '50% 50%',
+          transform: `perspective(1000px) rotateY(${currentRotation}deg)`
+        }));
       },
       onReverseComplete: function() {
         setShowIntro(true);
