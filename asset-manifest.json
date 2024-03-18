@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/amruta-portfolio/static/css/main.bbdd2fb5.css",
-    "main.js": "/amruta-portfolio/static/js/main.a773682c.js",
+    "main.js": "/amruta-portfolio/static/js/main.69f326d6.js",
     "static/js/453.07a2d4c0.chunk.js": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js",
     "static/media/Girl_Computer.png": "/amruta-portfolio/static/media/Girl_Computer.42fa280152d31b3ff989.png",
     "static/media/contact-bg.webp": "/amruta-portfolio/static/media/contact-bg.e29220d607f97119d42e.webp",
@@ -29,11 +29,11 @@
     "static/media/PixelEmulator-xq08.woff": "/amruta-portfolio/static/media/PixelEmulator-xq08.93c4c5e1f7f7fa1a7000.woff",
     "index.html": "/amruta-portfolio/index.html",
     "main.bbdd2fb5.css.map": "/amruta-portfolio/static/css/main.bbdd2fb5.css.map",
-    "main.a773682c.js.map": "/amruta-portfolio/static/js/main.a773682c.js.map",
+    "main.69f326d6.js.map": "/amruta-portfolio/static/js/main.69f326d6.js.map",
     "453.07a2d4c0.chunk.js.map": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bbdd2fb5.css",
-    "static/js/main.a773682c.js"
+    "static/js/main.69f326d6.js"
   ]
 }
