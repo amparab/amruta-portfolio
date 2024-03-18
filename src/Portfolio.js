@@ -306,6 +306,8 @@ function Portfolio() {
 
 
   useEffect(() => {
+
+    if(skylineRef.current == null) return;
     const parallaxSkyLine = gsap.timeline({
       scrollTrigger: {
         trigger: conRef1.current,
@@ -316,6 +318,7 @@ function Portfolio() {
         toggleActions: "play reverse play reverse"
       }
     });
+
     parallaxSkyLine.fromTo(skylineRef.current,{y: 100}, {y: 0});
 
     return () => {
@@ -325,6 +328,7 @@ function Portfolio() {
   });
 
   useEffect(() => {
+    if(girlRef.current == null) return;
     const parallaxGirl = gsap.timeline({
       scrollTrigger: {
         trigger: conRef1.current,
@@ -419,6 +423,7 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
+  if(spaceRef.current == null) return;
   const parallaxExp = gsap.timeline({
       scrollTrigger: {
         trigger: conRef3.current,
