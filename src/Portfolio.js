@@ -91,23 +91,16 @@ function Portfolio() {
         toggleActions: "play reverse play reverse",
       },
       onUpdate: function () {
-        let progress = ScrollTrigger.getById("intro-photo").progress;
         let currentRotation = gsap.getProperty(reference.current, "rotation");
-      
-        if (progress >= initialOffset) {
+        let progress = ScrollTrigger.getById("intro-photo").progress;
+        if(progress >= initialOffset){
           setImageSource(skillsBg);
           setShowParallax(true);
-        } else {
+        } else{
           setImageSource(image);
           setShowParallax(false);
         }
-      
-        // Batch state updates
-        setSpringProps((prevProps) => ({
-          ...prevProps,
-          transformOrigin: '50% 50%',
-          transform: `perspective(1000px) rotateY(${currentRotation}deg)`
-        }));
+        setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)`});
       },
       onReverseComplete: function() {
         setShowIntro(true);
@@ -356,22 +349,21 @@ function Portfolio() {
       parallaxGirl.kill();
     };
 
-}, [conRef1, girlRef]);
+  }, [conRef1, girlRef]);
 
-
-useEffect(() => {
-  const mask = maskRef.current;
-  gsap.set(mask, { transformOrigin: "50% 50%" });
-  const trans_intro_skills = gsap.timeline({
-    scrollTrigger: {
-      trigger: conRef.current,
-      start: 'top bottom',
-      end: 'bottom bottom',
-      scrub: scrubValue,
-      ease: "slow",
-      toggleActions: "play reverse play reverse"
-    }
-  });
+  useEffect(() => {
+    const mask = maskRef.current;
+    gsap.set(mask, { transformOrigin: "50% 50%" });
+    const trans_intro_skills = gsap.timeline({
+      scrollTrigger: {
+        trigger: conRef.current,
+        start: 'top bottom',
+        end: 'bottom bottom',
+        scrub: scrubValue,
+        ease: "slow",
+        toggleActions: "play reverse play reverse"
+      }
+    });
 
   trans_intro_skills.to(mask,
     {scale: () => Math.max(window.innerWidth / Constants.svgMaskWidth, window.innerHeight / Constants.svgMaskHeight)});
@@ -458,7 +450,6 @@ useEffect(() => {
   };
 
 }, [conRef3, spaceRef]);
-
 
     const [springProps, setSpringProps] = useSpring(() => ({
       rotateY: 0,

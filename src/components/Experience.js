@@ -85,7 +85,8 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
        <div className="fixed inset-0 overflow-auto p-5 flex flex-col justify-center items-center" ref={expRef}>
             {<div style={{display: showExp ? 'block' : 'none'}}>
                 <div id="skills-title" className="text-xl md:text-4xl font-knuckles text-center my-1 md:my-8">
-                <ReactTyped strings={["My Education and Experience"]} typeSpeed={50} />
+                {/* <ReactTyped strings={["My Education and Experience"]} typeSpeed={50} /> */}
+                    My Education and Experience
             </div>
 
 
