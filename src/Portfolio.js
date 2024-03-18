@@ -306,10 +306,6 @@ function Portfolio() {
 
 
   useEffect(() => {
-    if (!conRef1.current || !skylineRef.current) {
-        return;
-    }
-
     const parallaxSkyLine = gsap.timeline({
       scrollTrigger: {
         trigger: conRef1.current,
@@ -326,13 +322,9 @@ function Portfolio() {
       parallaxSkyLine.kill();
     };
 
-  }, [conRef1, skylineRef]);
+  });
 
   useEffect(() => {
-    if (!conRef1.current || !girlRef.current) {
-        return;
-    }
-
     const parallaxGirl = gsap.timeline({
       scrollTrigger: {
         trigger: conRef1.current,
@@ -348,22 +340,21 @@ function Portfolio() {
     return () => {
       parallaxGirl.kill();
     };
+  });
 
-  }, [conRef1, girlRef]);
-
-  useEffect(() => {
-    const mask = maskRef.current;
-    gsap.set(mask, { transformOrigin: "50% 50%" });
-    const trans_intro_skills = gsap.timeline({
-      scrollTrigger: {
-        trigger: conRef.current,
-        start: 'top bottom',
-        end: 'bottom bottom',
-        scrub: scrubValue,
-        ease: "slow",
-        toggleActions: "play reverse play reverse"
-      }
-    });
+useEffect(() => {
+  const mask = maskRef.current;
+  gsap.set(mask, { transformOrigin: "50% 50%" });
+  const trans_intro_skills = gsap.timeline({
+    scrollTrigger: {
+      trigger: conRef.current,
+      start: 'top bottom',
+      end: 'bottom bottom',
+      scrub: scrubValue,
+      ease: "slow",
+      toggleActions: "play reverse play reverse"
+    }
+  });
 
   trans_intro_skills.to(mask,
     {scale: () => Math.max(window.innerWidth / Constants.svgMaskWidth, window.innerHeight / Constants.svgMaskHeight)});
@@ -428,28 +419,22 @@ function Portfolio() {
 }, []);
 
 useEffect(() => {
-  if (!conRef3.current || !spaceRef.current) {
-      return;
-  }
-
   const parallaxExp = gsap.timeline({
-    scrollTrigger: {
-      trigger: conRef3.current,
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: scrubValue,
-      ease: "slow",
-      toggleActions: "play reverse play reverse",
-    }
-  });
+      scrollTrigger: {
+        trigger: conRef3.current,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: scrubValue,
+        ease: "slow",
+        toggleActions: "play reverse play reverse",
+      }
+    });
 
-  parallaxExp.fromTo(spaceRef.current, {scale: 1}, {scale: 1.5});
-
-  return () => {
-    parallaxExp.kill();
-  };
-
-}, [conRef3, spaceRef]);
+    parallaxExp.fromTo(spaceRef.current, {scale: 1}, {scale: 1.5});
+      return () => {
+        parallaxExp.kill();
+      };
+    });
 
     const [springProps, setSpringProps] = useSpring(() => ({
       rotateY: 0,
