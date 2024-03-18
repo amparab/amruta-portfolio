@@ -10,8 +10,8 @@ export default function ProgressBar ({progress}) {
 
     return(
         <>
-            <div class="w-48 h-1 border border-solid border-white">
-                <animated.div class="h-1 bg-white" style={{...progressAnimation}}  />
+            <div className="w-48 h-1 border border-solid border-white">
+                <animated.div className="h-1 bg-white" style={{...progressAnimation}}  />
             </div>
         </>
     );
