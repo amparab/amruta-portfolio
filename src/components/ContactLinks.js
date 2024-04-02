@@ -25,6 +25,7 @@ const ContactLinks = ({show, scrollToTop}) => {
         }  
       }, [show]);
     
+    
 
     return (
 
@@ -56,6 +57,7 @@ const ContactLinks = ({show, scrollToTop}) => {
             </div>
             <div className="flex justify-center items-center mt-8">          
                 <button type="reset" onClick={scrollToTop} className="py-2 px-4 bg-white text-black border border-black rounded-md mr-4 font-knuckleslite">Scroll To Top</button>
+            
                 </div>
         </div>
     </div>}

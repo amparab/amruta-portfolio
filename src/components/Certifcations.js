@@ -34,7 +34,10 @@ export default function Certifications ({show}) {
                             I am a <br/>
                             Certified Kubernetes <br/> Application Developer</div>
                         </div>
-                </div>}
+                </div>
+                
+                }
+            
          </div>
     );
 

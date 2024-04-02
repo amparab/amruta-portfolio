@@ -464,9 +464,11 @@ useEffect(() => {
       </div>
   }
 
+  
   return (
     <> 
         <div id="container" className="h-screen w-screen flex flex-col justify-center items-center">
+      
         {scrollIconVisibile && <div className="fixed bottom-3 md:bottom-6 right-3 md:right-6 z-50 flex justify-center items-center rounded-lg bg-white p-1 md:p-2">
           <div className="text-center justify-center items-center">
             <img src={scrollGif} className="h-7 w-7 md:h-14 md:w-14" alt="Your GIF" />
@@ -544,12 +546,14 @@ useEffect(() => {
         </div>
 
     <div className='mt-5'>
+      
     <div className="absolute inset-0 overflow-auto">
-              {<Skills show={displaySkills} />}
-              {<Experience show={showExperience} scrollTriggerRef={conRef5} />}
-              {<Certifications show={showCertification} />}
-              {<ContactLinks show={showContactLinks} scrollToTop={scrollToTop} />}
-      </div>
+      {showContactLinks && <ContactLinks show={showContactLinks} scrollToTop={scrollToTop} />}
+      {showExperience && <Experience show={showExperience} scrollTriggerRef={conRef5} />}
+      {displaySkills && <Skills show={displaySkills} />}
+      {showCertification && <Certifications show={showCertification} />}
+    </div>
+
 
       <div ref={conRef} className=" h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div ref={conRef1} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
@@ -557,7 +561,9 @@ useEffect(() => {
       <div ref={conRef3} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center-z-20"></div>
       <div ref={conRef4} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div ref={conRef5} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
-      <div ref={conRef6} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
+      <div ref={conRef6} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center">
+    
+      </div>
     </div>
 
     </>

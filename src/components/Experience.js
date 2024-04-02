@@ -76,19 +76,16 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
         })
     }, []);
     
-    
-
-    
 
     return (
 
        <div className="fixed inset-0 overflow-auto p-5 flex flex-col justify-center items-center" ref={expRef}>
+        
             {<div style={{display: showExp ? 'block' : 'none'}}>
                 <div id="skills-title" className="text-xl md:text-4xl font-knuckles text-center my-1 md:my-8">
                 {/* <ReactTyped strings={["My Education and Experience"]} typeSpeed={50} /> */}
-                    My Education and Experience
+                    My Education and Experience 
             </div>
-
 
                 <div className="flex flex-col grid-cols-9 p-2 mx-auto md:grid">
                     <div className="flex md:contents flex-row-reverse">
@@ -102,6 +99,12 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
                                             <div className="font-knuckleslite text-white">VESIT</div>
                                             <p className="font-knuckleslite text-white">Bachelor's Degree <br/> in Computer Science</p>
                                             <p className="font-knuckleslite text-white">(2016 - 2020)</p>
+                                            <button
+                    onClick={() => console.log('Button hovered!')}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                    Click me
+                    </button>
                                         </div>
                                     </div>
                                 </div>
@@ -167,8 +170,9 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
                                     </div>
                                 </div>
                     </div>
-
+                    
             </div></div>}
+        
         </div>
 
 

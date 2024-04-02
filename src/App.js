@@ -6,25 +6,26 @@ import Portfolio from './Portfolio';
 const App = () => {
   const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     setLoading(false);
-  //   }, 3000); 
-
-  //   return () => clearTimeout(timeout);
-  // }, []);
-
   const stopLoading = () => {
     console.log('stopped');
     setLoading(false);
   };
+
+  const handleClick = () => {
+    console.log('Button clicked!');
+    // You can add your logic here
+  };
+
 
   return (
     <>
       {loading ? (
             <Loading stopLoading={stopLoading} />    
       ) : (
-        <Portfolio />
+        <div>
+          <Portfolio />
+        </div>
+        
       )}
     </>
   );
