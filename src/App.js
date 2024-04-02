@@ -11,12 +11,6 @@ const App = () => {
     setLoading(false);
   };
 
-  const handleClick = () => {
-    console.log('Button clicked!');
-    // You can add your logic here
-  };
-
-
   return (
     <>
       {loading ? (
