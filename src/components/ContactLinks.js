@@ -4,6 +4,8 @@ import Github from '../images/icons/github.png';
 import { useEffect, useState, useRef } from 'react';
 import '../input.css';
 import { gsap } from 'gsap';
+import { UilDownloadAlt } from '@iconscout/react-unicons'
+import * as Utils from '../utils/Utils';
 
 const ContactLinks = ({show, scrollToTop}) => {
 
@@ -49,6 +51,12 @@ const ContactLinks = ({show, scrollToTop}) => {
                     </div>
                     <a href="https://github.com/amparab" target="_blank" rel="noopener noreferrer" className="text-white mr-2 ml-2 text-xl font-knuckleslite hover:underline">
                         Github
+                    </a>
+                </div>
+                <div className="flex justify-center items-center">                   
+                    <UilDownloadAlt size="28" className="inline text-white" />
+                    <a onClick={Utils.handleDownload} className="text-white mr-2 ml-2 text-xl font-knuckleslite hover:underline">
+                        Download Resume
                     </a>
                 </div>
                 

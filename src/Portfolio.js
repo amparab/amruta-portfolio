@@ -11,7 +11,8 @@ import certBg from './images/webp/contact-bg.webp'
 import scrollGif from './images/down-arrow.gif'
 import Skills from './components/Skills';
 import { ReactTyped } from 'react-typed';
-import * as Constants from './constants/Constants';
+import * as Constants from './utils/Constants';
+import * as Utils from './utils/Utils';
 import Experience from './components/Experience';
 import Certifications from './components/Certifcations';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -19,7 +20,7 @@ import { gsap } from 'gsap';
 import ContactLinks from './components/ContactLinks';
 import { UilExternalLinkAlt } from '@iconscout/react-unicons'
 import { UilDownloadAlt } from '@iconscout/react-unicons'
-import pdf from './Amruta-Resume-v3.pdf'
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -478,12 +479,7 @@ useEffect(() => {
       behavior: 'smooth'
     });
   };
-
-  const handleDownload = () => {
-    const link = "https://raw.githubusercontent.com/amparab/amruta-portfolio/feature/experience/src/Amruta-Resume-v3.pdf";
-    window.open(link, '_blank');
-  };
-
+  
   const openLinkedIn = () => {
     const url = 'https://www.linkedin.com/in/amruta-parab-9124b9180';
     window.open(url, '_blank');
@@ -524,7 +520,7 @@ useEffect(() => {
             <div className='px-2'>
                 <button
                     type="button"
-                    onClick={handleDownload}
+                    onClick={Utils.handleDownload}
                     className="py-2 px-2 bg-pink-900 text-sm md:text-lg text-white hover:bg-white hover:text-black border  hover:border-black rounded-md font-knuckleslite"
                 >
                     Download Resume <UilDownloadAlt size="21" className="inline" />
