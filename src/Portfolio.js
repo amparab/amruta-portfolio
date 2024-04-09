@@ -5,8 +5,9 @@ import image from './images/webp/pink.webp'
 import skillsBg from './images/sky.jpg'
 import skyline from './images/skyline-layer2.png'
 import girl from './images/skills_char-layer3.png'
-import expImg from './images/Girl_Computer.png'
-import spaceBg from './images/space-bg-layer.jpg'
+// import expImg from './images/Girl_Computer.png'
+import expImg from './images/cert_girl-1.png'
+import spaceBg from './images/cert-bg-1.jpg'
 import certBg from './images/webp/contact-bg.webp'
 import scrollGif from './images/down-arrow.gif'
 import Skills from './components/Skills';
@@ -68,7 +69,6 @@ function Portfolio() {
       const rect = imageContainerRef.current.getBoundingClientRect();
       setPhotoMarginTop(rect.top / 2);
       setPhotoMarginBottom((window.innerHeight - rect.bottom) / 2);
-      console.log('Image container y coordinate:', rect.bottom);
     }
   }, []);
 
@@ -396,7 +396,7 @@ function Portfolio() {
       }
     });
 
-    trans_skills_exp.to(mask, { scale: 1.25 });
+    trans_skills_exp.to(mask, { scale: 1.5 });
     trans_skills_exp.to(mask, { y: isSmallScreen ? 0 : -100 }, 0);
 
     const trans_exp_cert = gsap.timeline({

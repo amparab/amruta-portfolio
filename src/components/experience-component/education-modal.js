@@ -34,7 +34,7 @@ const EducationModal = ({closeEduModal}) => {
 
 
                 {/*body*/}
-                <div className="relative p-6 flex-auto font-cambria lg:text-lg">
+                <div className="relative p-6 flex-auto font-cambria md:text-lg">
                   <p>
                     <b>Flood Prediction System For Mumbai : </b>
                     We received a grant of $5000 USD from Microsoft Azure for this project. 

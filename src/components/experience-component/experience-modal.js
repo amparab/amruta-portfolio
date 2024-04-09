@@ -32,7 +32,7 @@ const ExperienceModal = ({ closeExpModal }) => {
 
 
             {/*body*/}
-            <div className="relative p-6 flex-auto font-cambria">
+            <div className="relative p-6 flex-auto font-cambria md:text-lg">
               <p>
                 <b>Software Engineer : </b><br />
                 <ul className="list-disc">

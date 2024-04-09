@@ -7,7 +7,6 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   const stopLoading = () => {
-    console.log('stopped');
     setLoading(false);
   };
 
