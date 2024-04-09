@@ -6,22 +6,20 @@ import Portfolio from './Portfolio';
 const App = () => {
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Simulate loading time
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 3000); // Adjust the timeout as needed
-
-    // Cleanup the timeout to avoid memory leaks
-    return () => clearTimeout(timeout);
-  }, []);
+  const stopLoading = () => {
+    console.log('stopped');
+    setLoading(false);
+  };
 
   return (
     <>
       {loading ? (
-            <Loading />    
+            <Loading stopLoading={stopLoading} />    
       ) : (
-        <Portfolio />
+        <div>
+          <Portfolio />
+        </div>
+        
       )}
     </>
   );

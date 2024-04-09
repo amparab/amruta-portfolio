@@ -29,7 +29,24 @@ const Skills = ({show}) => {
         { id: 5, src: ReactLogo, progress: 60, name: 'React'},
         { id: 6, src: KafkaLogo, progress: 50, name: 'Kafka'},
         { id: 7, src: GitLogo, progress: 75, name: 'Git'},
+        { id: 8, src: TailwindLogo, progress: 50, name: 'TailwindCss'},
+        { id: 1, src: JavaLogo, progress: 85, name: 'Java'},
+        { id: 2, src: SpringLogo, progress: 80, name: 'Spring'},
+        { id: 3, src: KubernetesLogo, progress: 90, name: 'Kubernetes'},
+        { id: 4, src: SqlLogo, progress: 80, name: 'SQL'},
+        { id: 5, src: ReactLogo, progress: 60, name: 'React'},
+        { id: 6, src: KafkaLogo, progress: 50, name: 'Kafka'},
+        { id: 7, src: GitLogo, progress: 75, name: 'Git'},
+        { id: 8, src: TailwindLogo, progress: 50, name: 'TailwindCss'},
+        { id: 1, src: JavaLogo, progress: 85, name: 'Java'},
+        { id: 2, src: SpringLogo, progress: 80, name: 'Spring'},
+        { id: 3, src: KubernetesLogo, progress: 90, name: 'Kubernetes'},
+        { id: 4, src: SqlLogo, progress: 80, name: 'SQL'},
+        { id: 5, src: ReactLogo, progress: 60, name: 'React'},
+        { id: 6, src: KafkaLogo, progress: 50, name: 'Kafka'},
+        { id: 7, src: GitLogo, progress: 75, name: 'Git'},
         { id: 8, src: TailwindLogo, progress: 50, name: 'TailwindCss'}
+    
       ];
 
 
@@ -45,36 +62,116 @@ const Skills = ({show}) => {
         }  
       }, [show]);
 
-    return (
+      return (
         <>
             {
-
-
-                <div className="fixed inset-0 overflow-auto p-5 flex flex-col justify-center items-center" ref={skillsRef}
-                >
-                    {skills && <div id="skillsContainer" className=" text-white text-center" style={{ maxHeight: '200vh' }}>
-                         <div id="skills-title" className="text-2xl md:text-6xl font-knuckles my-4 md:my-8">
+                <div className="fixed inset-0 p-5 flex flex-col justify-center items-center" ref={skillsRef}>
+                    {skills && <div id="skillsContainer" className="text-white text-center" style={{ maxHeight: '200vh' }}>
+                        <div id="skills-title" className="text-2xl md:text-5xl font-knuckles md:my-8">
                             <ReactTyped strings={["MY SKILLS"]} typeSpeed={50} />
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2  gap-x-44"> 
-                            {images.map((image) => (
-                                <div key={image.id} className="p-4 flex items-center">
-                                    <div className="w-6 h-6 md:w-12 md:h-12 mr-4 shadow-xl rounded-full flex-shrink-0" style={{ transformOrigin: 'center' }}>
-                                        <img className="w-full h-full rounded-full" src={image.src} alt={`Image ${image.id}`} />
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-16">
+                            <div>
+                                <div className='py-2 md:py-4'>
+                                    <div className="text-lg md:text-3xl font-knuckleslite">Technologies</div>
+                                    <hr className="border-t-1 border-gray-300 my-1" />
+                                </div>
+                                <div className="grid grid-cols-2 gap-x-8">
+                                    <div className="text-base md:text-xl font-knuckleslite text-right">
+                                        Java
                                     </div>
-                                    <div>
-                                        <div className="sm:text-sm md:text-lg font-knuckleslite">{image.name}</div>
-                                        <ProgressBar progress={image.progress} />
+                                    <div className="text-base md:text-xl font-knuckleslite text-left">
+                                        Spring
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-right">
+                                        SQL
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-left">
+                                        Kubernetes
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-right">
+                                        React
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-left">
+                                        Kafka
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-right">
+                                        Maven
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-left">
+                                        Shell
                                     </div>
                                 </div>
-                            ))}
+                            </div>
+                            <div>
+                                <div className='py-2 md:py-4'>
+                                    <div className="text-lg md:text-3xl font-knuckleslite">Concepts</div>
+                                    <hr className="border-t-1 border-gray-300 my-1" />
+                                </div>
+                                <div className="grid grid-cols-2 gap-x-8">
+                                    <div className="text-base md:text-xl font-knuckleslite text-right">
+                                        Microservices
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-left">
+                                        REST
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-right">
+                                        Messaging Queues
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-left">
+                                        SOLID Principles
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-right">
+                                        Design Patterns
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-left">
+                                        JUnit Testing
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div className='py-2 md:py-4'>
+                                    <div className="text-lg md:text-3xl font-knuckleslite">Tools</div>
+                                    <hr className="border-t-1 border-gray-300 my-1" />
+                                </div>
+                            
+                                <div className="grid grid-cols-2 gap-x-8">
+                                    <div className="text-base md:text-xl font-knuckleslite text-right">
+                                        Git
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-left">
+                                        SQL Developer
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-right">
+                                        Postman
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-left">
+                                        Splunk
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-right">
+                                        Jenkins
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-left">
+                                        IntelliJ
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-right">
+                                        Jira
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-left">
+                                        Confluence
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>}
                 </div>
             }
         </>
     );
-
+    
+    
+    
+    
 };
 
 export default Skills;

@@ -1,8 +1,6 @@
-import VesitLogo from '../images/Vesit-Logo.png';
+
 import LinkedIn from '../images/icons/linkedin.png';
 import Github from '../images/icons/github.png';
-import Instagram from '../images/icons/instagram.png';
-import { ReactTyped } from 'react-typed';
 import { useEffect, useState, useRef } from 'react';
 import '../input.css';
 import { gsap } from 'gsap';
@@ -24,13 +22,16 @@ const ContactLinks = ({show, scrollToTop}) => {
             } });
         }  
       }, [show]);
+    
+    
 
     return (
 
 <div className='fixed h-screen w-screen flex flex-col justify-center items-center'>
     {showContact && <div ref={contact} className="h-full w-full md:w-1/2 flex flex-col justify-center items-center mt-4 md:mt-16">
         <div id="skills-title" className="font-knuckles text-white text-2xl md:text-4xl">
-            <ReactTyped strings={["Get in touch!"]} typeSpeed={25} />
+            Get in touch!
+            {/* <ReactTyped strings={["Get in touch!"]} typeSpeed={25} /> */}
         </div>
         <div className="w-full max-w-sm">
             <div className="flex flex-col justify-center items-center mt-6 space-y-4">
@@ -53,7 +54,8 @@ const ContactLinks = ({show, scrollToTop}) => {
                 
             </div>
             <div className="flex justify-center items-center mt-8">          
-                <button type="reset" onClick={scrollToTop} className="py-2 px-4 bg-white text-black border border-black rounded-md mr-4 font-knuckleslite">Scroll To Top</button>
+                <button type="reset" onClick={scrollToTop} className="py-2 px-4 bg-white text-black hover:bg-black hover:text-white border border-black hover:border-white rounded-md mr-4 font-knuckleslite">Scroll To Top</button>
+            
                 </div>
         </div>
     </div>}

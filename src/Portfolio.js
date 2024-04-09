@@ -1,13 +1,13 @@
 import './input.css';
 import { useSpring, animated, config  } from '@react-spring/web';
 import React, { useEffect, useState, useRef } from 'react';
-import image from './images/pink.png'
+import image from './images/webp/pink.webp'
 import skillsBg from './images/sky.jpg'
 import skyline from './images/skyline-layer2.png'
 import girl from './images/skills_char-layer3.png'
 import expImg from './images/Girl_Computer.png'
 import spaceBg from './images/space-bg-layer.jpg'
-import certBg from './images/Certification-Bg.jpg'
+import certBg from './images/webp/contact-bg.webp'
 import scrollGif from './images/down-arrow.gif'
 import Skills from './components/Skills';
 import { ReactTyped } from 'react-typed';
@@ -17,17 +17,16 @@ import Certifications from './components/Certifcations';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { gsap } from 'gsap';
 import ContactLinks from './components/ContactLinks';
+import { UilExternalLinkAlt } from '@iconscout/react-unicons'
+import { UilDownloadAlt } from '@iconscout/react-unicons'
+import pdf from './Amruta-Resume-v3.pdf'
 
 gsap.registerPlugin(ScrollTrigger);
 
-function App() {
+function Portfolio() {
 
-  const svgMaskWidth = 350;
-  const svgMaskHeight = 350;
-
-  const initialAngle = 0;
+  
   let initialOffset = 0.5;
-
   let scrubValue = 0.5;
 
   const [imageSource, setImageSource] = useState(image);
@@ -44,6 +43,9 @@ function App() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [scrollIconVisibile, setScrollIconVisible] = useState(true);
 
+  const [photoMarginTop, setPhotoMarginTop] = useState(0);
+  const [photoMarginBottom, setPhotoMarginBottom] = useState(0);
+
   const conRef = useRef(null);
   const conRef2 = useRef(null);
   const conRef1 = useRef(null);
@@ -58,37 +60,40 @@ function App() {
   const skylineRef = useRef(null);
   const girlRef = useRef(null);
 
+  const imageContainerRef = useRef(null);
+
   useEffect(() => {
+    if (imageContainerRef.current) {
+      const rect = imageContainerRef.current.getBoundingClientRect();
+      setPhotoMarginTop(rect.top/2);
+      setPhotoMarginBottom((window.innerHeight - rect.bottom)/2);
+      console.log('Image container y coordinate:', rect.bottom);
+    }
+  }, []);
 
+  useEffect(() => {
     window.scrollTo(0, 0);
-
-    if ((window.innerWidth > 768 && window.innerHeight < 500) 
-              || (window.innerHeight < 530 && window.innerWidth < 310))
-              {
+  
+    const handleUnsupportedResolution = () => {
+      const isUnsupportedResolution = 
+        (window.innerWidth > 768 && window.innerHeight < 500) ||
+        (window.innerHeight < 530 && window.innerWidth < 310);
+        
+      if (isUnsupportedResolution) {
         setError(true);
         setErrorMsg("Your browser resolution is currently not supported. Try resizing the window to experience this site.");
-        return;
-    }
-
-    if(window.innerWidth >= 768){
-      setIsSmallScreen(false);
-      scrubValue=0.5;
+      }
+    };
+  
+    const handleScreenSize = () => {
+      const isSmallScreen = window.innerWidth < 768;
+      setIsSmallScreen(isSmallScreen);
+      scrubValue = 0.5;
       initialOffset = 0.5;
-    } else {
-      setIsSmallScreen(true);
-      scrubValue=0.5;
-      initialOffset=0.5;
-    }
-
-
-    // gsap.fromTo(maskRef.current, {
-    //   opacity: 0,
-    // }, {
-    //   duration: 2,
-    //   opacity: 1,
-    // });
-
-
+    };
+  
+    handleUnsupportedResolution();
+    handleScreenSize();
   }, []);
 
   useEffect(() => {
@@ -101,6 +106,10 @@ function App() {
         end: 'bottom bottom',
         scrub: scrubValue,
         toggleActions: "play reverse play reverse",
+      },
+      onStart: function(){
+        setShowIntro(false);
+        setShowProfession(false);
       },
       onUpdate: function () {
         let currentRotation = gsap.getProperty(reference.current, "rotation");
@@ -116,7 +125,7 @@ function App() {
       },
       onReverseComplete: function() {
         setShowIntro(true);
-        setSpringProps({ immediate: true,  transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${initialAngle}deg)` });
+        setSpringProps({ immediate: true,  transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${Constants.initialAngle}deg)` });
       }
      });
 
@@ -274,7 +283,7 @@ function App() {
       },
      });
   
-    rotationAnimation1.fromTo(reference.current,{rotate: initialAngle}, {
+    rotationAnimation1.fromTo(reference.current,{rotate: Constants.initialAngle}, {
       transformOrigin: '100% 100%',
       rotate: 180
     })
@@ -318,6 +327,8 @@ function App() {
 
 
   useEffect(() => {
+
+    if(skylineRef.current == null) return;
     const parallaxSkyLine = gsap.timeline({
       scrollTrigger: {
         trigger: conRef1.current,
@@ -328,7 +339,8 @@ function App() {
         toggleActions: "play reverse play reverse"
       }
     });
-    parallaxSkyLine.fromTo(skylineRef.current,{y: 100}, {y: 0});
+
+    parallaxSkyLine.fromTo(skylineRef.current,{y: 100}, {y: 0}); // TODO: Change this to make repsonsive
 
     return () => {
       parallaxSkyLine.kill();
@@ -337,6 +349,7 @@ function App() {
   });
 
   useEffect(() => {
+    if(girlRef.current == null) return;
     const parallaxGirl = gsap.timeline({
       scrollTrigger: {
         trigger: conRef1.current,
@@ -347,7 +360,7 @@ function App() {
         toggleActions: "play reverse play reverse"
       }
     });
-    parallaxGirl.fromTo(girlRef.current,{y: 50}, {y: 0});
+    parallaxGirl.fromTo(girlRef.current,{y: 50}, {y: 0}); // TODO: Change this to make repsonsive
 
     return () => {
       parallaxGirl.kill();
@@ -369,7 +382,7 @@ useEffect(() => {
   });
 
   trans_intro_skills.to(mask,
-    {scale: () => Math.max(window.innerWidth / svgMaskWidth, window.innerHeight / svgMaskHeight)});
+    {scale: () => Math.max(window.innerWidth / Constants.svgMaskWidth, window.innerHeight / Constants.svgMaskHeight)});
 
   const trans_skills_exp = gsap.timeline({
     scrollTrigger: {
@@ -420,7 +433,7 @@ useEffect(() => {
     },
   });
 
-  trans_cert_contact.to(mask,{opacity: 1, scale: 3});
+  trans_cert_contact.to(mask,{opacity: 1, scale: 4});
 
   return () => {
     trans_intro_skills.kill();
@@ -431,6 +444,7 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
+  if(spaceRef.current == null) return;
   const parallaxExp = gsap.timeline({
       scrollTrigger: {
         trigger: conRef3.current,
@@ -451,7 +465,7 @@ useEffect(() => {
     const [springProps, setSpringProps] = useSpring(() => ({
       rotateY: 0,
       transformOrigin: '50% 50%', 
-      transform: `perspective(1000px) rotateY(${initialAngle}deg)`
+      transform: `perspective(1000px) rotateY(${Constants.initialAngle}deg)`
   }));
 
   const scrollToTop = () => {
@@ -465,38 +479,86 @@ useEffect(() => {
     });
   };
 
+  const handleDownload = () => {
+    const link = "https://raw.githubusercontent.com/amparab/amruta-portfolio/feature/experience/src/Amruta-Resume-v3.pdf";
+    window.open(link, '_blank');
+  };
+
+  const openLinkedIn = () => {
+    const url = 'https://www.linkedin.com/in/amruta-parab-9124b9180';
+    window.open(url, '_blank');
+  };
+
   if(error){
      return <div className="justify-center flex items-center h-screen w-screen">
         <h1 className="text-center font-knuckleslite">{errorMsg}</h1>
       </div>
   }
-
+  
   return (
     <> 
+    
         <div id="container" className="h-screen w-screen flex flex-col justify-center items-center">
+        
+        
         {scrollIconVisibile && <div className="fixed bottom-3 md:bottom-6 right-3 md:right-6 z-50 flex justify-center items-center rounded-lg bg-white p-1 md:p-2">
           <div className="text-center justify-center items-center">
             <img src={scrollGif} className="h-7 w-7 md:h-14 md:w-14" alt="Your GIF" />
             <div className="text-[0.6rem] md:text-xs font-knuckleslite">Scroll</div>
           </div>
+        </div>
+        }
+        
+
+          <div ref={reference} width={Constants.svgMaskWidth} height={Constants.svgMaskHeight}></div>
+          {showIntro &&<div className="fixed bottom-0 left-0 right-0 flex items-center z-10 justify-center"
+            style={{ marginBottom: photoMarginBottom }}>
+            <div className='px-2'>
+                <button onClick={openLinkedIn}
+                    type="button"
+                    className="py-2 px-2 bg-black text-sm md:text-lg text-white hover:bg-white hover:text-black border hover:border-black rounded-md font-knuckleslite"
+                >
+                    LinkedIn <UilExternalLinkAlt size="21" className="inline" />
+                </button>
+            </div>
+            <div className='px-2'>
+                <button
+                    type="button"
+                    onClick={handleDownload}
+                    className="py-2 px-2 bg-pink-900 text-sm md:text-lg text-white hover:bg-white hover:text-black border  hover:border-black rounded-md font-knuckleslite"
+                >
+                    Download Resume <UilDownloadAlt size="21" className="inline" />
+                </button>
+            </div>
         </div>}
-          <div ref={reference} width={svgMaskWidth} height={svgMaskHeight} className='z-0'></div>
+
+          
+          
           <div className="h-screen w-full flex flex-col items-center fixed">
+          
             {showIntro && (
               <div className="text-2xl md:text-4xl font-knuckles bg-gradient-to-r from-slate-800 
-              via-blue-950 to-pink-700 text-transparent bg-clip-text" style={{marginTop: (window.innerHeight - svgMaskHeight) / 4}}>
+              via-blue-950 to-pink-700 text-transparent bg-clip-text" style={{marginTop: photoMarginTop}}>
                 <ReactTyped strings={["Hi! I am Amruta Parab"]} typeSpeed={25} onComplete={() => setShowProfession(true)} />
               </div>
             )}
+            {showProfession && (
+              <h1 className="text-xl md:text-2xl font-knuckles bg-gradient-to-r from-pink-700 via-blue-950 
+              to-slate-800 text-transparent bg-clip-text">
+                <ReactTyped strings={["I'm a Software Developer"]} typeSpeed={25} />
+              </h1>
+            )}
+
+            
             <div id="imageContainer" className="h-full w-full">
             <svg className="left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full fixed" >
                 <mask id="myMask" className="myMask">
-                  <animated.rect
-                    x={(window.innerWidth - svgMaskWidth) / 2}
-                    y={(window.innerHeight - svgMaskHeight) / 2}
+                  <animated.rect ref={imageContainerRef}
+                    x={(window.innerWidth - Constants.svgMaskWidth) / 2}
+                    y={(window.innerHeight - Constants.svgMaskHeight) / 2}
                     className="rect"
-                    width={svgMaskWidth}
-                    height={svgMaskHeight}
+                    width={Constants.svgMaskWidth}
+                    height={Constants.svgMaskHeight}
                     fill="white"
                     style={{
                       ...springProps
@@ -540,23 +602,39 @@ useEffect(() => {
                 </g>
               </svg>
             </div>
-            {showIntro && showProfession && (
-              <h1 className="text-2xl md:text-4xl font-knuckles bg-gradient-to-r from-pink-700 via-blue-950 
-              to-slate-800 text-transparent bg-clip-text" style={{marginBottom: (window.innerHeight - svgMaskHeight) / 4}}>
-                <ReactTyped strings={["I'm a Software Developer"]} typeSpeed={25} />
-              </h1>
-            )}
-          </div>
+          
+            {/* <div className='z-50' style={{ display: 'inline-block', marginBottom: (window.innerHeight - Constants.svgMaskHeight) / 3 }}>
+              <button
+                type="button"
+                onClick={scrollToTop}
+                className="py-2 px-4 bg-white text-lg text-black border border-black rounded-md mr-4 font-knuckleslite"
+              >
+                LinkedIn
+              </button>
+              <button
+                type="button"
+                onClick={scrollToTop}
+                className=" py-2 px-4 bg-white text-lg text-black hover:bg-black hover:text-white border border-black hover:border-white rounded-md mr-4 font-knuckleslite"
+              >
+                Download Resume
+              </button>
+            </div> */}
+            
 
+          </div>
+          
+          
         </div>
+        
 
     <div className='mt-5'>
+      
     <div className="absolute inset-0 overflow-auto">
-              {<Skills show={displaySkills} />}
-              {<Experience show={showExperience} scrollTriggerRef={conRef5} />}
-              {<Certifications show={showCertification} />}
-              {<ContactLinks show={showContactLinks} scrollToTop={scrollToTop} />}
-      </div>
+      {showContactLinks && <ContactLinks show={showContactLinks} scrollToTop={scrollToTop} />}
+      {showExperience && <Experience show={showExperience} scrollTriggerRef={conRef5} />} 
+      {displaySkills && <Skills show={displaySkills} />}
+      {showCertification && <Certifications show={showCertification} />}
+    </div>
 
       <div ref={conRef} className=" h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div ref={conRef1} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
@@ -564,7 +642,10 @@ useEffect(() => {
       <div ref={conRef3} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center-z-20"></div>
       <div ref={conRef4} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div ref={conRef5} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
-      <div ref={conRef6} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
+      <div ref={conRef6} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center">
+    
+      </div>
+
     </div>
 
     </>
@@ -572,4 +653,4 @@ useEffect(() => {
   
 }
 
-export default App;
+export default Portfolio;
