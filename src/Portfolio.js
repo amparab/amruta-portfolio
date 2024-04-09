@@ -341,7 +341,7 @@ function Portfolio() {
       }
     });
 
-    parallaxSkyLine.fromTo(skylineRef.current, { y: 100 }, { y: 0 }); // TODO: Change this to make repsonsive
+    parallaxSkyLine.fromTo(skylineRef.current, { y: Utils.getSkylineStart()}, { y: Utils.getSkylineEnd() }); // TODO: 200, 100 Change this to make repsonsive
 
     return () => {
       parallaxSkyLine.kill();
@@ -361,7 +361,7 @@ function Portfolio() {
         toggleActions: "play reverse play reverse"
       }
     });
-    parallaxGirl.fromTo(girlRef.current, { y: 50 }, { y: 0 }); // TODO: Change this to make repsonsive
+    parallaxGirl.fromTo(girlRef.current, { y: Utils.getGirlStart() }, { y: Utils.getGirlEnd() }); // TODO: 100, 70 Change this to make repsonsive
 
     return () => {
       parallaxGirl.kill();
