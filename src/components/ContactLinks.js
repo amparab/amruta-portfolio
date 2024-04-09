@@ -1,8 +1,6 @@
-import VesitLogo from '../images/Vesit-Logo.png';
+
 import LinkedIn from '../images/icons/linkedin.png';
 import Github from '../images/icons/github.png';
-import Instagram from '../images/icons/instagram.png';
-import { ReactTyped } from 'react-typed';
 import { useEffect, useState, useRef } from 'react';
 import '../input.css';
 import { gsap } from 'gsap';

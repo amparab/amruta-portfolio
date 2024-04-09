@@ -8,10 +8,12 @@ import spaceBg from '../images/space-bg-layer.jpg'
 import certBg from '../images/webp/contact-bg.webp'
 import scrollGif from '../images/down-arrow.gif'
 import CKADLogo from '../images/CKAD-Logo.png';
+import LinkedIn from '../images/icons/linkedin.png';
+import Github from '../images/icons/github.png';
 
 const Loading = ({stopLoading})  => {
 
-    const images = [image, skillsBg, skyline, girl, expImg, spaceBg, certBg, scrollGif, CKADLogo];
+    const images = [image, skillsBg, skyline, girl, expImg, spaceBg, certBg, scrollGif, CKADLogo, LinkedIn, Github];
 
     useEffect(() => {
         // const timeout = setTimeout(() => {

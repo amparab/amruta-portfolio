@@ -480,12 +480,8 @@ useEffect(() => {
   };
 
   const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = pdf;
-    link.download = 'Amruta-Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const link = "https://raw.githubusercontent.com/amparab/amruta-portfolio/feature/experience/src/Amruta-Resume-v3.pdf";
+    window.open(link, '_blank');
   };
 
   const openLinkedIn = () => {
