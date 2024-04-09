@@ -29,8 +29,8 @@ const ContactLinks = ({show, scrollToTop}) => {
 
     return (
 
-<div className='fixed h-screen w-screen flex flex-col justify-center items-center'>
-    {showContact && <div ref={contact} className="h-full w-full md:w-1/2 flex flex-col justify-center items-center mt-4 md:mt-16">
+<div className='fixed h-screen w-screen flex flex-col justify-center items-center' ref={contact}>
+    {showContact && <div className="h-full w-full md:w-1/2 flex flex-col justify-center items-center mt-4 md:mt-16">
         <div id="skills-title" className="font-knuckles text-white text-2xl md:text-4xl">
             Get in touch!
             {/* <ReactTyped strings={["Get in touch!"]} typeSpeed={25} /> */}

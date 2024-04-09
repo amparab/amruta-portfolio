@@ -122,11 +122,11 @@ function Portfolio() {
           setImageSource(image);
           setShowParallax(false);
         }
-        setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)` });
+        setSpringProps.start({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)` });
       },
       onReverseComplete: function () {
         setShowIntro(true);
-        setSpringProps({ immediate: true, transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${Constants.initialAngle}deg)` });
+        setSpringProps.start({ immediate: true, transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${Constants.initialAngle}deg)` });
       }
     });
 
@@ -163,7 +163,7 @@ function Portfolio() {
       },
       onUpdate: function () {
         let currentRotation = gsap.getProperty(reference.current, "rotation");
-        setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)` });
+        setSpringProps.start({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)` });
         let progress = ScrollTrigger.getById("rot_skills_exp").progress;
         if (progress >= 0.5) {
           setImageSource(expImg);
@@ -216,7 +216,7 @@ function Portfolio() {
       },
       onUpdate: function () {
         let currentRotation = gsap.getProperty(reference.current, "rotation");
-        setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)` });
+        setSpringProps.start({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)` });
       },
       onComplete: function () {
         setShowExperience(true);
@@ -255,7 +255,7 @@ function Portfolio() {
       },
       onUpdate: function () {
         let currentRotation = gsap.getProperty(reference.current, "rotation");
-        setSpringProps({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)` });
+        setSpringProps.start({ transformOrigin: '50% 50%', transform: `perspective(1000px) rotateY(${currentRotation}deg)` });
       },
       onComplete: function () {
         setShowContactLinks(true);
@@ -341,7 +341,7 @@ function Portfolio() {
       }
     });
 
-    parallaxSkyLine.fromTo(skylineRef.current, { y: Utils.getSkylineStart()}, { y: Utils.getSkylineEnd() }); // TODO: 200, 100 Change this to make repsonsive
+    parallaxSkyLine.fromTo(skylineRef.current, { y: Utils.getSkylineStart() }, { y: Utils.getSkylineEnd() }); // TODO: 200, 100 Change this to make repsonsive
 
     return () => {
       parallaxSkyLine.kill();
