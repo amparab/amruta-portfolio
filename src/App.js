@@ -14,12 +14,12 @@ const App = () => {
   return (
     <>
       {loading ? (
-            <Loading stopLoading={stopLoading} />    
+        <Loading stopLoading={stopLoading} />
       ) : (
         <div>
           <Portfolio />
         </div>
-        
+
       )}
     </>
   );
