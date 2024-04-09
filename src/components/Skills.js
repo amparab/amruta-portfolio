@@ -1,5 +1,4 @@
 import { ReactTyped } from 'react-typed';
-import ProgressBar from './ProgressBar';
 import '../input.css';
 import SpringLogo from '../images/Spring-Logo.png';
 import JavaLogo from '../images/Java-Logo.png';
@@ -9,60 +8,60 @@ import KafkaLogo from '../images/Kafka-Logo.png';
 import ReactLogo from '../images/React-Logo.png';
 import SqlLogo from '../images/SQL-Logo.png';
 import TailwindLogo from '../images/Tailwind_CSS_Logo.png';
-import JiraLogo from '../images/Jira-Logo.png';
 import React, { useRef, useEffect, useState } from 'react';
-import { useSpring, animated } from '@react-spring/web';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { gsap } from 'gsap';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Skills = ({show}) => {
+const Skills = ({ show }) => {
     const skillsRef = useRef(null);
     const [skills, setSkills] = useState(false);
 
     const images = [
-        { id: 1, src: JavaLogo, progress: 85, name: 'Java'},
-        { id: 2, src: SpringLogo, progress: 80, name: 'Spring'},
-        { id: 3, src: KubernetesLogo, progress: 90, name: 'Kubernetes'},
-        { id: 4, src: SqlLogo, progress: 80, name: 'SQL'},
-        { id: 5, src: ReactLogo, progress: 60, name: 'React'},
-        { id: 6, src: KafkaLogo, progress: 50, name: 'Kafka'},
-        { id: 7, src: GitLogo, progress: 75, name: 'Git'},
-        { id: 8, src: TailwindLogo, progress: 50, name: 'TailwindCss'},
-        { id: 1, src: JavaLogo, progress: 85, name: 'Java'},
-        { id: 2, src: SpringLogo, progress: 80, name: 'Spring'},
-        { id: 3, src: KubernetesLogo, progress: 90, name: 'Kubernetes'},
-        { id: 4, src: SqlLogo, progress: 80, name: 'SQL'},
-        { id: 5, src: ReactLogo, progress: 60, name: 'React'},
-        { id: 6, src: KafkaLogo, progress: 50, name: 'Kafka'},
-        { id: 7, src: GitLogo, progress: 75, name: 'Git'},
-        { id: 8, src: TailwindLogo, progress: 50, name: 'TailwindCss'},
-        { id: 1, src: JavaLogo, progress: 85, name: 'Java'},
-        { id: 2, src: SpringLogo, progress: 80, name: 'Spring'},
-        { id: 3, src: KubernetesLogo, progress: 90, name: 'Kubernetes'},
-        { id: 4, src: SqlLogo, progress: 80, name: 'SQL'},
-        { id: 5, src: ReactLogo, progress: 60, name: 'React'},
-        { id: 6, src: KafkaLogo, progress: 50, name: 'Kafka'},
-        { id: 7, src: GitLogo, progress: 75, name: 'Git'},
-        { id: 8, src: TailwindLogo, progress: 50, name: 'TailwindCss'}
-    
-      ];
+        { id: 1, src: JavaLogo, progress: 85, name: 'Java' },
+        { id: 2, src: SpringLogo, progress: 80, name: 'Spring' },
+        { id: 3, src: KubernetesLogo, progress: 90, name: 'Kubernetes' },
+        { id: 4, src: SqlLogo, progress: 80, name: 'SQL' },
+        { id: 5, src: ReactLogo, progress: 60, name: 'React' },
+        { id: 6, src: KafkaLogo, progress: 50, name: 'Kafka' },
+        { id: 7, src: GitLogo, progress: 75, name: 'Git' },
+        { id: 8, src: TailwindLogo, progress: 50, name: 'TailwindCss' },
+        { id: 1, src: JavaLogo, progress: 85, name: 'Java' },
+        { id: 2, src: SpringLogo, progress: 80, name: 'Spring' },
+        { id: 3, src: KubernetesLogo, progress: 90, name: 'Kubernetes' },
+        { id: 4, src: SqlLogo, progress: 80, name: 'SQL' },
+        { id: 5, src: ReactLogo, progress: 60, name: 'React' },
+        { id: 6, src: KafkaLogo, progress: 50, name: 'Kafka' },
+        { id: 7, src: GitLogo, progress: 75, name: 'Git' },
+        { id: 8, src: TailwindLogo, progress: 50, name: 'TailwindCss' },
+        { id: 1, src: JavaLogo, progress: 85, name: 'Java' },
+        { id: 2, src: SpringLogo, progress: 80, name: 'Spring' },
+        { id: 3, src: KubernetesLogo, progress: 90, name: 'Kubernetes' },
+        { id: 4, src: SqlLogo, progress: 80, name: 'SQL' },
+        { id: 5, src: ReactLogo, progress: 60, name: 'React' },
+        { id: 6, src: KafkaLogo, progress: 50, name: 'Kafka' },
+        { id: 7, src: GitLogo, progress: 75, name: 'Git' },
+        { id: 8, src: TailwindLogo, progress: 50, name: 'TailwindCss' }
+
+    ];
 
 
-      useEffect(() => {
-        if(show){
+    useEffect(() => {
+        if (show) {
             setSkills(true);
             gsap.fromTo(skillsRef.current, { opacity: 0 }, { opacity: 1, duration: 2 });
         } else {
             // setSkills(false);
-            gsap.fromTo(skillsRef.current, { opacity: 1 }, { opacity: 0, onComplete: () => {
-                setSkills(false);
-            } });
-        }  
-      }, [show]);
+            gsap.fromTo(skillsRef.current, { opacity: 1 }, {
+                opacity: 0, onComplete: () => {
+                    setSkills(false);
+                }
+            });
+        }
+    }, [show]);
 
-      return (
+    return (
         <>
             {
                 <div className="fixed inset-0 p-5 flex flex-col justify-center items-center" ref={skillsRef}>
@@ -134,7 +133,7 @@ const Skills = ({show}) => {
                                     <div className="text-lg md:text-3xl font-knuckleslite">Tools</div>
                                     <hr className="border-t-1 border-gray-300 my-1" />
                                 </div>
-                            
+
                                 <div className="grid grid-cols-2 gap-x-8">
                                     <div className="text-base md:text-xl font-knuckleslite text-right">
                                         Git
@@ -168,10 +167,10 @@ const Skills = ({show}) => {
             }
         </>
     );
-    
-    
-    
-    
+
+
+
+
 };
 
 export default Skills;

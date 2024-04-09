@@ -4,41 +4,43 @@ import { useSpring, animated } from '@react-spring/web';
 import { gsap } from 'gsap';
 import React, { useRef, useEffect, useState } from 'react';
 
-export default function Certifications ({show}) {
+export default function Certifications({ show }) {
 
     const certRef = useRef(null);
     const [showCert, setShowCert] = useState(false);
 
     useEffect(() => {
-        if(show){
+        if (show) {
             setShowCert(true);
             gsap.fromTo(certRef.current, { opacity: 0 }, { opacity: 1 });
         } else {
-            gsap.fromTo(certRef.current, { opacity: 1 }, { opacity: 0, onComplete: () => {
-                setShowCert(false);
-            } });
-        }  
-      }, [show]);
+            gsap.fromTo(certRef.current, { opacity: 1 }, {
+                opacity: 0, onComplete: () => {
+                    setShowCert(false);
+                }
+            });
+        }
+    }, [show]);
 
-    return(
+    return (
         <div className="fixed bottom-6 md:bottom-10 left-0 right-0 flex justify-center -z-10" ref={certRef}>
             {showCert && <div className="p-4 flex items-center">
-                    <div className="w-24 h-24 mr-4 rounded-full flex-shrink-0">
-                        <animated.img 
-                            className="w-full h-full rounded-full" 
-                            src={CKADLogo}
-                        />
-                    </div>
-                    <div>
-                        <div className="text-sm md:text-lg font-knuckles">
-                            I am a <br/>
-                            Certified Kubernetes <br/> Application Developer</div>
-                        </div>
+                <div className="w-24 h-24 mr-4 rounded-full flex-shrink-0">
+                    <animated.img
+                        className="w-full h-full rounded-full"
+                        src={CKADLogo}
+                    />
                 </div>
-                
-                }
-            
-         </div>
+                <div>
+                    <div className="text-sm md:text-lg font-knuckles">
+                        I am a <br />
+                        Certified Kubernetes <br /> Application Developer</div>
+                </div>
+            </div>
+
+            }
+
+        </div>
     );
 
 }

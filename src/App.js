@@ -7,19 +7,18 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   const stopLoading = () => {
-    console.log('stopped');
     setLoading(false);
   };
 
   return (
     <>
       {loading ? (
-            <Loading stopLoading={stopLoading} />    
+        <Loading stopLoading={stopLoading} />
       ) : (
         <div>
           <Portfolio />
         </div>
-        
+
       )}
     </>
   );
