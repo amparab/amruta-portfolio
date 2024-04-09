@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/amruta-portfolio/static/css/main.e0a7182c.css",
-    "main.js": "/amruta-portfolio/static/js/main.9662ded3.js",
+    "main.js": "/amruta-portfolio/static/js/main.162b2dab.js",
     "static/js/453.07a2d4c0.chunk.js": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js",
     "static/media/Girl_Computer.png": "/amruta-portfolio/static/media/Girl_Computer.42fa280152d31b3ff989.png",
     "static/media/contact-bg.webp": "/amruta-portfolio/static/media/contact-bg.e29220d607f97119d42e.webp",
@@ -15,10 +15,10 @@
     "static/media/down-arrow.gif": "/amruta-portfolio/static/media/down-arrow.1b3884ea3fcddaf039a3.gif",
     "static/media/Jira-Logo.png": "/amruta-portfolio/static/media/Jira-Logo.c7f301a49458f5216215.png",
     "static/media/Java-Logo.png": "/amruta-portfolio/static/media/Java-Logo.be925db19dbfa198beb5.png",
-    "static/media/Amruta-Resume-v3.pdf": "/amruta-portfolio/static/media/Amruta-Resume-v3.248e36bdc271c5cd56e3.pdf",
     "static/media/CKAD-Logo.png": "/amruta-portfolio/static/media/CKAD-Logo.15859c575e5c51e433e1.png",
     "static/media/sky.jpg": "/amruta-portfolio/static/media/sky.5d1a24bfbcbd3c7fd289.jpg",
     "static/media/skills_char-layer3.png": "/amruta-portfolio/static/media/skills_char-layer3.a8920d0689a9a4f0d5e1.png",
+    "static/media/Amruta-Resume-v3.pdf": "/amruta-portfolio/static/media/Amruta-Resume-v3.7a6b34d580d6212bc470.pdf",
     "static/media/Kafka-Logo.png": "/amruta-portfolio/static/media/Kafka-Logo.dcc84afdcf3c9d78b614.png",
     "static/media/Vesit-Logo.png": "/amruta-portfolio/static/media/Vesit-Logo.6e46a85bb111ef618d77.png",
     "static/media/AznKnucklesTrialLight-jEyJl.woff": "/amruta-portfolio/static/media/AznKnucklesTrialLight-jEyJl.bec9628ef55084cee440.woff",
@@ -30,11 +30,11 @@
     "static/media/PixelEmulator-xq08.woff": "/amruta-portfolio/static/media/PixelEmulator-xq08.93c4c5e1f7f7fa1a7000.woff",
     "index.html": "/amruta-portfolio/index.html",
     "main.e0a7182c.css.map": "/amruta-portfolio/static/css/main.e0a7182c.css.map",
-    "main.9662ded3.js.map": "/amruta-portfolio/static/js/main.9662ded3.js.map",
+    "main.162b2dab.js.map": "/amruta-portfolio/static/js/main.162b2dab.js.map",
     "453.07a2d4c0.chunk.js.map": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e0a7182c.css",
-    "static/js/main.9662ded3.js"
+    "static/js/main.162b2dab.js"
   ]
 }
