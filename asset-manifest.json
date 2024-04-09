@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/amruta-portfolio/static/css/main.3101c313.css",
-    "main.js": "/amruta-portfolio/static/js/main.63c4ff94.js",
+    "main.js": "/amruta-portfolio/static/js/main.d12820da.js",
     "static/js/453.07a2d4c0.chunk.js": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js",
     "static/media/contact-bg.webp": "/amruta-portfolio/static/media/contact-bg.e29220d607f97119d42e.webp",
     "static/media/cert_girl-1.png": "/amruta-portfolio/static/media/cert_girl-1.545118c1d53b4ef41747.png",
@@ -27,11 +27,11 @@
     "static/media/PixelEmulator-xq08.woff": "/amruta-portfolio/static/media/PixelEmulator-xq08.93c4c5e1f7f7fa1a7000.woff",
     "index.html": "/amruta-portfolio/index.html",
     "main.3101c313.css.map": "/amruta-portfolio/static/css/main.3101c313.css.map",
-    "main.63c4ff94.js.map": "/amruta-portfolio/static/js/main.63c4ff94.js.map",
+    "main.d12820da.js.map": "/amruta-portfolio/static/js/main.d12820da.js.map",
     "453.07a2d4c0.chunk.js.map": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3101c313.css",
-    "static/js/main.63c4ff94.js"
+    "static/js/main.d12820da.js"
   ]
 }
