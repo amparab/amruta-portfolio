@@ -17,6 +17,9 @@ import Certifications from './components/Certifcations';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { gsap } from 'gsap';
 import ContactLinks from './components/ContactLinks';
+import { UilExternalLinkAlt } from '@iconscout/react-unicons'
+import { UilDownloadAlt } from '@iconscout/react-unicons'
+import pdf from './Amruta-Resume-v3.pdf'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,6 +43,9 @@ function Portfolio() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [scrollIconVisibile, setScrollIconVisible] = useState(true);
 
+  const [photoMarginTop, setPhotoMarginTop] = useState(0);
+  const [photoMarginBottom, setPhotoMarginBottom] = useState(0);
+
   const conRef = useRef(null);
   const conRef2 = useRef(null);
   const conRef1 = useRef(null);
@@ -53,6 +59,17 @@ function Portfolio() {
   const spaceRef = useRef(null);
   const skylineRef = useRef(null);
   const girlRef = useRef(null);
+
+  const imageContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (imageContainerRef.current) {
+      const rect = imageContainerRef.current.getBoundingClientRect();
+      setPhotoMarginTop(rect.top/2);
+      setPhotoMarginBottom((window.innerHeight - rect.bottom)/2);
+      console.log('Image container y coordinate:', rect.bottom);
+    }
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -89,6 +106,10 @@ function Portfolio() {
         end: 'bottom bottom',
         scrub: scrubValue,
         toggleActions: "play reverse play reverse",
+      },
+      onStart: function(){
+        setShowIntro(false);
+        setShowProfession(false);
       },
       onUpdate: function () {
         let currentRotation = gsap.getProperty(reference.current, "rotation");
@@ -412,7 +433,7 @@ useEffect(() => {
     },
   });
 
-  trans_cert_contact.to(mask,{opacity: 1, scale: 3});
+  trans_cert_contact.to(mask,{opacity: 1, scale: 4});
 
   return () => {
     trans_intro_skills.kill();
@@ -458,35 +479,85 @@ useEffect(() => {
     });
   };
 
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = pdf;
+    link.download = 'Amruta-Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const openLinkedIn = () => {
+    const url = 'https://www.linkedin.com/in/amruta-parab-9124b9180';
+    window.open(url, '_blank');
+  };
+
   if(error){
      return <div className="justify-center flex items-center h-screen w-screen">
         <h1 className="text-center font-knuckleslite">{errorMsg}</h1>
       </div>
   }
-
   
   return (
     <> 
+    
         <div id="container" className="h-screen w-screen flex flex-col justify-center items-center">
-      
+        
+        
         {scrollIconVisibile && <div className="fixed bottom-3 md:bottom-6 right-3 md:right-6 z-50 flex justify-center items-center rounded-lg bg-white p-1 md:p-2">
           <div className="text-center justify-center items-center">
             <img src={scrollGif} className="h-7 w-7 md:h-14 md:w-14" alt="Your GIF" />
             <div className="text-[0.6rem] md:text-xs font-knuckleslite">Scroll</div>
           </div>
+        </div>
+        }
+        
+
+          <div ref={reference} width={Constants.svgMaskWidth} height={Constants.svgMaskHeight}></div>
+          {showIntro &&<div className="fixed bottom-0 left-0 right-0 flex items-center z-10 justify-center"
+            style={{ marginBottom: photoMarginBottom }}>
+            <div className='px-2'>
+                <button onClick={openLinkedIn}
+                    type="button"
+                    className="py-2 px-2 bg-black text-sm md:text-lg text-white hover:bg-white hover:text-black border hover:border-black rounded-md font-knuckleslite"
+                >
+                    LinkedIn <UilExternalLinkAlt size="21" className="inline" />
+                </button>
+            </div>
+            <div className='px-2'>
+                <button
+                    type="button"
+                    onClick={handleDownload}
+                    className="py-2 px-2 bg-pink-900 text-sm md:text-lg text-white hover:bg-white hover:text-black border  hover:border-black rounded-md font-knuckleslite"
+                >
+                    Download Resume <UilDownloadAlt size="21" className="inline" />
+                </button>
+            </div>
         </div>}
-          <div ref={reference} width={Constants.svgMaskWidth} height={Constants.svgMaskHeight} className='z-0'></div>
+
+          
+          
           <div className="h-screen w-full flex flex-col items-center fixed">
+          
             {showIntro && (
               <div className="text-2xl md:text-4xl font-knuckles bg-gradient-to-r from-slate-800 
-              via-blue-950 to-pink-700 text-transparent bg-clip-text" style={{marginTop: (window.innerHeight - Constants.svgMaskHeight) / 4}}>
+              via-blue-950 to-pink-700 text-transparent bg-clip-text" style={{marginTop: photoMarginTop}}>
                 <ReactTyped strings={["Hi! I am Amruta Parab"]} typeSpeed={25} onComplete={() => setShowProfession(true)} />
               </div>
             )}
+            {showProfession && (
+              <h1 className="text-xl md:text-2xl font-knuckles bg-gradient-to-r from-pink-700 via-blue-950 
+              to-slate-800 text-transparent bg-clip-text">
+                <ReactTyped strings={["I'm a Software Developer"]} typeSpeed={25} />
+              </h1>
+            )}
+
+            
             <div id="imageContainer" className="h-full w-full">
             <svg className="left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full fixed" >
                 <mask id="myMask" className="myMask">
-                  <animated.rect
+                  <animated.rect ref={imageContainerRef}
                     x={(window.innerWidth - Constants.svgMaskWidth) / 2}
                     y={(window.innerHeight - Constants.svgMaskHeight) / 2}
                     className="rect"
@@ -535,25 +606,39 @@ useEffect(() => {
                 </g>
               </svg>
             </div>
-            {showIntro && showProfession && (
-              <h1 className="text-2xl md:text-4xl font-knuckles bg-gradient-to-r from-pink-700 via-blue-950 
-              to-slate-800 text-transparent bg-clip-text" style={{marginBottom: (window.innerHeight - Constants.svgMaskHeight) / 4}}>
-                <ReactTyped strings={["I'm a Software Developer"]} typeSpeed={25} />
-              </h1>
-            )}
-          </div>
+          
+            {/* <div className='z-50' style={{ display: 'inline-block', marginBottom: (window.innerHeight - Constants.svgMaskHeight) / 3 }}>
+              <button
+                type="button"
+                onClick={scrollToTop}
+                className="py-2 px-4 bg-white text-lg text-black border border-black rounded-md mr-4 font-knuckleslite"
+              >
+                LinkedIn
+              </button>
+              <button
+                type="button"
+                onClick={scrollToTop}
+                className=" py-2 px-4 bg-white text-lg text-black hover:bg-black hover:text-white border border-black hover:border-white rounded-md mr-4 font-knuckleslite"
+              >
+                Download Resume
+              </button>
+            </div> */}
+            
 
+          </div>
+          
+          
         </div>
+        
 
     <div className='mt-5'>
       
     <div className="absolute inset-0 overflow-auto">
       {showContactLinks && <ContactLinks show={showContactLinks} scrollToTop={scrollToTop} />}
-      {showExperience && <Experience show={showExperience} scrollTriggerRef={conRef5} />}
+      {showExperience && <Experience show={showExperience} scrollTriggerRef={conRef5} />} 
       {displaySkills && <Skills show={displaySkills} />}
       {showCertification && <Certifications show={showCertification} />}
     </div>
-
 
       <div ref={conRef} className=" h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
       <div ref={conRef1} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
@@ -564,6 +649,7 @@ useEffect(() => {
       <div ref={conRef6} className="h-screen w-screen flex flex-col md:flex-row justify-center items-center">
     
       </div>
+
     </div>
 
     </>

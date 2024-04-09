@@ -22,9 +22,9 @@ const EducationModal = ({closeEduModal}) => {
                         <img className="w-full h-full object-cover rounded-full" src={VesitLogo} alt="Vesit Logo" />
                     </div>
                         <div className="flex flex-col flex-grow font-knuckleslite">
-                            <div className="text-2xl">VESIT</div>
-                            <p>Bachelor's Degree in Computer Science</p>
-                            <p>(2016 - 2020)</p>
+                            <div className="text-2xl lg:text-3xl">VESIT</div>
+                            <p className="lg:text-xl">Bachelor's Degree in Computer Science</p>
+                            <p className="lg:text-xl">(2016 - 2020)</p>
                         </div>
                         <div className="flex flex-col font-knuckleslite self-start justify-end hover:opacity-50"> {/* Updated classes here */}
                             <button onClick={closeEduModal}><UilMultiply /></button>
@@ -34,7 +34,7 @@ const EducationModal = ({closeEduModal}) => {
 
 
                 {/*body*/}
-                <div className="relative p-6 flex-auto font-cambria">
+                <div className="relative p-6 flex-auto font-cambria lg:text-lg">
                   <p>
                     <b>Flood Prediction System For Mumbai : </b>
                     We received a grant of $5000 USD from Microsoft Azure for this project. 
