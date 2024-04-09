@@ -1,6 +1,5 @@
 import VesitLogo from '../images/Vesit-Logo.png';
 import JPLogo from '../images/JP-Logo.png';
-import { ReactTyped } from 'react-typed';
 import React, { useEffect, useState, useRef } from 'react';
 import '../input.css';
 import { gsap } from 'gsap';
