@@ -17,7 +17,7 @@ import Experience from './components/Experience';
 import Certifications from './components/Certifcations';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { gsap } from 'gsap';
-import ContactLinks from './components/ContactLinks';
+import ContactLinks from './components/Contact';
 import { UilExternalLinkAlt } from '@iconscout/react-unicons'
 import { UilDownloadAlt } from '@iconscout/react-unicons'
 
