@@ -152,9 +152,12 @@ const Skills = ({show}) => {
                                         Jenkins
                                     </div>
                                     <div className="text-base md:text-lg font-knuckleslite text-left">
-                                        Jira
+                                        IntelliJ
                                     </div>
                                     <div className="text-base md:text-lg font-knuckleslite text-right">
+                                        Jira
+                                    </div>
+                                    <div className="text-base md:text-lg font-knuckleslite text-left">
                                         Confluence
                                     </div>
                                 </div>

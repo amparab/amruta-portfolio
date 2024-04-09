@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
@@ -7,6 +8,7 @@ module.exports = {
         pixel: ["Pixel", "sans-serif"],
         knuckles: ["Knuckles", "sans-serif"],
         knuckleslite: ["KnucklesLite", "sans-serif"],
+        cambria: ['Cambria', 'serif']
       },
     },
   },
