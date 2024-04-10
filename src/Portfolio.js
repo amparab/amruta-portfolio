@@ -383,7 +383,7 @@ function Portfolio() {
     });
 
     trans_intro_skills.to(mask,
-      { scale: () => Math.max(window.innerWidth / Constants.svgMaskWidth, window.innerHeight / Constants.svgMaskHeight) });
+      { scale: () => Math.max(window.innerWidth / Constants.svgMaskWidth, window.innerHeight / Utils.svgHeight()) });
 
     const trans_skills_exp = gsap.timeline({
       scrollTrigger: {
@@ -506,7 +506,7 @@ function Portfolio() {
         }
 
 
-        <div ref={reference} width={Constants.svgMaskWidth} height={Constants.svgMaskHeight}></div>
+        <div ref={reference} width={Constants.svgMaskWidth} height={Utils.svgHeight()}></div>
         {showIntro && <div className="fixed bottom-0 left-0 right-0 flex items-center z-10 justify-center"
           style={{ marginBottom: photoMarginBottom }}>
           <div className='px-2'>
@@ -551,10 +551,10 @@ function Portfolio() {
               <mask id="myMask" className="myMask">
                 <animated.rect ref={imageContainerRef}
                   x={(window.innerWidth - Constants.svgMaskWidth) / 2}
-                  y={(window.innerHeight - Constants.svgMaskHeight) / 2}
+                  y={(window.innerHeight - Utils.svgHeight()) / 2}
                   className="rect"
                   width={Constants.svgMaskWidth}
-                  height={Constants.svgMaskHeight}
+                  height={Utils.svgHeight()}
                   fill="white"
                   style={{
                     ...springProps
@@ -599,7 +599,7 @@ function Portfolio() {
             </svg>
           </div>
 
-          {/* <div className='z-50' style={{ display: 'inline-block', marginBottom: (window.innerHeight - Constants.svgMaskHeight) / 3 }}>
+          {/* <div className='z-50' style={{ display: 'inline-block', marginBottom: (window.innerHeight - Utils.svgHeight()) / 3 }}>
               <button
                 type="button"
                 onClick={scrollToTop}

@@ -3,6 +3,15 @@ export const handleDownload = () => {
     window.open(link, '_blank');
 };
 
+export const svgWidth = () => {
+    return 350;
+};
+
+export const svgHeight = () => {
+    return Math.min(window.innerHeight/2, 350);
+    //return 350;
+};
+
 export const getSkylineStart = () => {
     return 100 + 0.395257 * (window.innerHeight - 700);
 };
