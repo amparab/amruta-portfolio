@@ -76,16 +76,6 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
             opacity: 1
         })
 
-        // const fourth_animation = gsap.timeline({
-        //     scrollTrigger: {
-        //         trigger: scrollTriggerRef.current,
-        //         start: 'top 25%',
-        //         end: 'top top',
-        //         scrub: 0.5,
-        //         toggleActions: "play reverse play reverse",
-        //     },
-        // });
-
         third_animation.fromTo(fourth.current, { opacity: 0 }, {
             opacity: 1
         }, 0)
