@@ -18,7 +18,6 @@ const ContactLinks = ({show, scrollToTop}) => {
             setShowContact(true);
             gsap.fromTo(contact.current, { opacity: 0 }, { opacity: 1, duration: 2 });
         } else {
-            // setSkills(false);
             gsap.fromTo(contact.current, { opacity: 1 }, { opacity: 0, onComplete: () => {
                 setShowContact(false);
             } });

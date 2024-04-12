@@ -9,7 +9,7 @@ export const svgWidth = () => {
 
 export const svgHeight = () => {
     return Math.min(window.innerHeight/2, 350);
-    //return 350;
+    //return 350; //test
 };
 
 export const getSkylineStart = () => {

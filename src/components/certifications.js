@@ -11,7 +11,6 @@ export default function Certifications({ show }) {
     const [showCert, setShowCert] = useState(false);
 
     useEffect(() => {
-        //test
         if (show) {
             setShowCert(true);
             gsap.fromTo(certRef.current, { opacity: 0 }, { opacity: 1 });
