@@ -40,7 +40,7 @@ const ContactLinks = ({show, scrollToTop}) => {
                     <div className="w-8 h-8">
                         <img className="object-cover" src={LinkedIn} alt="LinkedIn" />
                     </div>
-                    <a href="https://www.linkedin.com/in/amruta-parab-9124b9180" target="_blank" rel="noopener noreferrer" className="text-white mr-2 ml-2 text-xl font-knuckleslite hover:underline">
+                    <a href="https://www.linkedin.com/in/amruta-parab" target="_blank" rel="noopener noreferrer" className="text-white mr-2 ml-2 text-xl font-knuckleslite hover:underline">
                         LinkedIn
                     </a>
                 </div>
