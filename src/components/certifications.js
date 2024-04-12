@@ -25,7 +25,7 @@ export default function Certifications({ show }) {
 
     return ( //  bottom-2 md:bottom-10  || bottom-5 md:bottom-10 
         <div className="fixed left-0 right-0 flex justify-center"
-            style={{ bottom: window.innerHeight > 768 ? '4rem' : (window.innerHeight > 600 ? '1rem' : '0.5rem') }} ref={certRef}>
+            style={{ bottom: window.innerHeight > 750 ? '4rem' : (window.innerHeight > 600 ? '1rem' : '0.5rem') }} ref={certRef}>
             {showCert &&
                 <div>
                     <div className="text-lg md:text-2xl font-knuckles text-center">
