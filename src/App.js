@@ -9,6 +9,7 @@ const App = () => {
 
   const stopLoading = () => {
     setLoading(false);
+    //test
   };
 
   return (
