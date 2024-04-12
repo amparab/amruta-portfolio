@@ -12,7 +12,7 @@ import scrollGif from './images/down-arrow.gif'
 import Skills from './components/skills';
 import { ReactTyped } from 'react-typed';
 import * as Constants from './utils/constants';
-import * as Utils from './utils/utils';
+import * as Utils from './utils/util';
 import Experience from './components/experience';
 import Certifications from './components/certifications';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
