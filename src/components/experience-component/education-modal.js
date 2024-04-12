@@ -1,5 +1,4 @@
 import VesitLogo from '../../images/Vesit-Logo.png';
-import JPLogo from '../../images/JP-Logo.png';
 import { UilExternalLinkAlt } from '@iconscout/react-unicons'
 import { UilMultiply } from '@iconscout/react-unicons'
 

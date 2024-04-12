@@ -1,5 +1,4 @@
 import JPLogo from '../../images/JP-Logo.png';
-import { UilExternalLinkAlt } from '@iconscout/react-unicons'
 import { UilMultiply } from '@iconscout/react-unicons'
 
 const ExperienceModal = ({ closeExpModal }) => {
