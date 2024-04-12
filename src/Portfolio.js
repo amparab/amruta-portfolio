@@ -9,22 +9,22 @@ import expImg from './images/cert_girl-1.png'
 import spaceBg from './images/cert-bg-1.jpg'
 import certBg from './images/webp/contact-bg.webp'
 import scrollGif from './images/down-arrow.gif'
-import Skills from './components/Skills';
+import Skills from './components/skills';
 import { ReactTyped } from 'react-typed';
-import * as Constants from './utils/Constants';
-import * as Utils from './utils/Utils';
-import Experience from './components/Experience';
-import Certifications from './components/Certifcations';
+import * as Constants from './utils/constants';
+import * as Utils from './utils/utils';
+import Experience from './components/experience';
+import Certifications from './components/certifications';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { gsap } from 'gsap';
-import ContactLinks from './components/Contact';
+import ContactLinks from './components/contact';
 import { UilExternalLinkAlt } from '@iconscout/react-unicons'
 import { UilDownloadAlt } from '@iconscout/react-unicons'
 
 
 gsap.registerPlugin(ScrollTrigger);
 
-function Portfolio() {
+export default function Portfolio() {
 
 
   let initialOffset = 0.5;
@@ -629,5 +629,3 @@ function Portfolio() {
   );
 
 }
-
-export default Portfolio;

@@ -16,7 +16,7 @@ import VesitLogo from '../images/Vesit-Logo.png';
 import JPLogo from '../images/JP-Logo.png';
 import AWSLogo from '../images/AWS-Logo.png';
 
-const Loading = ({ stopLoading }) => {
+export default function Loading({ stopLoading }) {
 
   const images = [image, skillsBg, skyline, girl, expImg, spaceBg, certBg, scrollGif, CKADLogo, LinkedIn, Github, VesitLogo, JPLogo, AWSLogo];
   const fonts = [
@@ -68,7 +68,7 @@ const Loading = ({ stopLoading }) => {
         }, 3000);
         return () => clearTimeout(timeout);
       });
-  }, []);
+  }, [preloadFonts, preloadImages, stopLoading]);
 
 
 
@@ -109,4 +109,3 @@ const Loading = ({ stopLoading }) => {
   );
 };
 
-export default Loading;
