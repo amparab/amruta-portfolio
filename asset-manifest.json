@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/amruta-portfolio/static/css/main.1559607a.css",
-    "main.js": "/amruta-portfolio/static/js/main.8c5d8f85.js",
+    "main.css": "/amruta-portfolio/static/css/main.986f2420.css",
+    "main.js": "/amruta-portfolio/static/js/main.014131bc.js",
     "static/js/453.07a2d4c0.chunk.js": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js",
     "static/media/contact-bg.webp": "/amruta-portfolio/static/media/contact-bg.e29220d607f97119d42e.webp",
     "static/media/cert_girl-1.png": "/amruta-portfolio/static/media/cert_girl-1.545118c1d53b4ef41747.png",
@@ -17,6 +17,7 @@
     "static/media/skills_char-layer3.png": "/amruta-portfolio/static/media/skills_char-layer3.a8920d0689a9a4f0d5e1.png",
     "static/media/Kafka-Logo.png": "/amruta-portfolio/static/media/Kafka-Logo.dcc84afdcf3c9d78b614.png",
     "static/media/Vesit-Logo.png": "/amruta-portfolio/static/media/Vesit-Logo.6e46a85bb111ef618d77.png",
+    "static/media/AWS-Logo.png": "/amruta-portfolio/static/media/AWS-Logo.f685d63a35961ca83875.png",
     "static/media/cert-bg-1.jpg": "/amruta-portfolio/static/media/cert-bg-1.50562cb9a6e0bb923a2f.jpg",
     "static/media/AznKnucklesTrialLight-jEyJl.woff": "/amruta-portfolio/static/media/AznKnucklesTrialLight-jEyJl.bec9628ef55084cee440.woff",
     "static/media/AznKnucklesTrial-z85pa.woff": "/amruta-portfolio/static/media/AznKnucklesTrial-z85pa.1371c40862e43f143d08.woff",
@@ -26,12 +27,12 @@
     "static/media/linkedin.png": "/amruta-portfolio/static/media/linkedin.f249b38224ca41a0b909.png",
     "static/media/PixelEmulator-xq08.woff": "/amruta-portfolio/static/media/PixelEmulator-xq08.93c4c5e1f7f7fa1a7000.woff",
     "index.html": "/amruta-portfolio/index.html",
-    "main.1559607a.css.map": "/amruta-portfolio/static/css/main.1559607a.css.map",
-    "main.8c5d8f85.js.map": "/amruta-portfolio/static/js/main.8c5d8f85.js.map",
+    "main.986f2420.css.map": "/amruta-portfolio/static/css/main.986f2420.css.map",
+    "main.014131bc.js.map": "/amruta-portfolio/static/js/main.014131bc.js.map",
     "453.07a2d4c0.chunk.js.map": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1559607a.css",
-    "static/js/main.8c5d8f85.js"
+    "static/css/main.986f2420.css",
+    "static/js/main.014131bc.js"
   ]
 }
