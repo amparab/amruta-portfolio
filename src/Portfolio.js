@@ -599,24 +599,6 @@ function Portfolio() {
             </svg>
           </div>
 
-          {/* <div className='z-50' style={{ display: 'inline-block', marginBottom: (window.innerHeight - Utils.svgHeight()) / 3 }}>
-              <button
-                type="button"
-                onClick={scrollToTop}
-                className="py-2 px-4 bg-white text-lg text-black border border-black rounded-md mr-4 font-knuckleslite"
-              >
-                LinkedIn
-              </button>
-              <button
-                type="button"
-                onClick={scrollToTop}
-                className=" py-2 px-4 bg-white text-lg text-black hover:bg-black hover:text-white border border-black hover:border-white rounded-md mr-4 font-knuckleslite"
-              >
-                Download Resume
-              </button>
-            </div> */}
-
-
         </div>
 
 

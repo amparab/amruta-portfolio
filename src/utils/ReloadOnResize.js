@@ -3,7 +3,10 @@ import React, { useEffect } from 'react';
 function ReloadOnResize() {
   useEffect(() => {
     const handleResize = () => {
-      window.location.reload();
+        if (window.screen.width > 768) { // For devices other than phones
+            window.location.reload();
+        }
+      
     };
 
     window.addEventListener('resize', handleResize);

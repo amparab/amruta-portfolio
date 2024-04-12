@@ -154,10 +154,10 @@ const Skills = ({ show }) => {
                                         IntelliJ
                                     </div>
                                     <div className="text-base md:text-xl font-knuckleslite text-right">
-                                        Jira
+                                        Confluence
                                     </div>
                                     <div className="text-base md:text-xl font-knuckleslite text-left">
-                                        Confluence
+                                        Jira
                                     </div>
                                 </div>
                             </div>
