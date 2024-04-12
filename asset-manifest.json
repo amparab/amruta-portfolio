@@ -1,38 +1,32 @@
 {
   "files": {
-    "main.css": "/amruta-portfolio/static/css/main.049e0a69.css",
-    "main.js": "/amruta-portfolio/static/js/main.7a879b86.js",
+    "main.css": "/amruta-portfolio/static/css/main.9f1ea2fd.css",
+    "main.js": "/amruta-portfolio/static/js/main.773418d8.js",
     "static/js/453.07a2d4c0.chunk.js": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js",
     "static/media/contact-bg.webp": "/amruta-portfolio/static/media/contact-bg.e29220d607f97119d42e.webp",
     "static/media/cert_girl-1.png": "/amruta-portfolio/static/media/cert_girl-1.545118c1d53b4ef41747.png",
     "static/media/skyline-layer2.png": "/amruta-portfolio/static/media/skyline-layer2.15cda66adf9195a37abb.png",
-    "static/media/React-Logo.png": "/amruta-portfolio/static/media/React-Logo.4d30b5476d27b21bd88c.png",
     "static/media/pink.webp": "/amruta-portfolio/static/media/pink.fb3f96a46edc5fcd0309.webp",
-    "static/media/SQL-Logo.png": "/amruta-portfolio/static/media/SQL-Logo.d94e97f6d5cce1ed7b42.png",
-    "static/media/Kubernetes-Logo.png": "/amruta-portfolio/static/media/Kubernetes-Logo.47d27cf2083b3b3b7ac0.png",
     "static/media/down-arrow.gif": "/amruta-portfolio/static/media/down-arrow.1b3884ea3fcddaf039a3.gif",
-    "static/media/Java-Logo.png": "/amruta-portfolio/static/media/Java-Logo.be925db19dbfa198beb5.png",
     "static/media/CKAD-Logo.png": "/amruta-portfolio/static/media/CKAD-Logo.15859c575e5c51e433e1.png",
     "static/media/sky.jpg": "/amruta-portfolio/static/media/sky.5d1a24bfbcbd3c7fd289.jpg",
     "static/media/skills_char-layer3.png": "/amruta-portfolio/static/media/skills_char-layer3.a8920d0689a9a4f0d5e1.png",
-    "static/media/Kafka-Logo.png": "/amruta-portfolio/static/media/Kafka-Logo.dcc84afdcf3c9d78b614.png",
     "static/media/Vesit-Logo.png": "/amruta-portfolio/static/media/Vesit-Logo.6e46a85bb111ef618d77.png",
     "static/media/AWS-Logo.png": "/amruta-portfolio/static/media/AWS-Logo.f685d63a35961ca83875.png",
     "static/media/cert-bg-1.jpg": "/amruta-portfolio/static/media/cert-bg-1.50562cb9a6e0bb923a2f.jpg",
     "static/media/AznKnucklesTrialLight-jEyJl.woff": "/amruta-portfolio/static/media/AznKnucklesTrialLight-jEyJl.bec9628ef55084cee440.woff",
     "static/media/AznKnucklesTrial-z85pa.woff": "/amruta-portfolio/static/media/AznKnucklesTrial-z85pa.1371c40862e43f143d08.woff",
-    "static/media/Git-Logo.png": "/amruta-portfolio/static/media/Git-Logo.fe86c28c14ca4a71d931.png",
     "static/media/Spring-Logo.png": "/amruta-portfolio/static/media/Spring-Logo.b72aca648dfd027a75de.png",
     "static/media/github.png": "/amruta-portfolio/static/media/github.e4136ad3ca352f8a1f23.png",
     "static/media/linkedin.png": "/amruta-portfolio/static/media/linkedin.f249b38224ca41a0b909.png",
     "static/media/PixelEmulator-xq08.woff": "/amruta-portfolio/static/media/PixelEmulator-xq08.93c4c5e1f7f7fa1a7000.woff",
     "index.html": "/amruta-portfolio/index.html",
-    "main.049e0a69.css.map": "/amruta-portfolio/static/css/main.049e0a69.css.map",
-    "main.7a879b86.js.map": "/amruta-portfolio/static/js/main.7a879b86.js.map",
+    "main.9f1ea2fd.css.map": "/amruta-portfolio/static/css/main.9f1ea2fd.css.map",
+    "main.773418d8.js.map": "/amruta-portfolio/static/js/main.773418d8.js.map",
     "453.07a2d4c0.chunk.js.map": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.049e0a69.css",
-    "static/js/main.7a879b86.js"
+    "static/css/main.9f1ea2fd.css",
+    "static/js/main.773418d8.js"
   ]
 }
