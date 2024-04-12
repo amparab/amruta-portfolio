@@ -1,7 +1,6 @@
 
 import CKADLogo from '../images/CKAD-Logo.png';
 import AWSLogo from '../images/AWS-Logo.png';
-import { animated } from '@react-spring/web';
 import { gsap } from 'gsap';
 import React, { useRef, useEffect, useState } from 'react';
 import { UilExternalLinkAlt } from '@iconscout/react-unicons'
