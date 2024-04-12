@@ -79,7 +79,7 @@ const Experience = React.forwardRef(({ show, scrollTriggerRef }, ref) => {
         third_animation.fromTo(fourth.current, { opacity: 0 }, {
             opacity: 1
         }, 0)
-    }, []);
+    }, [scrollTriggerRef]);
 
     const closeEduModal = () => {
         setShowEduModal(false);

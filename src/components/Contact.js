@@ -5,7 +5,7 @@ import { useEffect, useState, useRef } from 'react';
 import '../input.css';
 import { gsap } from 'gsap';
 import { UilDownloadAlt } from '@iconscout/react-unicons'
-import * as Utils from '../utils/Utils';
+import * as Utils from '../utils/utils';
 
 const ContactLinks = ({show, scrollToTop}) => {
 
