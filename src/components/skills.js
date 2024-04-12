@@ -6,7 +6,7 @@ import { gsap } from 'gsap';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Skills = ({ show }) => {
+export default function Skills ({ show }) {
     const skillsRef = useRef(null);
     const [skills, setSkills] = useState(false);
     //test
@@ -136,5 +136,3 @@ const Skills = ({ show }) => {
 
 
 };
-
-export default Skills;
