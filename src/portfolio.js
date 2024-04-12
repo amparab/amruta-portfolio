@@ -12,7 +12,7 @@ import scrollGif from './images/down-arrow.gif'
 import Skills from './components/skills';
 import { ReactTyped } from 'react-typed';
 import * as Constants from './utils/constants';
-import * as Utils from './utils/utils';
+import * as Utils from './utils/util';
 import Experience from './components/experience';
 import Certifications from './components/certifications';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -340,7 +340,7 @@ export default function Portfolio() {
       }
     });
 
-    parallaxSkyLine.fromTo(skylineRef.current, { y: Utils.getSkylineStart() }, { y: Utils.getSkylineEnd() }); // TODO: 200, 100 Change this to make repsonsive
+    parallaxSkyLine.fromTo(skylineRef.current, { y: Utils.getSkylineStart() }, { y: Utils.getSkylineEnd() });
 
     return () => {
       parallaxSkyLine.kill();
@@ -360,7 +360,7 @@ export default function Portfolio() {
         toggleActions: "play reverse play reverse"
       }
     });
-    parallaxGirl.fromTo(girlRef.current, { y: Utils.getGirlStart() }, { y: Utils.getGirlEnd() }); // TODO: 100, 70 Change this to make repsonsive
+    parallaxGirl.fromTo(girlRef.current, { y: Utils.getGirlStart() }, { y: Utils.getGirlEnd() });
 
     return () => {
       parallaxGirl.kill();

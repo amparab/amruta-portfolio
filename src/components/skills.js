@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Skills = ({ show }) => {
     const skillsRef = useRef(null);
     const [skills, setSkills] = useState(false);
+    //test
 
 
     useEffect(() => {

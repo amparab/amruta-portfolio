@@ -9,6 +9,8 @@ function ReloadOnResize() {
       
     };
 
+    //test
+
     window.addEventListener('resize', handleResize);
 
     return () => {

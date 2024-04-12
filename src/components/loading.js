@@ -83,8 +83,8 @@ export default function Loading({ stopLoading }) {
       }}
     >
       <svg
-        width="200"  // Double the width
-        height="200" // Double the height
+        width="200"
+        height="200"
         viewBox="0 0 100 100"
       >
         <path

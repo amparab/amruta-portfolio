@@ -8,6 +8,8 @@ export default function ProgressBar({ progress }) {
         config: { duration: 1000 }
     });
 
+    //test
+
     return (
         <>
             <div className="w-48 h-1 border border-solid border-white">
