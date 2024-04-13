@@ -1,7 +1,8 @@
 import './input.css';
 import { useSpring, animated } from '@react-spring/web';
 import React, { useEffect, useState, useRef } from 'react';
-import image from './images/webp/pink.webp'
+// import image from './images/webp/pink.webp'
+import image from './images/me.png'
 import skillsBg from './images/sky.jpg'
 import skyline from './images/skyline-layer2.png'
 import girl from './images/skills_char-layer3.png'
