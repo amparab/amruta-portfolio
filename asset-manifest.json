@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/amruta-portfolio/static/css/main.9f1ea2fd.css",
-    "main.js": "/amruta-portfolio/static/js/main.afeb2a3b.js",
+    "main.js": "/amruta-portfolio/static/js/main.c5384801.js",
     "static/js/453.07a2d4c0.chunk.js": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js",
+    "static/media/me.png": "/amruta-portfolio/static/media/me.a92843308c9965e8c3fa.png",
     "static/media/contact-bg.webp": "/amruta-portfolio/static/media/contact-bg.e29220d607f97119d42e.webp",
     "static/media/cert_girl-1.png": "/amruta-portfolio/static/media/cert_girl-1.545118c1d53b4ef41747.png",
     "static/media/skyline-layer2.png": "/amruta-portfolio/static/media/skyline-layer2.15cda66adf9195a37abb.png",
-    "static/media/pink.webp": "/amruta-portfolio/static/media/pink.fb3f96a46edc5fcd0309.webp",
     "static/media/down-arrow.gif": "/amruta-portfolio/static/media/down-arrow.1b3884ea3fcddaf039a3.gif",
     "static/media/CKAD-Logo.png": "/amruta-portfolio/static/media/CKAD-Logo.15859c575e5c51e433e1.png",
     "static/media/sky.jpg": "/amruta-portfolio/static/media/sky.5d1a24bfbcbd3c7fd289.jpg",
@@ -22,11 +22,11 @@
     "static/media/PixelEmulator-xq08.woff": "/amruta-portfolio/static/media/PixelEmulator-xq08.93c4c5e1f7f7fa1a7000.woff",
     "index.html": "/amruta-portfolio/index.html",
     "main.9f1ea2fd.css.map": "/amruta-portfolio/static/css/main.9f1ea2fd.css.map",
-    "main.afeb2a3b.js.map": "/amruta-portfolio/static/js/main.afeb2a3b.js.map",
+    "main.c5384801.js.map": "/amruta-portfolio/static/js/main.c5384801.js.map",
     "453.07a2d4c0.chunk.js.map": "/amruta-portfolio/static/js/453.07a2d4c0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9f1ea2fd.css",
-    "static/js/main.afeb2a3b.js"
+    "static/js/main.c5384801.js"
   ]
 }
