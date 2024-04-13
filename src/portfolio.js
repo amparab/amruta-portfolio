@@ -541,7 +541,7 @@ export default function Portfolio() {
           {showProfession && (
             <h1 className="text-xl md:text-2xl font-knuckles bg-gradient-to-r from-pink-700 via-blue-950 
               to-slate-800 text-transparent bg-clip-text">
-              <ReactTyped strings={["I'm a Software Developer"]} typeSpeed={25} />
+              <ReactTyped strings={["I'm a Software Engineer"]} typeSpeed={25} />
             </h1>
           )}
 
