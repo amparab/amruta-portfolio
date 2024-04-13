@@ -35,6 +35,7 @@ const EducationModal = ({ closeEduModal }) => {
             {/*body*/}
             <div className="relative p-6 flex-auto font-cambria md:text-lg">
               <p>
+                <b>Projects : </b><br/>
                 <b>Flood Prediction System For Mumbai : </b>
                 We received a grant of $5000 USD from Microsoft Azure for this project.
                 As a part of this project, we developed a system to predict floods in Mumbai using Machine Learning.
