@@ -28,8 +28,9 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Portfolio() {
 
 
-  let initialOffset = 0.5;
-  let scrubValue = 0.5;
+  const initialOffset = 0.5;
+  const scrubValue = 0.5;
+  const isSmallScreenConst = window.innerWidth < 768;
 
   const [imageSource, setImageSource] = useState(image);
   const [displaySkills, setDisplaySkills] = useState(false);
@@ -42,7 +43,6 @@ export default function Portfolio() {
   const [error, setError] = useState(false);
   const [showContactLinks, setShowContactLinks] = useState(false);
   const [showProfession, setShowProfession] = useState(false);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [scrollIconVisibile, setScrollIconVisible] = useState(true);
 
   const [photoMarginTop, setPhotoMarginTop] = useState(0);
@@ -61,6 +61,7 @@ export default function Portfolio() {
   const spaceRef = useRef(null);
   const skylineRef = useRef(null);
   const girlRef = useRef(null);
+  const imgRef = useRef(null);
 
   const imageContainerRef = useRef(null);
 
@@ -78,7 +79,7 @@ export default function Portfolio() {
     const handleUnsupportedResolution = () => {
       const isUnsupportedResolution =
         (window.innerWidth > 768 && window.innerHeight < 500) ||
-        (window.innerHeight < 530 && window.innerWidth < 310);
+        (window.innerHeight < 540 || window.innerHeight<300);
 
       if (isUnsupportedResolution) {
         setError(true);
@@ -86,15 +87,7 @@ export default function Portfolio() {
       }
     };
 
-    const handleScreenSize = () => {
-      const isSmallScreen = window.innerWidth < 768;
-      setIsSmallScreen(isSmallScreen);
-      scrubValue = 0.5;
-      initialOffset = 0.5;
-    };
-
     handleUnsupportedResolution();
-    handleScreenSize();
   }, []);
 
   useEffect(() => {
@@ -396,8 +389,11 @@ export default function Portfolio() {
       }
     });
 
-    trans_skills_exp.to(mask, { scale: 1.5 });
-    trans_skills_exp.to(mask, { y: isSmallScreen ? 0 : -100 }, 0);
+    trans_skills_exp.to(mask, { 
+      scale: isSmallScreenConst ? 1 : 1.5,
+      y: -100
+    });
+    //trans_skills_exp.to(mask, { y: -100 }, 0);
 
     const trans_exp_cert = gsap.timeline({
       scrollTrigger: {
@@ -571,7 +567,7 @@ export default function Portfolio() {
                   />
                 )}
 
-                <image
+                <image ref={imgRef}
                   href={imageSource}
                   mask="url(#myMask)"
                   width={800}
@@ -611,7 +607,7 @@ export default function Portfolio() {
           {showContactLinks && <ContactLinks show={showContactLinks} scrollToTop={scrollToTop} />}
           {showExperience && <Experience show={showExperience} scrollTriggerRef={conRef5} />}
           {displaySkills && <Skills show={displaySkills} />}
-          {showCertification && <Certifications show={showCertification} />}
+          {showCertification && <Certifications show={showCertification} certMargin={photoMarginBottom*2} />}
         </div>
 
         <div ref={conRef} className=" h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
