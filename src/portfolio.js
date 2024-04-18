@@ -7,7 +7,8 @@ import skillsBg from './images/sky.jpg'
 import skyline from './images/skyline-layer2.png'
 import girl from './images/skills_char-layer3.png'
 import expImg from './images/cert_girl-1.png'
-import spaceBg from './images/cert-bg-1.jpg'
+// import spaceBg from './images/cert-bg-1.jpg'
+import spaceBg from './images/webp/space.jpg'
 import certBg from './images/webp/contact-bg.webp'
 import scrollGif from './images/down-arrow.gif'
 import Skills from './components/skills';
@@ -453,7 +454,7 @@ export default function Portfolio() {
       }
     });
 
-    parallaxExp.fromTo(spaceRef.current, { scale: 1 }, { scale: 1.5 });
+    parallaxExp.fromTo(spaceRef.current, { scale: 1.5 }, { scale: 2 });
     return () => {
       parallaxExp.kill();
     };

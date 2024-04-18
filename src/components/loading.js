@@ -4,7 +4,7 @@ import skillsBg from '../images/sky.jpg'
 import skyline from '../images/skyline-layer2.png'
 import girl from '../images/skills_char-layer3.png'
 import expImg from '../images/cert_girl-1.png'
-import spaceBg from '../images/cert-bg-1.jpg'
+import spaceBg from '../images/webp/space.jpg'
 import certBg from '../images/webp/contact-bg.webp'
 import scrollGif from '../images/down-arrow.gif'
 import CKADLogo from '../images/CKAD-Logo.png';
