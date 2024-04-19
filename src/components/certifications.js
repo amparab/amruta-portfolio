@@ -11,7 +11,6 @@ export default function Certifications({ show, certMargin }) {
     const [showCert, setShowCert] = useState(false);
 
     useEffect(() => {
-        console.log('certMargin', certMargin);
         if (show) {
             setShowCert(true);
             gsap.fromTo(certRef.current, { opacity: 0 }, { opacity: 1 });
@@ -27,7 +26,7 @@ export default function Certifications({ show, certMargin }) {
     return ( //  bottom-2 md:bottom-10  || bottom-5 md:bottom-10 
         <div className="fixed left-0 right-0 flex justify-center"
             //style={{ bottom: window.innerHeight > 750 ? '4rem' : (window.innerHeight > 600 ? '4rem' : '2rem') }} 
-            style={{ bottom:  window.innerWidth > 450 ? '4rem' : certMargin-100 }} 
+            style={{ bottom: certMargin }}
             ref={certRef}>
             {showCert &&
                 <div>

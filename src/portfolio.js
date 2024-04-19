@@ -9,7 +9,7 @@ import girl from './images/skills_char-layer3.png'
 import expImg from './images/cert_girl-1.png'
 // import spaceBg from './images/cert-bg-1.jpg'
 import spaceBg from './images/webp/space.jpg'
-import certBg from './images/webp/contact-bg.webp'
+import contactBg from './images/webp/contact-bg.webp'
 import scrollGif from './images/down-arrow.gif'
 import Skills from './components/skills';
 import { ReactTyped } from 'react-typed';
@@ -48,6 +48,7 @@ export default function Portfolio() {
 
   const [photoMarginTop, setPhotoMarginTop] = useState(0);
   const [photoMarginBottom, setPhotoMarginBottom] = useState(0);
+  const [certMargin, setCertMargin] = useState(0);
 
   const conRef = useRef(null);
   const conRef2 = useRef(null);
@@ -71,6 +72,7 @@ export default function Portfolio() {
       const rect = imageContainerRef.current.getBoundingClientRect();
       setPhotoMarginTop(rect.top / 2);
       setPhotoMarginBottom((window.innerHeight - rect.bottom) / 2);
+      setCertMargin(isSmallScreenConst ? (window.innerHeight - rect.bottom) - 100 : ((window.innerHeight - rect.bottom) / 1.5) - 100);
     }
   }, []);
 
@@ -80,7 +82,7 @@ export default function Portfolio() {
     const handleUnsupportedResolution = () => {
       const isUnsupportedResolution =
         (window.innerWidth > 768 && window.innerHeight < 500) ||
-        (window.innerHeight < 540 || window.innerHeight<300);
+        (window.innerHeight < 540 || window.innerHeight < 300);
 
       if (isUnsupportedResolution) {
         setError(true);
@@ -235,7 +237,7 @@ export default function Portfolio() {
 
     const rotationAnimation4 = gsap.timeline({
       onStart: function () {
-        setImageSource(certBg);
+        setImageSource(contactBg);
         setShowExperience(false);
       },
       scrollTrigger: {
@@ -390,11 +392,10 @@ export default function Portfolio() {
       }
     });
 
-    trans_skills_exp.to(mask, { 
+    trans_skills_exp.to(mask, {
       scale: isSmallScreenConst ? 1 : 1.5,
       y: -100
     });
-    //trans_skills_exp.to(mask, { y: -100 }, 0);
 
     const trans_exp_cert = gsap.timeline({
       scrollTrigger: {
@@ -608,7 +609,7 @@ export default function Portfolio() {
           {showContactLinks && <ContactLinks show={showContactLinks} scrollToTop={scrollToTop} />}
           {showExperience && <Experience show={showExperience} scrollTriggerRef={conRef5} />}
           {displaySkills && <Skills show={displaySkills} />}
-          {showCertification && <Certifications show={showCertification} certMargin={photoMarginBottom*2} />}
+          {showCertification && <Certifications show={showCertification} certMargin={certMargin} />}
         </div>
 
         <div ref={conRef} className=" h-screen w-screen flex flex-col md:flex-row justify-center items-center"></div>
