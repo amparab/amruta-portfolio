@@ -5,7 +5,7 @@ import { gsap } from 'gsap';
 import React, { useRef, useEffect, useState } from 'react';
 import { UilExternalLinkAlt } from '@iconscout/react-unicons'
 
-export default function Certifications({ show }) {
+export default function Certifications({ show, certMargin }) {
 
     const certRef = useRef(null);
     const [showCert, setShowCert] = useState(false);
@@ -25,10 +25,12 @@ export default function Certifications({ show }) {
 
     return ( //  bottom-2 md:bottom-10  || bottom-5 md:bottom-10 
         <div className="fixed left-0 right-0 flex justify-center"
-            style={{ bottom: window.innerHeight > 750 ? '4rem' : (window.innerHeight > 600 ? '1rem' : '0.5rem') }} ref={certRef}>
+            //style={{ bottom: window.innerHeight > 750 ? '4rem' : (window.innerHeight > 600 ? '4rem' : '2rem') }} 
+            style={{ bottom: certMargin }}
+            ref={certRef}>
             {showCert &&
                 <div>
-                    <div className="text-lg md:text-2xl font-knuckles text-center">
+                    <div className="text-xl md:text-2xl font-knuckles text-center">
                         My Certifications
                     </div>
                     <div className="container mx-auto">
@@ -41,7 +43,7 @@ export default function Certifications({ show }) {
                                             src={CKADLogo}
                                         /></div>
                                     </td>
-                                    <td className="px-4 py-2 text-sm md:text-lg font-knuckleslite">
+                                    <td className="px-4 py-2 text-base md:text-lg font-knuckleslite">
                                         Certified Kubernetes Application Developer&nbsp;
                                         <a href="https://www.credly.com/badges/0e8e2c6d-63a1-4fff-a9d4-e8e42410c024" className="text-blue-900 underline" target="_blank" rel="noopener noreferrer">
                                             Verify&nbsp;<UilExternalLinkAlt size="14" className="inline" />
@@ -55,7 +57,7 @@ export default function Certifications({ show }) {
                                             src={AWSLogo}
                                         /></div>
                                     </td>
-                                    <td className="px-4 py-2 text-sm md:text-lg font-knuckleslite">
+                                    <td className="px-4 py-2 text-base md:text-lg font-knuckleslite">
                                         AWS Certified Cloud Practitioner&nbsp;
                                         <a href="https://www.credly.com/badges/aa177f36-c419-4eb2-bf5c-2340cebcb788" className="text-blue-900 underline" target="_blank" rel="noopener noreferrer">
                                             Verify&nbsp;<UilExternalLinkAlt size="14" className="inline" />
