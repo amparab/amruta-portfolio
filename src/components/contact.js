@@ -1,6 +1,7 @@
 
 import LinkedIn from '../images/icons/linkedin.png';
 import Github from '../images/icons/github.png';
+import Medium from '../images/icons/medium.png';
 import { useEffect, useState, useRef } from 'react';
 import '../input.css';
 import { gsap } from 'gsap';
@@ -42,6 +43,14 @@ const ContactLinks = ({show, scrollToTop}) => {
                     </div>
                     <a href="https://www.linkedin.com/in/amruta-parab" target="_blank" rel="noopener noreferrer" className="text-white mr-2 ml-2 text-xl font-knuckleslite hover:underline">
                         LinkedIn
+                    </a>
+                </div>
+                <div className="flex justify-center items-center">                   
+                    <div className="w-8 h-8">
+                        <img className="object-cover" src={Medium} alt="Medium" />
+                    </div>
+                    <a href="https://medium.com/@amruta0303" target="_blank" rel="noopener noreferrer" className="text-white mr-2 ml-2 text-xl font-knuckleslite hover:underline">
+                        Medium
                     </a>
                 </div>
                 <div className="flex justify-center items-center">                   
