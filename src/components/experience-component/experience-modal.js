@@ -42,9 +42,9 @@ const ExperienceModal = ({ closeExpModal }) => {
                   records. Technologies used include <b>Java, Spring Boot, Messaging Queues, SQL</b>.
                 </li>
                 <li className="ml-10">
-                  Developed multiple <b>React</b>-based user interfaces integrated with a Java and Spring Boot backend,
-                  leveraging SQL databases. These interfaces significantly streamlined operations by enabling users
-                  to automate tasks, reducing manual effort.
+                  Contributed to the development of a comprehensive <b>microservice</b> architecture-based platform,
+                  an end-to-end solution aimed at facilitating the adoption of new ISO20022 SWIFT payment
+                  standards. Primarily focused on Java and Spring.
                 </li>
                 <li className="ml-10">
                   Implemented a migration strategy to transition a legacy system from utilizing <b>REST API</b> for
@@ -53,9 +53,9 @@ const ExperienceModal = ({ closeExpModal }) => {
                   callbacks and improving overall production stability.
                 </li>
                 <li className="ml-10">
-                  Contributed to the development of a comprehensive <b>microservice</b> architecture-based platform,
-                  an end-to-end solution aimed at facilitating the adoption of new ISO20022 SWIFT payment
-                  standards. Primarily focused on Java and Spring.
+                  Developed multiple <b>React</b>-based user interfaces integrated with a Java and Spring Boot backend,
+                  leveraging SQL databases. These interfaces significantly streamlined operations by enabling users
+                  to automate tasks, reducing manual effort.
                 </li>
                 <li className="ml-10">
                   Collaborated with team members to ensure timely delivery of requirements and prompt
