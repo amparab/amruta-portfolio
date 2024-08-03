@@ -17,16 +17,16 @@ export const getSkylineStart = () => {
 };
 
 export const getSkylineEnd = () => {
-    // return 0.395257 * (window.innerHeight - 700);
-    return window.innerHeight < 1000 ? 0.395257 * (window.innerHeight - 700) : 0.48 * (window.innerHeight - 700);
+    // For extra large screens
+    return window.innerHeight < 1030 ? 0.395257 * (window.innerHeight - 700) : 0.48 * (window.innerHeight - 700);
 };
 
 export const getGirlStart = () => {
-    // return 50 + 0.197628 * (window.innerHeight - 700)
-    return window.innerHeight < 1000 ? 50 + 0.197628 * (window.innerHeight - 700) : 0.27668 * (window.innerHeight - 100)
+    // For extra large screens
+    return window.innerHeight < 1030 ? 50 + 0.197628 * (window.innerHeight - 700) : 0.27668 * (window.innerHeight - 100)
 };
 
 export const getGirlEnd = () => {
     //return 0.27668 * (window.innerHeight - 700);
-    return window.innerHeight < 1000 ? 0.27668 * (window.innerHeight - 700) : 50 + 0.197628 * (window.innerHeight);
+    return window.innerHeight < 1030 ? 0.27668 * (window.innerHeight - 700) : 50 + 0.197628 * (window.innerHeight);
 };
