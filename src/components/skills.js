@@ -59,10 +59,13 @@ export default function Skills ({ show }) {
                                         Kafka
                                     </div>
                                     <div className="text-base md:text-xl font-knuckleslite text-right">
-                                        Maven
+                                        JUnit
                                     </div>
                                     <div className="text-base md:text-xl font-knuckleslite text-left">
                                         Shell
+                                    </div>
+                                    <div className="text-base md:text-xl font-knuckleslite text-right">
+                                        Maven
                                     </div>
                                 </div>
                             </div>
@@ -79,16 +82,13 @@ export default function Skills ({ show }) {
                                         REST
                                     </div>
                                     <div className="text-base md:text-xl font-knuckleslite text-right">
-                                        Messaging Queues
+                                        Messaging
                                     </div>
                                     <div className="text-base md:text-xl font-knuckleslite text-left">
-                                        SOLID Principles
-                                    </div>
-                                    <div className="text-base md:text-xl font-knuckleslite text-right">
                                         Design Patterns
                                     </div>
-                                    <div className="text-base md:text-xl font-knuckleslite text-left">
-                                        JUnit Testing
+                                    <div className="text-base md:text-xl font-knuckleslite text-right">
+                                        Problem Solving
                                     </div>
                                 </div>
                             </div>
