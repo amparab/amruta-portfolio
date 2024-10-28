@@ -1,5 +1,5 @@
 export const handleDownload = () => {
-    const link = "https://raw.githubusercontent.com/amparab/amruta-portfolio/master/src/Amruta-Resume.pdf";
+    const link = "https://raw.githubusercontent.com/amparab/amruta-portfolio/master/src/Amruta-Parab-Resume.pdf";
     window.open(link, '_blank');
 };
 
